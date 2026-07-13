@@ -62,7 +62,8 @@
   header.nav{
     position:fixed;top:0;left:0;right:0;z-index:100;
     display:flex;align-items:center;justify-content:space-between;
-    padding:20px var(--pad);
+    padding:16px var(--pad);
+    background:linear-gradient(180deg, rgba(11,35,33,.65) 0%, rgba(11,35,33,0) 100%);
     transition:background .4s ease,padding .4s ease,box-shadow .4s ease,color .4s;
     color:var(--porcelain);
   }
@@ -76,6 +77,8 @@
   .brand b{font-weight:400}
   .brand .tm{font-family:var(--sans);font-size:.6rem;transform:translateY(-.55em);opacity:.7;margin-left:1px}
   .brand .dot{width:7px;height:7px;border-radius:50%;background:var(--silica);display:inline-block;margin-left:9px;transform:translateY(-2px)}
+  .brand img{height:52px;width:auto;display:block;transition:height .4s ease}
+  header.nav.scrolled .brand img{height:40px}
   nav.links{display:flex;gap:34px;align-items:center}
   nav.links a{font-size:.82rem;letter-spacing:.01em;opacity:.85;transition:opacity .2s}
   nav.links a:hover{opacity:1}
@@ -92,13 +95,13 @@
     position:relative;min-height:100svh;background:var(--ink);color:var(--porcelain);
     display:flex;align-items:flex-end;overflow:hidden;
   }
-  #particles{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+  #herovid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;background:var(--ink)}
   .hero::after{ /* vignette + refraction wash */
     content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
     background:
       radial-gradient(120% 90% at 78% 8%, rgba(110,231,214,.16), transparent 46%),
       radial-gradient(100% 80% at 12% 96%, rgba(127,168,255,.10), transparent 50%),
-      linear-gradient(180deg, rgba(11,35,33,.35) 0%, rgba(11,35,33,0) 30%, rgba(11,35,33,.72) 100%);
+      linear-gradient(180deg, rgba(11,35,33,.55) 0%, rgba(11,35,33,.12) 30%, rgba(11,35,33,.40) 60%, rgba(11,35,33,.88) 100%);
   }
   .hero-inner{position:relative;z-index:3;width:100%;max-width:var(--maxw);margin:0 auto;padding:0 var(--pad) clamp(56px,9vh,110px)}
   .hero h1{
@@ -262,7 +265,7 @@
 <body>
 
 <header class="nav" id="nav">
-  <a href="#top" class="brand"><b>AggrePlex</b><span class="tm">™</span><span class="dot"></span></a>
+  <a href="#top" class="brand" aria-label="AggrePlex home"><img src="logo.png" alt="AggrePlex — Sustainable Pozzolans"></a>
   <nav class="links" id="links">
     <a href="#pozzodyne">PozzoDyne™</a>
     <a href="#process">The Difference</a>
@@ -275,7 +278,9 @@
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <canvas id="particles"></canvas>
+  <video id="herovid" autoplay muted loop playsinline preload="auto" poster="hero-poster.jpg">
+    <source src="hero.mp4" type="video/mp4">
+  </video>
   <div class="hero-inner">
     <span class="eyebrow" style="color:var(--silica)">Activated Ground Glass Pozzolan</span>
     <h1 class="display">Micronized for performance.<br><em>Engineered</em> for the future.</h1>
@@ -472,7 +477,7 @@
   <div class="wrap">
     <div class="foot-top">
       <div class="brandcol">
-        <div class="brand display"><b>AggrePlex</b><span class="tm" style="font-family:var(--sans);font-size:.6rem;vertical-align:super;opacity:.6">™</span></div>
+        <div class="brand"><img src="logo-white.png" alt="AggrePlex" style="height:64px;width:auto;display:block;margin-bottom:4px"></div>
         <p class="about">Transforming underutilized materials into high-performing pozzolans and technical powders — engineered on Microtec's proven, scalable technology.</p>
       </div>
       <div class="fcol">
@@ -505,6 +510,13 @@
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* HERO VIDEO — autoplay, or show poster only if reduced motion */
+  var hv=document.getElementById('herovid');
+  if(hv){
+    if(reduce){hv.removeAttribute('autoplay');try{hv.pause()}catch(e){}}
+    else{var pr=hv.play();if(pr&&pr.catch)pr.catch(function(){});}
+  }
+
   /* NAV scroll + mobile */
   var nav=document.getElementById('nav'),links=document.getElementById('links'),burger=document.getElementById('burger');
   addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>40)},{passive:true});
@@ -526,7 +538,7 @@
 
   /* HERO PARTICLE FIELD — micronized glass drifting + refracting */
   (function(){
-    var c=document.getElementById('particles'),x=c.getContext('2d'),w,h,pts=[],DPR=Math.min(devicePixelRatio||1,2);
+    var c=document.getElementById('particles');if(!c)return;var x=c.getContext('2d'),w,h,pts=[],DPR=Math.min(devicePixelRatio||1,2);
     var hues=['rgba(56,214,190,','rgba(127,168,255,','rgba(231,178,76,','rgba(237,239,236,'];
     function size(){w=c.width=innerWidth*DPR;h=c.height=c.offsetHeight*DPR;c.style.width=innerWidth+'px'}
     function seed(){pts=[];var n=Math.round((innerWidth*c.offsetHeight)/9000);n=Math.min(n,190);for(var i=0;i<n;i++){pts.push({x:Math.random()*w,y:Math.random()*h,r:(Math.random()*1.7+.3)*DPR,vx:(Math.random()-.5)*.14*DPR,vy:(Math.random()-.5)*.14*DPR,a:Math.random()*.5+.15,hue:hues[Math.random()<.72?3:Math.floor(Math.random()*3)],tw:Math.random()*Math.PI*2})}}
