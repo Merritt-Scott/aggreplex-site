@@ -238,8 +238,10 @@
   .fcol a:hover{color:var(--silica)}
   .foot-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;padding-top:26px;font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;color:rgba(237,239,236,.4)}
 
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
-  .reveal.in{opacity:1;transform:none}
+  .reveal{opacity:0;transform:translateY(30px) scale(.99);filter:blur(5px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1),filter 1s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none;filter:none}
+  .wreveal .wrd{display:inline-block;opacity:.14;will-change:opacity}
+  #herovid,.figblock canvas{will-change:transform}
 
   @media(max-width:1020px){
     .statgrid,.props{grid-template-columns:repeat(2,1fr)}
@@ -285,7 +287,8 @@
   }
   @media(prefers-reduced-motion:reduce){
     *{animation:none!important;scroll-behavior:auto!important}
-    .reveal{opacity:1;transform:none;transition:none}
+    .reveal{opacity:1;transform:none;filter:none;transition:none}
+    .wreveal .wrd{opacity:1}
     .page{animation:none}
   }
 </style>
@@ -330,7 +333,7 @@
       <div class="head reveal">
         <div>
           <span class="eyebrow">The opportunity, by the numbers</span>
-          <h2 class="display" style="font-size:clamp(1.7rem,3.4vw,2.6rem);margin-top:.4em;color:var(--porcelain)">A vast, wasted feedstock — re-engineered into value.</h2>
+          <h2 class="display wreveal" style="font-size:clamp(1.7rem,3.4vw,2.6rem);margin-top:.4em;color:var(--porcelain)">A vast, wasted feedstock — re-engineered into value.</h2>
         </div>
         <p>Every year the world discards enough glass to reshape how concrete is made. PozzoDyne™ turns that stream into supply security.</p>
       </div>
@@ -362,7 +365,7 @@
     <div class="wrap"><div class="mill-grid">
       <div class="reveal">
         <span class="eyebrow">The signature process</span>
-        <h2 class="display">It's not ground. <em>It's micronized.</em></h2>
+        <h2 class="display wreveal">It's not ground. <em>It's micronized.</em></h2>
         <p class="copy">Conventional grinding reduces size. Our milling and air-classification systems engineer it — driving particles down to the micron level to unlock surface area, and with it, reactivity. Take the material finer and watch performance climb.</p>
         <a class="btn btn-ghost" data-nav="difference" style="margin-top:6px">Explore the process →</a>
       </div>
@@ -424,7 +427,7 @@
     <div class="wrap"><div class="mill-grid">
       <div class="reveal">
         <span class="eyebrow">The signature process</span>
-        <h2 class="display">Take it finer. <em>Watch performance climb.</em></h2>
+        <h2 class="display wreveal">Take it finer. <em>Watch performance climb.</em></h2>
         <p class="copy">Conventional grinding reduces size. Our milling and air-classification systems engineer it — driving particles down to the micron level to unlock surface area, and with it, reactivity.</p>
         <p class="copy" style="margin-bottom:0;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:rgba(237,239,236,.5)">Drag to mill →</p>
       </div>
@@ -451,11 +454,11 @@
         <div class="pcell"><span class="spec">Commercial scale</span><h3>Built for volume, not the lab</h3><p>Designed for high-volume production — real supply for real infrastructure, not laboratory-scale results.</p></div>
       </div>
       <div class="split reveal">
-        <div class="txt"><span class="eyebrow">Built for scale</span><h2 class="display">Performance that survives contact with reality.</h2><p>Many advanced materials shine in controlled environments, then falter when scaled. <strong>Ours are designed for scale from the start.</strong></p><p>By pairing an abundantly available feedstock with proven manufacturing technology, we deliver a reliable supply of high-performance material for construction and industry worldwide.</p></div>
+        <div class="txt"><span class="eyebrow">Built for scale</span><h2 class="display wreveal">Performance that survives contact with reality.</h2><p>Many advanced materials shine in controlled environments, then falter when scaled. <strong>Ours are designed for scale from the start.</strong></p><p>By pairing an abundantly available feedstock with proven manufacturing technology, we deliver a reliable supply of high-performance material for construction and industry worldwide.</p></div>
         <div class="figblock"><canvas id="fig1"></canvas><span class="cap">Micronized glass · PozzoDyne™</span></div>
       </div>
       <div class="split rev reveal">
-        <div class="txt"><span class="eyebrow">Sustainability, simplified</span><h2 class="display">A greener build without the trade-off.</h2><p>By converting underutilized glass into high-value SCMs, we cut reliance on carbon-intensive raw materials and extend the life of resources already in circulation.</p><p><strong>PozzoDyne™ draws on a readily available feedstock</strong> — enabling long-term scalability and genuine material security.</p></div>
+        <div class="txt"><span class="eyebrow">Sustainability, simplified</span><h2 class="display wreveal">A greener build without the trade-off.</h2><p>By converting underutilized glass into high-value SCMs, we cut reliance on carbon-intensive raw materials and extend the life of resources already in circulation.</p><p><strong>PozzoDyne™ draws on a readily available feedstock</strong> — enabling long-term scalability and genuine material security.</p></div>
         <div class="figblock"><canvas id="fig2"></canvas><span class="cap">Diverted from landfill · Re-engineered</span></div>
       </div>
     </div>
@@ -639,6 +642,7 @@ var TEAM = [
     if(location.hash!=='#'+page){history.replaceState(null,'','#'+page)}
     // reveal this page's content on entry (stagger)
     revealPage(target);
+    if(!reduce){setTimeout(function(){if(typeof motionTick==='function')motionTick()},90)}
     // (re)size + start any interactive canvases now that the page is visible
     if(typeof refitMillsIn==='function'){requestAnimationFrame(function(){refitMillsIn(target);setTimeout(function(){refitMillsIn(target)},80);});}
   }
@@ -731,6 +735,73 @@ var TEAM = [
     function loop(){g.clearRect(0,0,W,H);for(var i=0;i<ps.length;i++){var p=ps[i];p.x+=p.vx;p.y+=p.vy;p.tw+=.025;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;var a=p.a*(.6+.4*Math.sin(p.tw));g.beginPath();g.arc(p.x,p.y,p.r,0,6.28);g.fillStyle='rgba('+p.h+','+a+')';g.fill()}if(!reduce)requestAnimationFrame(loop)}
     fit();seed();loop();addEventListener('resize',function(){fit();seed();if(reduce)loop()})}
   shimmer('fig1','56,214,190');shimmer('fig2','127,168,255');
+
+  /* ===== MOTION SYSTEM: word reveal + parallax + inertia scroll ===== */
+  function splitWords(el){
+    if(el.dataset.split)return;el.dataset.split='1';
+    (function walk(node){
+      Array.prototype.slice.call(node.childNodes).forEach(function(n){
+        if(n.nodeType===3){
+          var frag=document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function(tok){
+            if(!tok)return;
+            if(/^\s+$/.test(tok)){frag.appendChild(document.createTextNode(tok));return}
+            var s=document.createElement('span');s.className='wrd';s.textContent=tok;frag.appendChild(s);
+          });
+          node.replaceChild(frag,n);
+        }else if(n.nodeType===1&&n.className!=='wrd'){walk(n)}
+      });
+    })(el);
+  }
+  var wrevEls=[],plxEls=[];
+  if(!reduce){
+    document.querySelectorAll('.wreveal').forEach(function(el){splitWords(el);wrevEls.push({el:el,words:el.querySelectorAll('.wrd')})});
+    document.querySelectorAll('.figblock canvas').forEach(function(cv){plxEls.push({el:cv,f:.06,scale:1.08})});
+    var hv2=document.getElementById('herovid');if(hv2)plxEls.push({el:hv2,f:.06,scale:1.1});
+  }
+  function motionTick(){
+    for(var i=0;i<wrevEls.length;i++){
+      var o=wrevEls[i],r=o.el.getBoundingClientRect();
+      if(r.top>innerHeight||r.bottom<0)continue;
+      var p=(innerHeight*.88-r.top)/(innerHeight*.5);p=Math.max(0,Math.min(1,p));
+      var n=o.words.length,lit=p*n;
+      for(var j=0;j<n;j++){o.words[j].style.opacity=j<Math.floor(lit)?1:(j<lit?.45:.14)}
+    }
+    for(var k=0;k<plxEls.length;k++){
+      var q=plxEls[k],rr=q.el.getBoundingClientRect();
+      if(rr.bottom<-80||rr.top>innerHeight+80)continue;
+      var off=(rr.top+rr.height/2-innerHeight/2)*q.f;
+      q.el.style.transform='translate3d(0,'+off.toFixed(1)+'px,0) scale('+q.scale+')';
+    }
+  }
+  if(!reduce){
+    var mtq=false;
+    addEventListener('scroll',function(){if(!mtq){mtq=true;requestAnimationFrame(function(){mtq=false;motionTick()})}},{passive:true});
+    addEventListener('resize',function(){motionTick()});
+    motionTick();
+  }
+  /* inertia smooth scrolling (Lenis-style lerp) — fine pointers only */
+  (function(){
+    if(reduce)return;
+    if(matchMedia('(pointer:coarse)').matches)return;
+    var target=scrollY,current=scrollY,active=false;
+    function maxScroll(){return document.documentElement.scrollHeight-innerHeight}
+    addEventListener('wheel',function(e){
+      if(e.ctrlKey)return;
+      if(document.body.style.overflow==='hidden')return;
+      if(e.target&&e.target.closest&&e.target.closest('.bio-panel'))return;
+      e.preventDefault();
+      target=Math.max(0,Math.min(maxScroll(),target+e.deltaY));
+      if(!active){active=true;current=scrollY;requestAnimationFrame(step)}
+    },{passive:false});
+    function step(){
+      current+=(target-current)*.1;
+      if(Math.abs(target-current)<.6){current=target;active=false}
+      window.scrollTo(0,current);
+      if(active)requestAnimationFrame(step)
+    }
+    addEventListener('scroll',function(){if(!active){target=scrollY;current=scrollY}},{passive:true});
+  })();
 
   /* ===== INITIAL ROUTE ===== */
   var start=(location.hash||'#home').replace('#','');
