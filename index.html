@@ -6,7 +6,7 @@
 <title>AggrePlex™ — Sustainable Pozzolans</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
   :root{
     --ink:#0B2321;--ink-2:#0E2C29;--ink-3:#123634;
@@ -14,7 +14,7 @@
     --silica:#38D6BE;--silica-deep:#1E9E8C;--teal:#2E7D6B;
     --tan:#B5A98A;--slate:#22302E;--muted:#6E7C79;
     --line:rgba(34,48,46,.14);--line-dark:rgba(255,255,255,.12);
-    --serif:'Fraunces',Georgia,serif;--sans:'Hanken Grotesk',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;
+    --serif:'Aptos Display','Aptos','Segoe UI Variable Display','Segoe UI',system-ui,sans-serif;--sans:'Aptos Display','Aptos','Segoe UI',system-ui,sans-serif;--mono:'Aptos Display','Aptos','Segoe UI',system-ui,sans-serif;
     --pad:clamp(22px,5vw,80px);--maxw:1280px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -25,7 +25,7 @@
   ::selection{background:var(--silica);color:var(--ink)}
   .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
   .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--silica-deep);font-weight:500}
-  .display{font-family:var(--serif);font-weight:300;line-height:1.02;letter-spacing:-.01em;font-optical-sizing:auto}
+  .display{font-family:var(--serif);font-weight:650;line-height:1.02;letter-spacing:-.01em;font-optical-sizing:auto}
 
   /* NAV */
   header.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px var(--pad);
@@ -98,7 +98,7 @@
   .stats .head p{max-width:34ch;color:rgba(237,239,236,.6);font-weight:300;font-size:.98rem}
   .statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-dark)}
   .stat{background:var(--ink);padding:clamp(24px,2.4vw,38px) clamp(20px,2vw,30px) clamp(30px,3vw,42px)}
-  .stat .num{font-family:var(--serif);font-weight:300;font-size:clamp(2.6rem,4.6vw,4.2rem);line-height:1;letter-spacing:-.02em}
+  .stat .num{font-family:var(--serif);font-weight:650;font-size:clamp(2.6rem,4.6vw,4.2rem);line-height:1;letter-spacing:-.02em}
   .stat .num .u{color:var(--silica)}
   .stat .lbl{margin-top:14px;font-size:.86rem;color:rgba(237,239,236,.62);max-width:22ch;font-weight:300}
 
@@ -153,6 +153,74 @@
   input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--silica);cursor:pointer;box-shadow:0 0 0 6px rgba(56,214,190,.16);transition:.15s}
   input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radius:50%;background:var(--silica);cursor:pointer}
   .mill-note{font-family:var(--mono);font-size:.66rem;color:rgba(237,239,236,.4);margin-top:18px;letter-spacing:.04em}
+
+  /* ---------- NAV DROPDOWNS ---------- */
+  .nav-drop{position:relative}
+  .nav-drop .drop-toggle{display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+  .nav-drop .drop-toggle::after{content:"";width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .25s;opacity:.7}
+  .nav-drop.open .drop-toggle::after{transform:rotate(-135deg) translateY(-2px)}
+  .drop-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(6px);min-width:190px;
+    background:rgba(11,35,33,.97);backdrop-filter:blur(14px);border:1px solid var(--line-dark);border-radius:12px;padding:8px;
+    opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s;box-shadow:0 24px 50px rgba(0,0,0,.45);z-index:120}
+  .nav-drop:hover .drop-menu,.nav-drop.open .drop-menu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+  .drop-menu a{display:block;padding:10px 14px;border-radius:8px;font-size:.82rem;opacity:.85;white-space:nowrap}
+  .drop-menu a:hover{background:rgba(56,214,190,.1);color:var(--silica);opacity:1}
+  .drop-menu a.active{color:var(--silica)}
+  .drop-menu a.active::after{display:none}
+
+  /* ---------- PRODUCT PAGE ---------- */
+  .chiprow{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .chiprow span{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--silica);border:1px solid rgba(56,214,190,.35);border-radius:100px;padding:8px 16px}
+  .pz-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,4vw,70px);align-items:start}
+  .pz-p{color:var(--muted);font-weight:300;margin-top:1em;max-width:56ch;line-height:1.65}
+  .pz-p strong{color:var(--slate);font-weight:600}
+  .pz-sup{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--silica-deep);margin-top:26px;font-weight:500}
+  .checks{display:grid;grid-template-columns:1fr 1fr;gap:10px 26px;margin-top:14px}
+  .checks div{font-size:.9rem;color:var(--slate);font-weight:400;display:flex;gap:9px;align-items:flex-start;line-height:1.4}
+  .checks div::before{content:"✓";color:var(--silica-deep);font-weight:700;flex:none}
+  .spec-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+  .spec-card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .spec-card h4{background:var(--ink);color:var(--porcelain);font-family:var(--mono);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;padding:12px 16px;text-align:center;font-weight:500}
+  .spec-card .body{padding:16px 18px 18px}
+  .spec-card .row{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding:8px 0;font-size:.92rem}
+  .spec-card .row .k{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:var(--muted);padding-top:3px}
+  .spec-card .row .v{font-weight:600;color:var(--ink)}
+  .spec-card p{font-size:.82rem;color:var(--muted);font-weight:300;margin-top:12px;line-height:1.55}
+  .spec-note{font-size:.8rem;color:var(--muted);font-weight:300;margin-top:16px;font-style:italic}
+  .adv{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:clamp(36px,4vw,54px)}
+  .adv .cell{background:var(--porcelain);padding:clamp(20px,2.4vw,30px)}
+  .adv .cell .n{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:var(--silica-deep)}
+  .adv .cell h3{font-family:var(--serif);font-weight:600;font-size:1.12rem;margin:.5em 0 .35em;letter-spacing:-.01em}
+  .adv .cell p{font-size:.87rem;color:var(--muted);font-weight:300;line-height:1.55}
+  .adv-bottom{margin-top:26px;text-align:center;font-family:var(--serif);font-size:clamp(1.05rem,1.8vw,1.3rem);color:var(--slate)}
+  .adv-bottom em{color:var(--silica-deep);font-style:italic}
+  .sus-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(26px,3.5vw,56px);margin-top:clamp(36px,4vw,54px);align-items:start}
+  .sus-stat{background:var(--ink-2);border:1px solid var(--line-dark);border-radius:18px;padding:clamp(26px,3vw,40px)}
+  .sus-stat .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--silica)}
+  .sus-stat .big{font-family:var(--serif);font-weight:600;font-size:clamp(2.6rem,5vw,4.2rem);line-height:1.05;margin:.25em 0 .2em;color:#fff}
+  .sus-stat .big span{color:var(--silica)}
+  .sus-stat p{color:rgba(237,239,236,.72);font-weight:300;font-size:.95rem;line-height:1.6}
+  .sus-cards{display:grid;gap:14px}
+  .sus-card{border:1px solid var(--line-dark);border-radius:14px;padding:20px 22px;background:rgba(255,255,255,.02)}
+  .sus-card h3{font-family:var(--serif);font-weight:600;font-size:1.05rem;color:var(--porcelain);margin-bottom:.35em}
+  .sus-card p{color:rgba(237,239,236,.66);font-weight:300;font-size:.88rem;line-height:1.6}
+  .cert-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:clamp(24px,3vw,34px)}
+  .cert-card h3{font-family:var(--serif);font-weight:600;font-size:1.3rem;color:var(--ink);letter-spacing:-.01em}
+  .cert-sub{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+  .cert-list{margin-top:18px;display:grid;gap:11px}
+  .cert-list div{font-size:.88rem;color:var(--slate);font-weight:300;line-height:1.5;padding-left:22px;position:relative}
+  .cert-list div::before{content:"✓";position:absolute;left:0;color:var(--silica-deep);font-weight:700}
+  .cert-list b{font-weight:600;color:var(--ink)}
+  .cert-foot{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line);font-size:.8rem;color:var(--muted);font-weight:300;line-height:1.55}
+  @media(max-width:1020px){.pz-grid,.sus-grid{grid-template-columns:1fr}.adv{grid-template-columns:1fr 1fr}}
+  @media(max-width:760px){
+    .adv{grid-template-columns:1fr}
+    .spec-cards{grid-template-columns:1fr}
+    .nav-drop{width:100%}
+    .drop-menu{position:static;opacity:1;visibility:visible;transform:none;background:transparent;border:0;box-shadow:none;padding:0 0 0 16px;backdrop-filter:none;min-width:0}
+    .drop-menu a{border-top:1px solid var(--line-dark);border-radius:0;padding:13px 4px}
+    .nav-drop .drop-toggle{width:100%}
+  }
 
   /* ---------- SIGNATURE PROCESS 3D VISUAL ---------- */
   .mvis{background:#07100f;color:var(--porcelain);padding:clamp(60px,8vw,110px) 0 0;position:relative;overflow:hidden}
@@ -336,8 +404,14 @@
   </div>
   <nav class="links" id="links">
     <a data-nav="home">Home</a>
-    <a data-nav="pozzodyne">PozzoDyne™</a>
-    <a data-nav="difference">The Process</a>
+    <div class="nav-drop">
+      <a class="drop-toggle">Products</a>
+      <div class="drop-menu"><a data-nav="pozzodyne">PozzoDyne™</a></div>
+    </div>
+    <div class="nav-drop">
+      <a class="drop-toggle">The Process</a>
+      <div class="drop-menu"><a data-nav="difference">Milling Process</a><a data-nav="stats">Statistics</a></div>
+    </div>
     <a data-nav="casestudy">Case Study</a>
     <a data-nav="plants">Plants</a>
     <a data-nav="applications">Applications</a>
@@ -355,8 +429,8 @@
     </video>
     <div class="hero-inner">
       <span class="eyebrow" style="color:var(--silica)">Activated Ground Glass Pozzolan</span>
-      <h1 class="display">Micronized for performance.<br><em>Engineered</em> for the future.</h1>
-      <p class="lede">AggrePlex™ transforms underutilized glass into high-performing pozzolans and technical powders — precision materials that lower embodied carbon and outperform on the jobsite, at commercial scale.</p>
+      <h1 class="display">PozzoDyne™: <em>Engineered to Perform</em></h1>
+      <p class="lede">AggrePlex transforms landfill-destined glass into activated ground-glass pozzolan (AGGP), a high-performance supplementary cementitious material that enhances concrete durability, long-term strength, and resilience while significantly reducing its carbon footprint.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" data-nav="contact">Request Technical Data →</a>
         <a class="btn btn-ghost" data-nav="pozzodyne">Explore PozzoDyne™</a>
@@ -448,9 +522,80 @@
   <section class="page-top"><div class="glow"></div><div class="wrap">
     <span class="eyebrow">Flagship Product</span>
     <h1 class="display">PozzoDyne™ — <em>engineered</em> to perform.</h1>
-    <p class="sub">The next-generation supplementary cementitious material reshaping low-carbon construction — an activated ground glass pozzolan built to replace cement without compromising strength, durability, or cost.</p>
+    <p class="sub">AggrePlex's flagship Activated Ground Glass Pozzolan (AGGP) — a next-generation supplementary cementitious material engineered to lower carbon, improve concrete performance, and create value from underutilized glass streams.</p>
+    <div class="chiprow">
+      <span>Lower Carbon Concrete</span><span>Stronger &amp; Durable</span><span>Circular Solution</span><span>Built for Scale</span>
+    </div>
   </div></section>
+
+  <!-- WHAT IS + SPECS -->
   <section class="band band-light">
+    <div class="wrap">
+      <div class="pz-grid reveal">
+        <div>
+          <span class="eyebrow">What is PozzoDyne™?</span>
+          <h2 class="display" style="font-size:clamp(1.6rem,3vw,2.4rem)">Ultra-fine. Engineered. Repeatable.</h2>
+          <p class="pz-p">PozzoDyne™ is an ultra-fine ground glass pozzolan manufactured from carefully processed glass feedstocks. Through AggrePlex's proprietary material processing, the glass is cleaned, micronized, and classified into a precise particle-size distribution that delivers high performance in cementitious systems.</p>
+          <p class="pz-p">As a supplementary cementitious material, PozzoDyne™ can replace <strong>20–30% of ordinary Portland cement</strong> in the concrete matrix — reducing embodied carbon while maintaining or improving concrete performance.</p>
+          <div class="pz-sup">PozzoDyne™ is designed to support:</div>
+          <div class="checks">
+            <div>Lower-carbon concrete</div>
+            <div>Enhanced long-term strength development</div>
+            <div>Improved durability</div>
+            <div>Increased sulfate resistivity</div>
+            <div>Reduced chloride permeability</div>
+            <div>Circular use of glass byproducts</div>
+            <div>ASR mitigation</div>
+          </div>
+        </div>
+        <div>
+          <span class="eyebrow">Product Specifications</span>
+          <h2 class="display" style="font-size:clamp(1.6rem,3vw,2.4rem)">Two engineered distributions.</h2>
+          <p class="pz-p">Produced in two particle-size distributions to support different performance requirements and mix designs.</p>
+          <div class="spec-cards">
+            <div class="spec-card">
+              <h4>PozzoDyne™ 20µm</h4>
+              <div class="body">
+                <div class="row"><span class="k">D97</span><span class="v">≤ 20 microns</span></div>
+                <div class="row"><span class="k">D50</span><span class="v">5 microns</span></div>
+                <p>Optimized for balanced performance, workability, and general cement replacement.</p>
+              </div>
+            </div>
+            <div class="spec-card">
+              <h4>PozzoDyne™ 10µm</h4>
+              <div class="body">
+                <div class="row"><span class="k">D97</span><span class="v">≤ 10 microns</span></div>
+                <div class="row"><span class="k">D50</span><span class="v">3 microns</span></div>
+                <p>Designed for higher reactivity, increased surface area, and enhanced early and long-term performance.</p>
+              </div>
+            </div>
+          </div>
+          <p class="spec-note">Both products are manufactured using precise micronization and classification to ensure consistency, reactivity, and repeatability across applications.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POZZOLANS / WHY IT MATTERS -->
+  <section class="band band-porc2" style="padding-top:clamp(50px,6vw,80px);padding-bottom:clamp(50px,6vw,80px)">
+    <div class="wrap">
+      <div class="proc reveal" style="margin-top:0">
+        <div class="pcell">
+          <span class="spec">What are pozzolans?</span>
+          <h3>The chemistry behind better concrete</h3>
+          <p>Pozzolans are amorphous siliceous materials that react with calcium hydroxide in the presence of water to form additional cementitious compounds — densifying the cement matrix and improving strength, durability, and chemical resistance over time. PozzoDyne™ is a new generation of engineered pozzolanic powder made from glass and optimized through advanced particle engineering.</p>
+        </div>
+        <div class="pcell">
+          <span class="spec">Why PozzoDyne™ matters</span>
+          <h3>Concrete's carbon problem, addressed</h3>
+          <p>Cement production accounts for roughly 8% of global emissions. PozzoDyne™ replaces a portion of Portland cement with a lower-carbon alternative that integrates into existing concrete and cement production systems — reducing carbon intensity while improving material circularity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE PROPS -->
+  <section class="band band-light" style="padding-top:clamp(50px,6vw,80px)">
     <div class="wrap">
       <div class="props reveal">
         <div class="prop"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 20h18M6 20V9m4 11V5m4 15v-7m4 7V8"/></svg><span class="tag">01 · Performance</span><h3>Superior performance</h3><p>Improves long-term strength, durability, and resistance to chemical attack across demanding applications.</p></div>
@@ -460,6 +605,86 @@
       </div>
     </div>
   </section>
+
+  <!-- COMPETITIVE ADVANTAGE -->
+  <section class="band band-porc2" id="advantage">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Competitive Advantage</span>
+        <h2 class="display">Better concrete, from the inside out.</h2>
+        <p class="sub">Engineered reactivity. Measurable results. How PozzoDyne™ concrete outperforms conventional mixes.</p>
+      </div>
+      <div class="adv reveal">
+        <div class="cell"><span class="n">01</span><h3>20–30% cement replacement</h3><p>Comparable or improved compressive strength with standard mix design practices — no production redesign.</p></div>
+        <div class="cell"><span class="n">02</span><h3>Lower embodied carbon</h3><p>Direct CO₂ reduction per cubic yard; supports ESG, regulatory, and project-specific carbon targets.</p></div>
+        <div class="cell"><span class="n">03</span><h3>Reduced permeability</h3><p>Ultra-fine particles refine the pore structure — lower chloride ingress and improved durability in aggressive environments.</p></div>
+        <div class="cell"><span class="n">04</span><h3>ASR &amp; sulfate resistance</h3><p>Consumes free lime into additional C-S-H, limiting expansive alkali-silica and sulfate reactions.</p></div>
+        <div class="cell"><span class="n">05</span><h3>Strength at every age</h3><p>Slag-like early performance, ~100% of control at 28 days, and continued densification beyond 56 days.</p></div>
+        <div class="cell"><span class="n">06</span><h3>Thermal performance</h3><p>A denser matrix limits heat transfer — higher R-value, lower U-value, better energy efficiency.</p></div>
+        <div class="cell"><span class="n">07</span><h3>Fire &amp; heat stability</h3><p>Less free lime and more stable C-S-H phases reduce high-temperature degradation and spalling risk.</p></div>
+        <div class="cell"><span class="n">08</span><h3>Acoustic &amp; consistency</h3><p>Higher sound attenuation (STC), plus engineered repeatability that eliminates the variability of traditional SCMs.</p></div>
+      </div>
+      <div class="adv-bottom reveal">This is not just a cement replacement — <em>it's a performance upgrade to conventional concrete.</em></div>
+    </div>
+  </section>
+
+  <!-- SUSTAINABILITY -->
+  <section class="mill" id="sustainability">
+    <div class="glow"></div>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Sustainability</span>
+        <h2 class="display" style="color:var(--porcelain)">Lower carbon. Smarter materials. <em>Scalable impact.</em></h2>
+      </div>
+      <div class="sus-grid reveal">
+        <div class="sus-stat">
+          <div class="k">LCA Key Finding</div>
+          <div class="big">Up to <span>94%</span></div>
+          <p>reduction in CO₂ emissions during production compared to ordinary Portland cement (OPC) — validated by Life Cycle Assessment.</p>
+        </div>
+        <div class="sus-cards">
+          <div class="sus-card"><h3>CO₂ reduction through cement replacement</h3><p>Cement is the most carbon-intensive component of concrete. Replacing 20–30% of it with PozzoDyne™ directly lowers embodied carbon per cubic yard — without changing how concrete is produced.</p></div>
+          <div class="sus-card"><h3>Data-backed decarbonization</h3><p>LCA-validated performance supports ESG and sustainability reporting, aligns with emerging low-carbon material standards, and gives project owners quantifiable impact.</p></div>
+          <div class="sus-card"><h3>Circular material strategy</h3><p>Landfill-bound glass becomes a high-value cementitious input — upgrading existing material streams, extending lifecycles, and reducing dependency on newly produced materials.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS & STANDARDS -->
+  <section class="band band-light" id="certifications">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Certifications &amp; Standards</span>
+        <h2 class="display">Built to be specified.</h2>
+        <p class="sub">PozzoDyne™ is engineered to meet established industry standards and integrate seamlessly into existing concrete specifications.</p>
+      </div>
+      <div class="pz-grid reveal" style="margin-top:clamp(30px,4vw,50px)">
+        <div class="cert-card">
+          <h3>ASTM C1866 Compliance</h3>
+          <p class="cert-sub">Standard Specification for Ground-Glass Pozzolan for Use in Concrete</p>
+          <div class="cert-list">
+            <div><b>Loss on Ignition (LOI)</b> ≤ 0.5% — consistently below threshold</div>
+            <div><b>Fineness</b> — engineered particle-size distributions well within specification</div>
+            <div><b>Chemical composition</b> — high amorphous silica content suitable for pozzolanic reaction</div>
+            <div><b>Performance criteria</b> — meets or exceeds required strength activity and durability benchmarks</div>
+          </div>
+          <p class="cert-foot">Specification-ready for commercial and infrastructure projects — can be specified as a ground-glass pozzolan per ASTM C1866 within performance-based specs and 20–30% replacement strategies.</p>
+        </div>
+        <div class="cert-card">
+          <h3>Performance-Based Validation</h3>
+          <p class="cert-sub">Evaluated through a comprehensive testing framework aligned with industry standards</p>
+          <div class="cert-list">
+            <div><b>Reactivity &amp; strength</b> — ASTM C311 (Strength Activity Index), C1897 (Isothermal Calorimetry)</div>
+            <div><b>Durability</b> — ASTM C1260 / C1567 (ASR mitigation), C1012 (sulfate resistance), C1202 (chloride penetration)</div>
+            <div><b>Physical properties</b> — ASTM C204 (Blaine fineness), full PSD (D10–D97), specific gravity, density, moisture</div>
+          </div>
+          <p class="cert-foot">Documentation available: Technical Data Sheet, ASTM C1866 compliance statement, test data summary, and environmental product profile.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="cta"><div class="glow"></div><div class="wrap">
     <span class="eyebrow">Request technical data</span>
     <h2 class="display">See how PozzoDyne™ <em>performs.</em></h2>
@@ -542,6 +767,40 @@
   </div></section>
 </main>
 
+
+<!-- ============ STATISTICS ============ -->
+<main class="page" id="page-stats">
+  <section class="page-top"><div class="glow"></div><div class="wrap">
+    <span class="eyebrow">The Process</span>
+    <h1 class="display">Our milling process, <em>by the numbers.</em></h1>
+    <p class="sub">The scale of the opportunity and the precision of the output — the statistics behind AggrePlex micronization.</p>
+  </div></section>
+  <section class="stats" style="border-top:0">
+    <div class="wrap">
+      <div class="statgrid reveal">
+        <div class="stat"><div class="num" data-count="200" data-suffix="M+">0</div><div class="lbl">tons of glass generated globally each year</div></div>
+        <div class="stat"><div class="num" data-count="130" data-suffix="M+">0</div><div class="lbl">tons of glass underutilized annually</div></div>
+        <div class="stat"><div class="num" data-count="30" data-suffix="B+">0</div><div class="lbl">tons of concrete used every year</div></div>
+        <div class="stat"><div class="num"><span class="u">↑</span><span data-count="30" data-suffix="%">0</span></div><div class="lbl">potential cement replacement with PozzoDyne™</div></div>
+      </div>
+    </div>
+  </section>
+  <section class="band band-light">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Process precision</span>
+        <h2 class="display">Engineered output, measured.</h2>
+      </div>
+      <div class="adv reveal" style="grid-template-columns:repeat(4,1fr)">
+        <div class="cell"><span class="n">D97</span><h3>≤ 10–20 µm</h3><p>Two engineered particle-size distributions for different performance targets.</p></div>
+        <div class="cell"><span class="n">D50</span><h3>3–5 µm</h3><p>Median particle size at the micron level — surface area that drives reactivity.</p></div>
+        <div class="cell"><span class="n">LOI</span><h3>≤ 0.5%</h3><p>Loss on ignition consistently below the ASTM C1866 threshold — clean feedstock, low variability.</p></div>
+        <div class="cell"><span class="n">CO₂</span><h3>Up to 94% lower</h3><p>Production emissions vs ordinary Portland cement, validated by Life Cycle Assessment.</p></div>
+      </div>
+      <p class="spec-note reveal" style="margin-top:22px">Additional process statistics are being finalized by engineering and will be published here.</p>
+    </div>
+  </section>
+</main>
 
 <!-- ============ CASE STUDY ============ -->
 <main class="page" id="page-casestudy">
@@ -766,6 +1025,11 @@ var TEAM = [
     var target=document.getElementById('page-'+page)||document.getElementById('page-home');
     target.classList.add('active');
     links.querySelectorAll('a').forEach(function(a){a.classList.toggle('active',a.getAttribute('data-nav')===page)});
+    document.querySelectorAll('.nav-drop').forEach(function(d){
+      d.classList.remove('open');
+      var tg=d.querySelector('.drop-toggle');
+      if(tg)tg.classList.toggle('active',!!d.querySelector('a.active'));
+    });
     // nav appearance: transparent over hero on home-top, else solid
     setNavState(page);setNavH();
     window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});
@@ -782,6 +1046,15 @@ var TEAM = [
     if(page==='home'&&scrollY<40){nav.classList.remove('solid')}else{nav.classList.add('solid')}
   }
   navItems.forEach(function(el){el.addEventListener('click',function(e){e.preventDefault();go(el.getAttribute('data-nav'))})});
+  document.querySelectorAll('.nav-drop .drop-toggle').forEach(function(tg){
+    tg.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();
+      var d=tg.parentElement,was=d.classList.contains('open');
+      document.querySelectorAll('.nav-drop').forEach(function(o){o.classList.remove('open')});
+      if(!was)d.classList.add('open');
+    });
+  });
+  addEventListener('click',function(e){if(!e.target.closest('.nav-drop'))document.querySelectorAll('.nav-drop').forEach(function(o){o.classList.remove('open')})});
   burger.addEventListener('click',function(){links.classList.toggle('open');nav.classList.toggle('menuopen')});
   addEventListener('scroll',function(){var active=document.querySelector('.page.active');setNavState(active&&active.id==='page-home'?'home':'x')},{passive:true});
 
