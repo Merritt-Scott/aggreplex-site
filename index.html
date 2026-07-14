@@ -165,6 +165,33 @@
   .mv-lbl .s{font-family:var(--mono);font-size:clamp(.56rem,.85vw,.7rem);letter-spacing:.14em;text-transform:uppercase;color:rgba(237,239,236,.55);margin-top:6px}
   .mv-hint{position:absolute;top:14px;right:18px;font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(237,239,236,.35)}
 
+  /* ---------- PLANTS GLOBE ---------- */
+  .glsec{background:#07100f;position:relative;overflow:hidden;padding:10px 0 0}
+  .gl-meta{display:flex;flex-direction:column;align-items:center;gap:11px;margin-top:16px;text-align:center}
+  .gl-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 26px;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(237,239,236,.6)}
+  .gl-legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px;vertical-align:-1px;box-shadow:0 0 8px rgba(255,255,255,.25)}
+  .gl-hint{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(237,239,236,.35)}
+  .gl-scene{position:relative;height:min(74vh,680px);min-height:480px;cursor:grab;touch-action:none}
+  .gl-scene.dragging{cursor:grabbing}
+  .gl-scene canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .pl-overlay{position:fixed;inset:0;z-index:200;background:rgba(9,20,19,.62);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s}
+  .pl-overlay.open{opacity:1;visibility:visible}
+  .pl-panel{position:fixed;top:0;left:0;bottom:0;z-index:201;width:min(92vw,440px);background:var(--ink);color:var(--porcelain);
+    transform:translateX(-102%);transition:transform .5s cubic-bezier(.16,.84,.28,1);box-shadow:30px 0 80px rgba(0,0,0,.5);display:flex;flex-direction:column;overflow-y:auto}
+  .pl-panel.open{transform:none}
+  .pl-head{padding:clamp(24px,3vw,34px);background:linear-gradient(160deg,#12403c,#0b2321);position:relative;flex-shrink:0}
+  .pl-close{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line-dark);background:rgba(11,35,33,.5);color:var(--porcelain);cursor:pointer;font-size:1.05rem;display:flex;align-items:center;justify-content:center;transition:.25s}
+  .pl-close:hover{background:var(--silica);color:var(--ink);border-color:var(--silica);transform:rotate(90deg)}
+  .pl-tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--silica)}
+  .pl-name{font-family:var(--serif);font-weight:500;font-size:clamp(1.5rem,2.8vw,1.95rem);margin:.35em 0 .1em;letter-spacing:-.01em;color:#fff}
+  .pl-loc{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(237,239,236,.6)}
+  .pl-body{padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;flex:1}
+  .pl-desc{font-size:.97rem;font-weight:300;color:rgba(237,239,236,.82);line-height:1.7}
+  .pl-facts{margin-top:24px;border-top:1px solid var(--line-dark)}
+  .pl-fact{display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid var(--line-dark);font-size:.83rem}
+  .pl-fact .k{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(237,239,236,.5);padding-top:2px;white-space:nowrap}
+  .pl-fact .v{font-weight:300;color:rgba(237,239,236,.85);text-align:right}
+
   /* PROCESS + SPLIT */
   .proc{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line);margin-top:clamp(44px,5vw,64px)}
   .pcell{background:var(--porcelain);padding:clamp(30px,3vw,48px)}
@@ -221,7 +248,7 @@
   .bp-title{font-size:.96rem;color:rgba(237,239,236,.7);font-weight:300}
   .bp-rule{height:1px;background:var(--line-dark);margin:22px 0}
   .bp-bio{font-size:.98rem;font-weight:300;color:rgba(237,239,236,.82);line-height:1.7}
-  .bp-contact{margin-top:auto;padding-top:26px}
+  .bp-contact{margin-top:auto;padding-top:26px;display:flex;flex-wrap:wrap;gap:10px}
   .bp-contact a{display:inline-flex;align-items:center;gap:.6em;font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;color:var(--silica);border:1px solid var(--line-dark);border-radius:100px;padding:11px 18px;transition:.25s}
   .bp-contact a:hover{background:var(--silica);color:var(--ink);border-color:var(--silica)}
 
@@ -310,7 +337,9 @@
   <nav class="links" id="links">
     <a data-nav="home">Home</a>
     <a data-nav="pozzodyne">PozzoDyne™</a>
-    <a data-nav="difference">The Difference</a>
+    <a data-nav="difference">The Process</a>
+    <a data-nav="casestudy">Case Study</a>
+    <a data-nav="plants">Plants</a>
     <a data-nav="applications">Applications</a>
     <a data-nav="team">Meet the Team</a>
     <a data-nav="contact" class="nav-cta">Contact</a>
@@ -363,7 +392,7 @@
       </div>
       <div class="ov reveal">
         <div class="ovc" data-nav="pozzodyne"><span class="n">01</span><h3>PozzoDyne™</h3><p>An activated ground glass pozzolan engineered to replace cement without compromising strength, durability, or cost.</p><span class="go">Explore product →</span></div>
-        <div class="ovc" data-nav="difference"><span class="n">02</span><h3>The Difference</h3><p>Milling and air-classification that micronizes material to unlock reactivity conventional grinding can't reach.</p><span class="go">See how it works →</span></div>
+        <div class="ovc" data-nav="difference"><span class="n">02</span><h3>The Process</h3><p>Milling and air-classification that micronizes material to unlock reactivity conventional grinding can't reach.</p><span class="go">See how it works →</span></div>
         <div class="ovc" data-nav="applications"><span class="n">03</span><h3>Applications</h3><p>Lower-carbon concrete, precast and ready-mix, and custom technical powders for expanding industrial markets.</p><span class="go">View applications →</span></div>
       </div>
     </div>
@@ -435,14 +464,14 @@
     <span class="eyebrow">Request technical data</span>
     <h2 class="display">See how PozzoDyne™ <em>performs.</em></h2>
     <p>Get mix-design guidance, performance data, and supply details for your project.</p>
-    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap"><a class="btn btn-primary" data-nav="contact">Request data →</a><a class="btn btn-ghost" data-nav="difference">The process</a></div>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap"><a class="btn btn-primary" data-nav="contact">Request data →</a><a class="btn btn-ghost" data-nav="difference">The Process</a></div>
   </div></section>
 </main>
 
 <!-- ============ THE DIFFERENCE ============ -->
 <main class="page" id="page-difference">
   <section class="page-top"><div class="glow"></div><div class="wrap">
-    <span class="eyebrow">The AggrePlex™ Difference</span>
+    <span class="eyebrow">The AggrePlex™ Process</span>
     <h1 class="display">It's not ground. <em>It's micronized.</em></h1>
     <p class="sub">Powered by Microtec's advanced milling and air-classification systems, we produce ultra-fine powders with tightly controlled particle-size distributions that conventional grinding simply can't reach.</p>
   </div></section>
@@ -511,6 +540,50 @@
     <p>Bring our milling and classification expertise to your material challenge.</p>
     <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap"><a class="btn btn-primary" data-nav="contact">Talk to our team →</a><a class="btn btn-ghost" data-nav="applications">Applications</a></div>
   </div></section>
+</main>
+
+
+<!-- ============ CASE STUDY ============ -->
+<main class="page" id="page-casestudy">
+  <section class="page-top"><div class="glow"></div><div class="wrap">
+    <span class="eyebrow">Case Study</span>
+    <h1 class="display">Proof in <em>the pour.</em></h1>
+    <p class="sub">Real projects, real mix designs, real performance data. We're documenting results from early PozzoDyne™ placements — strength curves, durability metrics, and carbon savings.</p>
+  </div></section>
+  <section class="band band-light">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Coming soon</span>
+        <h2 class="display">The first PozzoDyne™ case study.</h2>
+        <p class="sub">Our first published case study is in the works. Want early access to the data, or a pilot placement of your own?</p>
+      </div>
+      <div style="margin-top:34px;display:flex;gap:16px;flex-wrap:wrap" class="reveal">
+        <a class="btn btn-primary" data-nav="contact">Request technical data →</a>
+        <a class="btn btn-ghost" style="border-color:var(--line);color:var(--slate)" data-nav="pozzodyne">About PozzoDyne™</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ PLANTS ============ -->
+<main class="page" id="page-plants">
+  <section class="page-top"><div class="glow"></div><div class="wrap">
+    <span class="eyebrow">Global Operations</span>
+    <h1 class="display">Two plants. <em>One platform.</em></h1>
+    <p class="sub">Production in California. Engineering in Bavaria. Spin the globe and select a location to learn more about each facility.</p>
+  </div></section>
+  <section class="glsec">
+    <div class="gl-meta">
+      <div class="gl-legend">
+        <span><i style="background:rgb(56,214,190)"></i>Production Facility</span>
+        <span><i style="background:rgb(244,177,105)"></i>Pilot Plant</span>
+      </div>
+      <div class="gl-hint">Drag to spin · Scroll to zoom · Click a plant</div>
+    </div>
+    <div class="gl-scene" id="glScene">
+      <canvas id="glCanvas"></canvas>
+    </div>
+  </section>
 </main>
 
 <!-- ============ APPLICATIONS ============ -->
@@ -589,6 +662,22 @@
   </div>
 </aside>
 
+
+<!-- PLANT PANEL -->
+<div class="pl-overlay" id="plOverlay"></div>
+<aside class="pl-panel" id="plPanel" aria-hidden="true">
+  <div class="pl-head">
+    <button class="pl-close" id="plClose" aria-label="Close">✕</button>
+    <div class="pl-tag" id="plTag"></div>
+    <h3 class="pl-name" id="plName"></h3>
+    <div class="pl-loc" id="plLoc"></div>
+  </div>
+  <div class="pl-body">
+    <p class="pl-desc" id="plDesc"></p>
+    <div class="pl-facts" id="plFacts"></div>
+  </div>
+</aside>
+
 <!-- FOOTER -->
 <footer class="site">
   <div class="wrap">
@@ -607,7 +696,7 @@
         </div>
         <p class="about">Transforming underutilized materials into high-performing pozzolans and technical powders — engineered on Microtec's proven, scalable technology.</p>
       </div>
-      <div class="fcol"><h4>Product</h4><a data-nav="pozzodyne">PozzoDyne™</a><a data-nav="difference">The Difference</a><a data-nav="applications">Applications</a></div>
+      <div class="fcol"><h4>Product</h4><a data-nav="pozzodyne">PozzoDyne™</a><a data-nav="difference">The Process</a><a data-nav="applications">Applications</a></div>
       <div class="fcol"><h4>Company</h4><a data-nav="team">Meet the Team</a></div>
       <div class="fcol"><h4>Connect</h4><a href="mailto:info@aggreplex.com">info@aggreplex.com</a><a data-nav="contact">Contact</a></div>
     </div>
@@ -618,19 +707,19 @@
 <script>
 /* ===== TEAM DATA ===== */
 var TEAM = [
-  {n:'Anthony Cialone', t:'President and Founder', e:'Tony@microtecdhus.com', b:"Anthony founded Microtec Development & Holdings to turn advanced materials science into real-world industrial capacity. As President and Founder, he sets the company's strategic direction and drives the innovation agenda behind PozzoDyne™ — building a durable, U.S.-based platform for sustainable pozzolans at commercial scale."},
-  {n:'David Haughie', t:'Executive Chairman', e:'david@microtecdhus.com', b:"David serves as Executive Chairman, guiding governance and long-term strategy across the Microtec and AggrePlex portfolio. He brings decades of leadership experience to the board, helping align the company's growth with its sustainability mission."},
-  {n:'William Cialone', t:'VP of Corporate Strategy', e:'will@microtecdhus.com', b:"William leads corporate strategy, shaping how AggrePlex scales its supply, partnerships, and market position. He connects the company's technical strengths to commercial opportunity across the construction and industrial sectors."},
-  {n:'Josef Fischer', t:'Chief Technology Officer', e:'info@microtec-bobingen.de', b:"As Chief Technology Officer, Josef oversees the science and engineering behind Microtec's milling and air-classification technology. Based in Germany, he leads the R&D that pushes particle performance to the micron level."},
-  {n:'Alan Wessel', t:'Senior Strategic Advisor', e:'alan@aggreplexus.com', b:"Alan advises the leadership team on strategy and growth, bringing an experienced outside perspective to AggrePlex's expansion. He helps steer key decisions across market development and partnerships."},
-  {n:'Mike Kneller', t:'Controller', e:'mike@microtecdhus.com', b:"Mike manages the company's financial operations as Controller, overseeing accounting, reporting, and fiscal discipline. He ensures AggrePlex's growth is built on a sound financial foundation."},
-  {n:'Merritt Scott', t:'Director of Digital Intelligence & Technology Integration', e:'merritt@microtecdhus.com', b:"Merritt leads digital intelligence and technology integration, building the systems and data infrastructure that keep AggrePlex running efficiently. He bridges operations and technology across the organization."},
-  {n:'Joe Meierhoff', t:'National Glass Acquisition & Logistics Director', e:'joe@aggreplexus.com', b:"Joe directs national glass acquisition and logistics, securing the post-consumer glass feedstock at the heart of PozzoDyne™. He manages the supply relationships and transport network that keep material flowing to production."},
-  {n:'Martín Guzman', t:'Plant Manager, Modesto', e:'martin@aggreplexus.com', b:"Martín manages day-to-day operations at the Modesto plant, overseeing production, safety, and quality on the floor. He turns AggrePlex's process technology into consistent, commercial-scale output."},
-  {n:'Tabitha Eaves', t:'Document Controls Manager', e:'tabitha@aggreplexus.com', b:"Tabitha manages document controls, keeping the company's technical, compliance, and operational records organized and accessible. She supports quality and accountability across every project."},
-  {n:'Christopher Cheadle', t:'Lead Process Engineer', e:'chris@microtecdhus.com', b:"Christopher leads process engineering, designing and optimizing the milling and classification systems that define AggrePlex's material performance. He translates lab results into repeatable industrial processes."},
-  {n:'Nick Tenley', t:'Mechanical Engineering Specialist', e:'nick@microtecdhus.com', b:"Nick specializes in mechanical engineering, supporting the design, maintenance, and reliability of AggrePlex's production equipment. He keeps the systems that power micronization running at peak."},
-  {n:'Stan Gibson', t:'Engineering', e:'stan@microtecdhus.com', b:"Stan supports the engineering team across design and implementation, contributing to the systems and equipment that bring AggrePlex's materials to commercial scale."}
+  {n:'Anthony Cialone', t:'President and Founder', e:'Tony@microtecdhus.com',p:'239-505-9101',tel:'+12395059101', b:"Anthony founded Microtec Development & Holdings to turn advanced materials science into real-world industrial capacity. As President and Founder, he sets the company's strategic direction and drives the innovation agenda behind PozzoDyne™ — building a durable, U.S.-based platform for sustainable pozzolans at commercial scale."},
+  {n:'David Haughie', t:'Executive Chairman', e:'david@microtecdhus.com',p:'239-505-9105',tel:'+12395059105', b:"David serves as Executive Chairman, guiding governance and long-term strategy across the Microtec and AggrePlex portfolio. He brings decades of leadership experience to the board, helping align the company's growth with its sustainability mission."},
+  {n:'William Cialone', t:'VP of Corporate Strategy', e:'will@microtecdhus.com',p:'239-505-9102',tel:'+12395059102', b:"William leads corporate strategy, shaping how AggrePlex scales its supply, partnerships, and market position. He connects the company's technical strengths to commercial opportunity across the construction and industrial sectors."},
+  {n:'Josef Fischer', t:'Chief Technology Officer', e:'info@microtec-bobingen.de',p:'+49 171 3803815',tel:'+491713803815', b:"As Chief Technology Officer, Josef oversees the science and engineering behind Microtec's milling and air-classification technology. Based in Germany, he leads the R&D that pushes particle performance to the micron level."},
+  {n:'Alan Wessel', t:'Senior Strategic Advisor', e:'alan@aggreplexus.com',p:'323-791-2926',tel:'+13237912926', b:"Alan advises the leadership team on strategy and growth, bringing an experienced outside perspective to AggrePlex's expansion. He helps steer key decisions across market development and partnerships."},
+  {n:'Mike Kneller', t:'Controller', e:'mike@microtecdhus.com',p:'239-505-8450',tel:'+12395058450', b:"Mike manages the company's financial operations as Controller, overseeing accounting, reporting, and fiscal discipline. He ensures AggrePlex's growth is built on a sound financial foundation."},
+  {n:'Merritt Scott', t:'Director of Digital Intelligence & Technology Integration', e:'merritt@microtecdhus.com',p:'239-505-9107',tel:'+12395059107', b:"Merritt leads digital intelligence and technology integration, building the systems and data infrastructure that keep AggrePlex running efficiently. He bridges operations and technology across the organization."},
+  {n:'Joe Meierhoff', t:'National Glass Acquisition & Logistics Director', e:'joe@aggreplexus.com',p:'218-591-4569',tel:'+12185914569', b:"Joe directs national glass acquisition and logistics, securing the post-consumer glass feedstock at the heart of PozzoDyne™. He manages the supply relationships and transport network that keep material flowing to production."},
+  {n:'Martín Guzman', t:'Plant Manager, Modesto', e:'martin@aggreplexus.com',p:'239-505-9109',tel:'+12395059109', b:"Martín manages day-to-day operations at the Modesto plant, overseeing production, safety, and quality on the floor. He turns AggrePlex's process technology into consistent, commercial-scale output."},
+  {n:'Tabitha Eaves', t:'Document Controls Manager', e:'tabitha@aggreplexus.com',p:'239-509-3190',tel:'+12395093190', b:"Tabitha manages document controls, keeping the company's technical, compliance, and operational records organized and accessible. She supports quality and accountability across every project."},
+  {n:'Christopher Cheadle', t:'Lead Process Engineer', e:'chris@microtecdhus.com',p:'239-505-9108',tel:'+12395059108', b:"Christopher leads process engineering, designing and optimizing the milling and classification systems that define AggrePlex's material performance. He translates lab results into repeatable industrial processes."},
+  {n:'Nick Tenley', t:'Mechanical Engineering Specialist', e:'nick@microtecdhus.com',p:'239-505-9106',tel:'+12395059106', b:"Nick specializes in mechanical engineering, supporting the design, maintenance, and reliability of AggrePlex's production equipment. He keeps the systems that power micronization running at peak."},
+  {n:'Stan Gibson', t:'Engineering', e:'stan@microtecdhus.com',p:'941-350-9253',tel:'+19413509253', b:"Stan supports the engineering team across design and implementation, contributing to the systems and equipment that bring AggrePlex's materials to commercial scale."}
 ];
 
 (function(){
@@ -658,7 +747,7 @@ var TEAM = [
     document.getElementById('bpName').textContent=m.n;
     document.getElementById('bpTitle').textContent=m.t;
     document.getElementById('bpBio').textContent=m.b;
-    document.getElementById('bpContact').innerHTML='<a href="mailto:'+m.e+'">✉ '+m.e+'</a>';
+    document.getElementById('bpContact').innerHTML='<a href="mailto:'+m.e+'">✉ '+m.e+'</a>'+(m.p?' <a href="tel:'+m.tel+'">✆ '+m.p+'</a>':'');
     overlay.classList.add('open');panel.classList.add('open');panel.setAttribute('aria-hidden','false');
     document.body.style.overflow='hidden';
   }
@@ -687,6 +776,7 @@ var TEAM = [
     // (re)size + start any interactive canvases now that the page is visible
     if(typeof refitMillsIn==='function'){requestAnimationFrame(function(){refitMillsIn(target);setTimeout(function(){refitMillsIn(target)},80);});}
     if(window.mvRefit){requestAnimationFrame(function(){window.mvRefit();setTimeout(window.mvRefit,90);});}
+    if(window.glRefit){requestAnimationFrame(function(){window.glRefit();setTimeout(window.glRefit,90);});}
   }
   function setNavState(page){
     if(page==='home'&&scrollY<40){nav.classList.remove('solid')}else{nav.classList.add('solid')}
@@ -1050,6 +1140,231 @@ if(reduce){t0=0;for(var w2=0;w2<400;w2++){parts.forEach(function(p){stepParticle
 }
 document.querySelectorAll('.mv-scene').forEach(initMV);
 window.mvRefit=function(){refits.forEach(function(f){f()})};
+})();
+</script>
+<script>
+(function(){
+var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var scene=document.getElementById('glScene'),cv=document.getElementById('glCanvas');if(!scene||!cv)return;var g=cv.getContext('2d');
+var DPR=Math.min(devicePixelRatio||1,2),W=0,H=0;
+function fit(){if(!scene.clientWidth)return;W=cv.width=scene.clientWidth*DPR;H=cv.height=scene.clientHeight*DPR}
+window.glRefit=fit;
+fit();addEventListener('resize',fit);
+
+/* ---------- land dots from packed mask ---------- */
+var MASK="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAAAAAAAAAAAAAAAAAADAAAAAAAAAHgAAAAAAAAAAAAAAAAAAYAAAAAAAAB4AAAAAAAAAAAAAAAAGADAAAAAAAAAfAAAAAAAAAAAAAAAAAAAAAAAAAAAAH4AAAAAAAAAAAAAAABgAHAAAAAAAAB+AAAAAAAAAAAAAAAA/ABAAAAAAAAAfwAAAAADAAAAAAACA/wAAAAAAAAAAD/gAAAAB8AAAAAAB//+AAAAAAAAAAA/8AAAAAfwAAAAAAf//gAAAAAAAAAAP/AAAAAH8AAAAAAH//4AAAAAAAAAAD/4AAAAD/gAAAAAD//+AAAAAAAAAAA//AAAAA/8EAAAAA///AAAAAAAAAAAP/4AAAAf/DAAAAAP//gAAAAAAAAAAD//gAAAH/wwAAAAA//wAAAAAAAAAAA//4AAAB/8OAAAAAH/8AAAAAAAAAAAf//AAAAf/jgAAAAAf2AAAAAAAAAAAf//wAAAP/8gAAAAAB9gAAAAAAAAAAH//8AAAD//AAAAAAAAIAAAAAAAAAAD///AAAA//wAAAAAAAAAAAAAAAAAAA///4AAAP/8AAAAA+AAAAAAAAAAAAAf//+AAAD//AAAAAAAA8AAAAAAAAAAH///AAAA//wAAAAEAA8AAAAAAAAAAB//+AAAAf/8AAAACPQYAAAAAAAAAAAf/8AAAAH//gAAABD0AAAAAAAAAAAAD//AAAAB//8AAAAgcAAAAAAAAAAAAA//gAAAAf//gAAACAAAAAAAAAAAAAAP/gAAA////8AAABAAAAAAAAAAAAAAB/gAAAf////AACAgAAAAAAAAAAAAAEPgAAAP////4ACAJgYAAAAAAAAAAADAAAAAH////wABgC4GAAAAAAAAAAADwAAAAB////3gAcA+AgAAAAAAAAAAHwAAAAA////5+APg/gQAAAAAAAAAAH8AAAAAP///+/wH8P8AAAAAAAAAAAHjAAAAAD////P+B/n/AAAAAAAAAAAD4HAAAAAf///3/g///8AAAAAAAAAAD+AAAAAAH///5/wf///wAAAAAAAAAA/gAAAAAA///+/j////8AAAAAAAAAAf+CAAAAAH///vx/////AAAAAAAAAAP//gAAAAB///3//////4AAAAAAAAAH//8AAAAAP/wB//////+CAAAAAAAAD///gAAAAB/gAP//////wQAAAAAAAA///8AAAAAD4Af//////8TgAAAAAAAf///AAAAAPAAf+H////+MYAAAAAAAP///wAAAAD4C3/h//////CAAAAAAAD//+PAAAAA/BeA4f/////4AAAAAAAA//+D8AAAAA//weH//////CAAAAAAAP//D/gAAAAP///x//////4AAAAAAAH////4AAAAP///////////gAAAAAAB/////gAAAAf//////////wAAAAAAA///9/+AAAA7//////////8AAAAAAAf//+P/AAAA8L/////////+AEAADwAf///B/gAAADCB/////////gBgAA/gf//+AfwAAAAAAP////////+A4AAf/////gH4AAAAAeAf/////////+AAH/////4DwAMAAAH8H///////////gB/////+AgAPwAAA/jz//////////+A//////AP8H/gAAD//f//////////AB////wAD+B/+AAAf/D/////////8AAH/AAfAAAAf/8AAA+AAD///////4AAAAAAAYAAAP//AAAAAAAB////wAAAAAAAAAAAAAH//4AAAAAAAA//gAAAAAAAAAAAAAAD//wAAAAAAAAAPgAAAAAAAAAAAAP8D/4AAAAAAAAAAAAAAAAAA==";
+var COLS=176,ROWS=70,LAT0=-60,DLAT=2;
+var LAND=[];
+(function(){
+  var bin=atob(MASK),bits=[];
+  for(var i=0;i<bin.length;i++){var by=bin.charCodeAt(i);for(var k=7;k>=0;k--)bits.push((by>>k)&1)}
+  for(var r=0;r<ROWS;r++){
+    var lat=LAT0+r*DLAT;
+    var thin=Math.abs(lat)>62?2:1;                 // thin polar rows
+    for(var c=0;c<COLS;c++){
+      if(!bits[r*COLS+c])continue;
+      if(thin>1&&(c%thin))continue;
+      var lon=-180+360*c/COLS;
+      var la=lat*Math.PI/180,lo=lon*Math.PI/180;
+      LAND.push([Math.cos(la)*Math.cos(lo),Math.sin(la),Math.cos(la)*Math.sin(lo)]);
+    }
+  }
+})();
+function ll2v(lat,lon){var la=lat*Math.PI/180,lo=lon*Math.PI/180;return [Math.cos(la)*Math.cos(lo),Math.sin(la),Math.cos(la)*Math.sin(lo)]}
+
+/* ---------- plants ---------- */
+var PLANTS=[
+ {id:'modesto',name:'AggrePlex — Modesto',loc:'Modesto, California, USA',tag:'Production Facility',
+  lat:37.639,lon:-120.997,label:'MODESTO, USA',col:'56,214,190',
+  desc:"AggrePlex's U.S. production plant converts post-consumer glass from California's recycling stream into PozzoDyne™ micronized pozzolan. Built on Microtec's UTM milling and air-classification technology, Modesto anchors domestic supply for West Coast concrete and industrial markets.",
+  facts:[['Role','PozzoDyne™ production'],['Feedstock','Post-consumer glass cullet'],['Technology','UTM Turbo Mill + air classification'],['Plant Manager','Martín Guzman']]},
+ {id:'bobingen',name:'Microtec — Bobingen',loc:'Bobingen, Bavaria, Germany',tag:'Pilot Plant — Technology & Engineering',
+  lat:48.271,lon:10.834,label:'BOBINGEN, DE',col:'244,177,105',
+  desc:"The engineering home of Microtec's milling and air-classification systems. The Bobingen facility develops, tests, and builds the UTM Turbo Mill technology behind AggrePlex's micronization process — decades of German process-engineering expertise powering U.S. production.",
+  facts:[['Role','R&D & equipment engineering'],['Technology','UTM Turbo Mill development'],['Heritage','Microtec GmbH'],['Chief Technology Officer','Josef Fischer']]}
+];
+PLANTS.forEach(function(p){p.v=ll2v(p.lat,p.lon)});
+
+/* great-circle arc between the two plants */
+var ARC=[];
+(function(){
+  var a=PLANTS[0].v,b=PLANTS[1].v;
+  var dotp=a[0]*b[0]+a[1]*b[1]+a[2]*b[2],om=Math.acos(Math.max(-1,Math.min(1,dotp)));
+  for(var i=0;i<=64;i++){
+    var t=i/64,s1=Math.sin((1-t)*om)/Math.sin(om),s2=Math.sin(t*om)/Math.sin(om);
+    var x=s1*a[0]+s2*b[0],y=s1*a[1]+s2*b[1],z=s1*a[2]+s2*b[2];
+    var lift=1+0.16*Math.sin(Math.PI*t);
+    ARC.push([x*lift,y*lift,z*lift]);
+  }
+})();
+
+/* ---------- camera / projection ---------- */
+var rotY=2.53,rotX=0.42,vy=0,vx=0,zoom=1,tzoom=1;
+var SIL='56,214,190',TAN='196,183,150';
+function project(p){
+  var c=Math.cos(rotY),s=Math.sin(rotY);
+  var x=p[0]*c-p[2]*s,z=p[0]*s+p[2]*c,y=p[1];
+  var c2=Math.cos(rotX),s2=Math.sin(rotX);
+  var y2=y*c2-z*s2,z2=y*s2+z*c2;
+  var R=Math.min(W,H)*0.345*zoom;
+  return [W/2-x*R,H*0.52-y2*R,z2,R];
+}
+
+/* ---------- stars ---------- */
+var STARS=[];for(var i=0;i<90;i++)STARS.push([Math.random(),Math.random(),Math.random()*6.28]);
+
+var t0=null,pulseT=0,arcPulse=0,hover=-1;
+function frame(ts){
+  if(scene.offsetParent===null){t0=ts;if(!reduce)requestAnimationFrame(frame);return}
+  if(!W||!H){fit();t0=ts;if(!reduce)requestAnimationFrame(frame);return}
+  if(t0===null)t0=ts;var dt=Math.min(.05,(ts-t0)/1000);t0=ts;
+  if(!dragging){rotY+=vy;vy*=.95;rotX+=vx;vx*=.9;rotX=Math.max(-.9,Math.min(.9,rotX));
+    if(!reduce&&Math.abs(vy)<.0004)rotY+=dt*.06;}
+  zoom+=(tzoom-zoom)*.12;
+  pulseT+=dt;arcPulse+=dt*.35;
+  g.clearRect(0,0,W,H);
+
+  // stars
+  for(var i=0;i<STARS.length;i++){var st=STARS[i];var a=.12+.12*Math.abs(Math.sin(st[2]+pulseT*.8));
+    g.fillStyle='rgba(237,239,236,'+a+')';g.fillRect(st[0]*W,st[1]*H,DPR,DPR)}
+
+  var R=Math.min(W,H)*0.345*zoom;
+
+  // back hemisphere dots (dim)
+  g.fillStyle='rgba('+SIL+',.10)';
+  for(var i=0;i<LAND.length;i++){var q=project(LAND[i]);
+    if(q[2]<=0){g.beginPath();g.arc(q[0],q[1],1.0*DPR,0,6.283);g.fill()}}
+
+  // sphere halo + rim
+  var cx=W/2,cyy=H*0.52;
+  var halo=g.createRadialGradient(cx,cyy,R*.7,cx,cyy,R*1.25);
+  halo.addColorStop(0,'rgba('+SIL+',0)');halo.addColorStop(.82,'rgba('+SIL+',.07)');halo.addColorStop(1,'rgba('+SIL+',0)');
+  g.fillStyle=halo;g.fillRect(0,0,W,H);
+  g.strokeStyle='rgba('+SIL+',.25)';g.lineWidth=1*DPR;
+  g.beginPath();g.arc(cx,cyy,R,0,6.283);g.stroke();
+
+  // front hemisphere dots
+  for(var i=0;i<LAND.length;i++){var q=project(LAND[i]);
+    if(q[2]>0){var al=.28+.5*q[2];
+      g.fillStyle='rgba('+SIL+','+al+')';
+      g.beginPath();g.arc(q[0],q[1],(1+.45*q[2])*DPR,0,6.283);g.fill()}}
+
+  // arc
+  for(var i=0;i<ARC.length-1;i++){
+    var a1=project(ARC[i]),a2=project(ARC[i+1]);
+    var front=(a1[2]>-.05&&a2[2]>-.05);
+    g.strokeStyle=front?'rgba('+TAN+',.75)':'rgba('+TAN+',.12)';
+    g.lineWidth=(front?1.3:1)*DPR;
+    g.beginPath();g.moveTo(a1[0],a1[1]);g.lineTo(a2[0],a2[1]);g.stroke();
+  }
+  if(!reduce){
+    // pulse travels Bobingen (pilot) -> Modesto (production): orange fades to teal
+    var pu=(arcPulse%1);var pi=Math.floor((1-pu)*(ARC.length-1));
+    var pp=project(ARC[pi]);
+    if(pp[2]>-.05){
+      var mixR=Math.round(244+(56-244)*pu),mixG=Math.round(177+(214-177)*pu),mixB=Math.round(105+(190-105)*pu);
+      var pgrad=g.createRadialGradient(pp[0],pp[1],0,pp[0],pp[1],8*DPR);
+      pgrad.addColorStop(0,'rgba('+mixR+','+mixG+','+mixB+',.95)');
+      pgrad.addColorStop(1,'rgba('+mixR+','+mixG+','+mixB+',0)');
+      g.fillStyle=pgrad;g.beginPath();g.arc(pp[0],pp[1],8*DPR,0,6.283);g.fill();
+      g.fillStyle='rgba(255,255,255,.95)';g.beginPath();g.arc(pp[0],pp[1],2.2*DPR,0,6.283);g.fill();
+    }
+  }
+
+  // markers
+  for(var m=0;m<PLANTS.length;m++){
+    var pl=PLANTS[m],q=project(pl.v);
+    pl.sx=q[0]/DPR;pl.sy=q[1]/DPR;pl.front=q[2]>0.05;
+    if(m===0)window.__agxPlants=[];window.__agxPlants.push({x:pl.sx,y:pl.sy,front:pl.front});
+    if(!pl.front)continue;
+    var px=q[0],py=q[1];
+    var MC=pl.col;
+    // pulse ring
+    if(!reduce){var pr=(pulseT*.9+m*.5)%1;
+      g.strokeStyle='rgba('+MC+','+(0.55*(1-pr))+')';g.lineWidth=1.2*DPR;
+      g.beginPath();g.arc(px,py,(6+pr*20)*DPR,0,6.283);g.stroke();}
+    // glow + dot
+    var mg=g.createRadialGradient(px,py,0,px,py,16*DPR);
+    mg.addColorStop(0,'rgba('+MC+',.8)');mg.addColorStop(1,'rgba('+MC+',0)');
+    g.fillStyle=mg;g.beginPath();g.arc(px,py,16*DPR,0,6.283);g.fill();
+    g.fillStyle=hover===m?'#fff':'rgb('+MC+')';
+    g.beginPath();g.arc(px,py,(hover===m?5:4)*DPR,0,6.283);g.fill();
+    g.strokeStyle='rgba(255,255,255,.85)';g.lineWidth=1*DPR;
+    g.beginPath();g.arc(px,py,(hover===m?5:4)*DPR,0,6.283);g.stroke();
+    // label
+    g.font=(10.5*DPR)+'px JetBrains Mono, monospace';
+    g.textBaseline='middle';
+    var lx=px+14*DPR;
+    g.fillStyle='rgba(5,15,14,.65)';
+    var tw=g.measureText(pl.label).width;
+    g.fillRect(lx-4*DPR,py-9*DPR,tw+8*DPR,18*DPR);
+    g.fillStyle=hover===m?'#fff':'rgba('+MC+',.95)';
+    g.fillText(pl.label,lx,py);
+  }
+
+  // vignette
+  var vg=g.createRadialGradient(W/2,H*.5,Math.min(W,H)*.3,W/2,H*.5,Math.max(W,H)*.8);
+  vg.addColorStop(0,'rgba(5,15,14,0)');vg.addColorStop(1,'rgba(5,15,14,.85)');
+  g.fillStyle=vg;g.fillRect(0,0,W,H);
+
+  if(!reduce)requestAnimationFrame(frame);
+}
+
+/* ---------- interaction ---------- */
+var dragging=false,lx=0,ly=0,downX=0,downY=0,moved=0;
+scene.addEventListener('pointerdown',function(e){
+  dragging=true;scene.classList.add('dragging');scene.setPointerCapture(e.pointerId);
+  lx=e.clientX;ly=e.clientY;downX=e.clientX;downY=e.clientY;moved=0;vy=0;vx=0;
+});
+scene.addEventListener('pointermove',function(e){
+  var b=scene.getBoundingClientRect();
+  if(dragging){
+    var dx=e.clientX-lx,dy=e.clientY-ly;lx=e.clientX;ly=e.clientY;
+    moved+=Math.abs(dx)+Math.abs(dy);
+    rotY-=dx*.006;rotX+=dy*.005;rotX=Math.max(-.9,Math.min(.9,rotX));
+    vy=-dx*.0022;vx=dy*.0016;
+    if(reduce)frame(performance.now());
+  }else{
+    var mx=e.clientX-b.left,my=e.clientY-b.top;hover=-1;
+    for(var m=0;m<PLANTS.length;m++){var pl=PLANTS[m];
+      if(pl.front&&Math.hypot(mx-pl.sx,my-pl.sy)<16){hover=m;break}}
+    scene.style.cursor=hover>-1?'pointer':'grab';
+    if(reduce)frame(performance.now());
+  }
+});
+addEventListener('pointerup',function(e){
+  if(!dragging)return;dragging=false;scene.classList.remove('dragging');
+  if(moved<6){ // click
+    var b=scene.getBoundingClientRect(),mx=e.clientX-b.left,my=e.clientY-b.top;
+    for(var m=0;m<PLANTS.length;m++){var pl=PLANTS[m];
+      if(pl.front&&Math.hypot(mx-pl.sx,my-pl.sy)<16){openPlant(m);break}}
+  }
+});
+scene.addEventListener('wheel',function(e){
+  e.preventDefault();
+  tzoom=Math.max(.7,Math.min(1.6,tzoom*(e.deltaY>0?0.92:1.08)));
+  if(reduce)frame(performance.now());
+},{passive:false});
+
+/* ---------- panel ---------- */
+var overlay=document.getElementById('plOverlay'),panel=document.getElementById('plPanel');
+function openPlant(i){
+  var p=PLANTS[i];
+  document.getElementById('plTag').textContent=p.tag;
+  document.getElementById('plName').textContent=p.name;
+  document.getElementById('plLoc').textContent=p.loc;
+  document.getElementById('plDesc').textContent=p.desc;
+  document.getElementById('plFacts').innerHTML=p.facts.map(function(f){
+    return '<div class="pl-fact"><span class="k">'+f[0]+'</span><span class="v">'+f[1]+'</span></div>'}).join('');
+  overlay.classList.add('open');panel.classList.add('open');panel.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+}
+function closePlant(){overlay.classList.remove('open');panel.classList.remove('open');panel.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+overlay.addEventListener('click',closePlant);
+document.getElementById('plClose').addEventListener('click',closePlant);
+addEventListener('keydown',function(e){if(e.key==='Escape')closePlant()});
+
+if(reduce){frame(performance.now())}else requestAnimationFrame(frame);
 })();
 </script>
 </body>
