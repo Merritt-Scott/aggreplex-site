@@ -3,118 +3,87 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AggrePlex™ — Micronized for Performance. Engineered for the Future.</title>
+<title>AggrePlex™ — Sustainable Pozzolans</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Hanken+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0B2321;
-    --ink-2:#0E2C29;
-    --ink-3:#123634;
-    --porcelain:#EDEFEC;
-    --porcelain-2:#E3E6E1;
-    --silica:#38D6BE;
-    --silica-deep:#1E9E8C;
-    --slate:#22302E;
-    --muted:#6E7C79;
-    --line:rgba(34,48,46,.14);
-    --line-dark:rgba(255,255,255,.12);
-    --serif:'Fraunces',Georgia,serif;
-    --sans:'Hanken Grotesk',system-ui,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,monospace;
-    --pad:clamp(22px,5vw,80px);
-    --maxw:1280px;
+    --ink:#0B2321;--ink-2:#0E2C29;--ink-3:#123634;
+    --porcelain:#EDEFEC;--porcelain-2:#E3E6E1;
+    --silica:#38D6BE;--silica-deep:#1E9E8C;--teal:#2E7D6B;
+    --tan:#B5A98A;--slate:#22302E;--muted:#6E7C79;
+    --line:rgba(34,48,46,.14);--line-dark:rgba(255,255,255,.12);
+    --serif:'Fraunces',Georgia,serif;--sans:'Hanken Grotesk',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;
+    --pad:clamp(22px,5vw,80px);--maxw:1280px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{
-    font-family:var(--sans);
-    background:var(--porcelain);
-    color:var(--slate);
-    -webkit-font-smoothing:antialiased;
-    line-height:1.55;
-    overflow-x:hidden;
-  }
+  body{font-family:var(--sans);background:var(--porcelain);color:var(--slate);-webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:hidden}
   a{color:inherit;text-decoration:none}
   img,canvas,video{display:block;max-width:100%}
   ::selection{background:var(--silica);color:var(--ink)}
-
   .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
+  .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--silica-deep);font-weight:500}
+  .display{font-family:var(--serif);font-weight:300;line-height:1.02;letter-spacing:-.01em;font-optical-sizing:auto}
 
-  .eyebrow{
-    font-family:var(--mono);
-    font-size:.72rem;
-    letter-spacing:.22em;
-    text-transform:uppercase;
-    color:var(--silica-deep);
-    font-weight:500;
-  }
-  .display{
-    font-family:var(--serif);
-    font-weight:300;
-    line-height:1.02;
-    letter-spacing:-.01em;
-    font-optical-sizing:auto;
-  }
-
-  /* ---------- NAV ---------- */
-  header.nav{
-    position:fixed;top:0;left:0;right:0;z-index:100;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:16px var(--pad);
-    background:linear-gradient(180deg, rgba(11,35,33,.65) 0%, rgba(11,35,33,0) 100%);
-    transition:background .4s ease,padding .4s ease,box-shadow .4s ease,color .4s;
-    color:var(--porcelain);
-  }
-  header.nav.scrolled{
-    background:rgba(11,35,33,.86);
-    backdrop-filter:blur(14px);
-    padding:13px var(--pad);
-    box-shadow:0 1px 0 var(--line-dark);
-  }
-  .brand{display:flex;align-items:baseline;gap:.05em;font-family:var(--serif);font-weight:400;font-size:1.34rem;letter-spacing:-.01em}
-  .brand b{font-weight:400}
-  .brand .tm{font-family:var(--sans);font-size:.6rem;transform:translateY(-.55em);opacity:.7;margin-left:1px}
-  .brand .dot{width:7px;height:7px;border-radius:50%;background:var(--silica);display:inline-block;margin-left:9px;transform:translateY(-2px)}
-  .brand img{height:52px;width:auto;display:block;transition:height .4s ease}
-  header.nav.scrolled .brand img{height:40px}
-  nav.links{display:flex;gap:34px;align-items:center}
-  nav.links a{font-size:.82rem;letter-spacing:.01em;opacity:.85;transition:opacity .2s}
+  /* NAV */
+  header.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px var(--pad);
+    background:linear-gradient(180deg,rgba(11,35,33,.65) 0%,rgba(11,35,33,0) 100%);transition:background .4s,padding .4s,box-shadow .4s,color .4s;color:var(--porcelain)}
+  header.nav.solid{background:rgba(11,35,33,.92);backdrop-filter:blur(14px);padding:12px var(--pad);box-shadow:0 1px 0 var(--line-dark)}
+  .brand{display:flex;align-items:center;gap:12px;cursor:pointer;color:currentColor}
+  .brand-img{height:46px;width:auto;display:block;transition:height .4s ease}
+  header.nav.solid .brand-img{height:38px}
+  .brand-white{display:none}
+  header.nav.solid .brand-color{display:none}
+  header.nav.solid .brand-white{display:block}
+  .brand-lockup{display:flex;align-items:center;gap:11px}
+  .brand-mark{height:40px;width:auto;fill:currentColor;flex:none;transition:height .4s ease}
+  header.nav.solid .brand-mark{height:32px}
+  .brand-wordwrap{display:flex;flex-direction:column;line-height:1}
+  .brand-word{font-family:var(--sans);font-weight:700;font-size:1.3rem;letter-spacing:.05em}
+  .brand-word b{font-weight:700;color:var(--tan)}
+  .brand-word sup{font-size:.42em;font-weight:500;vertical-align:super;opacity:.8;margin-left:1px}
+  .brand-tag{font-family:var(--mono);font-size:.5rem;letter-spacing:.32em;text-transform:uppercase;opacity:.62;margin-top:5px}
+  nav.links{display:flex;gap:30px;align-items:center}
+  nav.links a{font-size:.82rem;letter-spacing:.01em;opacity:.8;transition:opacity .2s,color .2s;position:relative;padding:4px 0;cursor:pointer}
   nav.links a:hover{opacity:1}
-  .nav-cta{
-    font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
-    border:1px solid rgba(255,255,255,.35);border-radius:100px;padding:9px 18px;transition:.25s;
-  }
-  .nav-cta:hover{background:var(--silica);border-color:var(--silica);color:var(--ink)}
+  nav.links a.active{opacity:1;color:var(--silica)}
+  nav.links a.active::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1.5px;background:var(--silica)}
+  nav.links a.nav-cta{display:inline-flex;align-items:center;line-height:1;font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(255,255,255,.4);border-radius:100px;padding:11px 20px;opacity:.95;transition:.25s}
+  nav.links a.nav-cta:hover{background:var(--silica);border-color:var(--silica);color:var(--ink);opacity:1}
+  nav.links a.nav-cta.active{color:inherit}
+  nav.links a.nav-cta.active::after{display:none}
   .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:0}
   .burger span{width:24px;height:1.5px;background:currentColor;display:block;transition:.3s}
 
-  /* ---------- HERO ---------- */
-  .hero{
-    position:relative;min-height:100svh;background:var(--ink);color:var(--porcelain);
-    display:flex;align-items:flex-end;overflow:hidden;
-  }
+  /* PAGE ROUTER */
+  .page{display:none;animation:pageIn .55s cubic-bezier(.2,.7,.2,1)}
+  .page.active{display:block}
+  @keyframes pageIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .page-top{padding:clamp(120px,16vh,190px) 0 clamp(40px,6vw,70px);background:var(--ink);color:var(--porcelain);position:relative;overflow:hidden}
+  .page-top .glow{position:absolute;top:-40%;right:-10%;width:55vw;height:55vw;background:radial-gradient(circle,rgba(56,214,190,.12),transparent 60%);pointer-events:none}
+  .page-top h1{font-size:clamp(2.2rem,5vw,4rem);margin:.3em 0 .2em;max-width:18ch}
+  .page-top h1 em{font-style:italic;color:var(--silica)}
+  .page-top .sub{max-width:56ch;color:rgba(237,239,236,.72);font-weight:300;font-size:clamp(1rem,1.4vw,1.18rem)}
+
+  /* HERO (home) */
+  .hero{position:relative;min-height:100svh;background:var(--ink);color:var(--porcelain);display:flex;align-items:flex-end;overflow:hidden}
   #herovid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;background:var(--ink)}
-  .hero::after{ /* vignette + refraction wash */
-    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-    background:
-      radial-gradient(120% 90% at 78% 8%, rgba(110,231,214,.16), transparent 46%),
-      radial-gradient(100% 80% at 12% 96%, rgba(127,168,255,.10), transparent 50%),
-      linear-gradient(180deg, rgba(11,35,33,.55) 0%, rgba(11,35,33,.12) 30%, rgba(11,35,33,.40) 60%, rgba(11,35,33,.88) 100%);
-  }
+  #particles{position:absolute;inset:0;z-index:1}
+  .hero-bg{position:absolute;inset:0;z-index:0;background:
+      radial-gradient(80% 60% at 70% 20%,#12403c,transparent 60%),
+      radial-gradient(70% 60% at 20% 90%,#0e2c29,transparent 60%),var(--ink)}
+  .hero::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:radial-gradient(120% 90% at 78% 8%,rgba(110,231,214,.16),transparent 46%),
+      radial-gradient(100% 80% at 12% 96%,rgba(127,168,255,.10),transparent 50%),
+      linear-gradient(180deg,rgba(11,35,33,.55) 0%,rgba(11,35,33,.12) 30%,rgba(11,35,33,.40) 60%,rgba(11,35,33,.9) 100%)}
   .hero-inner{position:relative;z-index:3;width:100%;max-width:var(--maxw);margin:0 auto;padding:0 var(--pad) clamp(56px,9vh,110px)}
-  .hero h1{
-    font-size:clamp(2.7rem,7.4vw,6.6rem);
-    max-width:16ch;margin:.35em 0 .5em;
-  }
+  .hero h1{font-size:clamp(2.7rem,7.4vw,6.6rem);max-width:16ch;margin:.35em 0 .5em}
   .hero h1 em{font-style:italic;color:var(--silica)}
   .hero .lede{max-width:52ch;font-size:clamp(1rem,1.35vw,1.22rem);font-weight:300;color:rgba(237,239,236,.82);margin-bottom:2.2em}
   .hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
-  .btn{
-    font-family:var(--mono);font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;
-    padding:15px 26px;border-radius:100px;transition:.25s;cursor:pointer;border:1px solid transparent;display:inline-flex;gap:.7em;align-items:center;
-  }
+  .btn{font-family:var(--mono);font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;padding:15px 26px;border-radius:100px;transition:.25s;cursor:pointer;border:1px solid transparent;display:inline-flex;gap:.7em;align-items:center}
   .btn-primary{background:var(--silica);color:var(--ink);font-weight:500}
   .btn-primary:hover{background:#5fe6d1;transform:translateY(-2px)}
   .btn-ghost{border-color:rgba(255,255,255,.3);color:var(--porcelain)}
@@ -122,9 +91,8 @@
   .scrollcue{position:absolute;left:var(--pad);bottom:26px;z-index:3;font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,239,236,.5);display:flex;align-items:center;gap:10px}
   .scrollcue .bar{width:1px;height:34px;background:linear-gradient(var(--silica),transparent);animation:drop 2.2s infinite}
   @keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-  .hero-tag{position:absolute;right:var(--pad);bottom:30px;z-index:3;font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(237,239,236,.45);text-align:right;line-height:1.7}
 
-  /* ---------- STATS ---------- */
+  /* STATS */
   .stats{background:var(--ink);color:var(--porcelain);border-top:1px solid var(--line-dark);padding:clamp(56px,8vw,104px) 0}
   .stats .head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(38px,5vw,64px)}
   .stats .head p{max-width:34ch;color:rgba(237,239,236,.6);font-weight:300;font-size:.98rem}
@@ -134,15 +102,24 @@
   .stat .num .u{color:var(--silica)}
   .stat .lbl{margin-top:14px;font-size:.86rem;color:rgba(237,239,236,.62);max-width:22ch;font-weight:300}
 
-  /* ---------- SECTION SHELL ---------- */
-  section.band{padding:clamp(70px,10vw,140px) 0}
+  /* SECTION SHELL */
+  section.band{padding:clamp(70px,10vw,130px) 0}
   .band-light{background:var(--porcelain)}
   .band-porc2{background:var(--porcelain-2)}
   .sec-head{max-width:60ch}
-  .sec-head h2{font-size:clamp(2rem,4.4vw,3.6rem);margin:.32em 0 .1em}
+  .sec-head h2{font-size:clamp(2rem,4.4vw,3.4rem);margin:.32em 0 .1em}
   .sec-head .sub{color:var(--muted);font-size:clamp(1.02rem,1.4vw,1.2rem);font-weight:300;margin-top:.7em;max-width:52ch}
 
-  /* ---------- POZZODYNE VALUE PROPS ---------- */
+  /* OVERVIEW CARDS (home) */
+  .ov{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:clamp(40px,5vw,60px)}
+  .ovc{background:var(--porcelain);padding:clamp(28px,3vw,44px);min-height:260px;display:flex;flex-direction:column;transition:.35s;cursor:pointer}
+  .ovc:hover{background:#fff}
+  .ovc .n{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;color:var(--silica-deep);text-transform:uppercase}
+  .ovc h3{font-family:var(--serif);font-weight:400;font-size:1.5rem;margin:.6em 0 .4em;letter-spacing:-.01em}
+  .ovc p{font-size:.92rem;color:var(--muted);font-weight:300;flex:1}
+  .ovc .go{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin-top:18px}
+
+  /* POZZODYNE */
   .pozz-top{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,4vw,72px);align-items:end;margin-bottom:clamp(46px,5vw,72px)}
   .pozz-top .mark{font-family:var(--serif);font-weight:300;font-size:clamp(2.4rem,5vw,4.4rem);line-height:.98;letter-spacing:-.02em}
   .pozz-top .mark .tm{font-family:var(--sans);font-size:.34em;vertical-align:super;opacity:.55}
@@ -156,7 +133,7 @@
   .prop h3{font-family:var(--serif);font-weight:400;font-size:1.36rem;margin:.5em 0 .5em;letter-spacing:-.01em}
   .prop p{font-size:.9rem;color:var(--muted);font-weight:300;line-height:1.6}
 
-  /* ---------- MICRONIZATION SIGNATURE ---------- */
+  /* MICRONIZATION */
   .mill{background:var(--ink);color:var(--porcelain);padding:clamp(70px,9vw,130px) 0;position:relative;overflow:hidden}
   .mill .glow{position:absolute;top:-30%;right:-10%;width:60vw;height:60vw;background:radial-gradient(circle,rgba(56,214,190,.10),transparent 60%);pointer-events:none}
   .mill-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(36px,5vw,80px);align-items:center;position:relative}
@@ -164,7 +141,7 @@
   .mill h2 em{font-style:italic;color:var(--silica)}
   .mill p.copy{color:rgba(237,239,236,.7);font-weight:300;max-width:46ch;margin-bottom:2em}
   .mill-stage{background:var(--ink-2);border:1px solid var(--line-dark);border-radius:18px;padding:clamp(24px,3vw,40px)}
-  #millCanvas{width:100%;height:230px;border-radius:10px;background:radial-gradient(circle at 50% 40%,#12403c,#0b2321 70%)}
+  .millCanvas{width:100%;height:230px;border-radius:10px;display:block;background:radial-gradient(circle at 50% 40%,#12403c,#0b2321 70%)}
   .mill-readout{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0 22px}
   .ro{border-top:1px solid var(--line-dark);padding-top:12px}
   .ro .k{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(237,239,236,.5)}
@@ -174,19 +151,16 @@
   .slider-row .caplabel{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(237,239,236,.55);white-space:nowrap}
   input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:2px;background:rgba(255,255,255,.25);border-radius:2px;outline:none}
   input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--silica);cursor:pointer;box-shadow:0 0 0 6px rgba(56,214,190,.16);transition:.15s}
-  input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 9px rgba(56,214,190,.22)}
   input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radius:50%;background:var(--silica);cursor:pointer}
   .mill-note{font-family:var(--mono);font-size:.66rem;color:rgba(237,239,236,.4);margin-top:18px;letter-spacing:.04em}
 
-  /* ---------- PROCESS / DIFFERENCE ---------- */
+  /* PROCESS + SPLIT */
   .proc{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line);margin-top:clamp(44px,5vw,64px)}
   .pcell{background:var(--porcelain);padding:clamp(30px,3vw,48px)}
   .pcell .spec{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--silica-deep)}
   .pcell h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.3rem,2vw,1.7rem);margin:.7em 0 .4em;letter-spacing:-.01em}
   .pcell p{color:var(--muted);font-weight:300;font-size:.96rem;max-width:44ch}
-
-  /* ---------- SPLIT EDITORIAL ---------- */
-  .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,5vw,90px);align-items:center}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,5vw,90px);align-items:center;margin-top:clamp(50px,7vw,90px)}
   .split.rev .txt{order:2}
   .split .txt h2{font-size:clamp(1.8rem,3.6vw,2.9rem);margin:.35em 0 .5em}
   .split .txt p{color:var(--muted);font-weight:300;margin-bottom:1em;max-width:50ch}
@@ -195,416 +169,578 @@
   .figblock canvas{position:absolute;inset:0}
   .figblock .cap{position:absolute;left:20px;bottom:18px;z-index:2;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(237,239,236,.7)}
 
-  /* ---------- APPLICATIONS ---------- */
+  /* APPLICATIONS */
   .apps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:clamp(40px,5vw,60px)}
-  .app{background:var(--porcelain);padding:clamp(26px,2.6vw,40px);min-height:200px;display:flex;flex-direction:column;justify-content:space-between;transition:.35s}
+  .app{background:var(--porcelain);padding:clamp(26px,2.6vw,40px);min-height:220px;display:flex;flex-direction:column;justify-content:space-between;transition:.35s}
   .app:hover{background:var(--ink);color:var(--porcelain)}
   .app:hover .an,.app:hover p{color:rgba(237,239,236,.75)}
   .app .an{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;color:var(--silica-deep)}
   .app h3{font-family:var(--serif);font-weight:400;font-size:1.4rem;letter-spacing:-.01em;margin-top:auto}
   .app p{font-size:.88rem;color:var(--muted);font-weight:300;margin-top:.5em}
 
-  /* ---------- CTA ---------- */
-  .cta{background:var(--ink);color:var(--porcelain);text-align:center;padding:clamp(80px,12vw,170px) 0;position:relative;overflow:hidden}
+  /* TEAM */
+  .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,1.6vw,22px);margin-top:clamp(40px,5vw,60px)}
+  .member{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column}
+  .member:hover{transform:translateY(-4px);box-shadow:0 20px 40px -26px rgba(11,35,33,.5)}
+  .member .photo{aspect-ratio:1/1;background:
+      linear-gradient(135deg,#e7eae5,#d7ddd5);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .member .photo .mono{font-family:var(--serif);font-weight:400;font-size:2.2rem;color:var(--teal);opacity:.5}
+  .member .photo::after{content:"PHOTO";position:absolute;bottom:10px;right:12px;font-family:var(--mono);font-size:.52rem;letter-spacing:.18em;color:var(--muted);opacity:.7}
+  .member .rank{position:absolute;top:10px;left:12px;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--muted);background:rgba(255,255,255,.7);padding:2px 7px;border-radius:100px}
+  .member .info{padding:16px 16px 18px}
+  .member .info .nm{font-family:var(--serif);font-weight:500;font-size:1.12rem;color:var(--ink);letter-spacing:-.01em;line-height:1.15}
+  .member .info .ti{font-size:.8rem;color:var(--muted);font-weight:300;margin-top:5px;line-height:1.35}
+  .member .info .view{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--silica-deep);margin-top:12px;opacity:0;transform:translateX(-4px);transition:.3s}
+  .member:hover .info .view{opacity:1;transform:none}
+
+  /* BIO MODAL */
+  .bio-overlay{position:fixed;inset:0;z-index:200;background:rgba(9,20,19,.62);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s}
+  .bio-overlay.open{opacity:1;visibility:visible}
+  .bio-panel{position:fixed;top:0;left:0;bottom:0;z-index:201;width:min(92vw,460px);background:var(--ink);color:var(--porcelain);
+    transform:translateX(-102%);transition:transform .5s cubic-bezier(.16,.84,.28,1);box-shadow:30px 0 80px rgba(0,0,0,.5);display:flex;flex-direction:column;overflow-y:auto}
+  .bio-panel.open{transform:none}
+  .bio-panel .bp-photo{aspect-ratio:16/11;background:linear-gradient(135deg,#12403c,#0b2321);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
+  .bio-panel .bp-photo .mono{font-family:var(--serif);font-size:3.4rem;color:var(--silica);opacity:.6}
+  .bio-panel .bp-photo::after{content:"PHOTO TO COME";position:absolute;bottom:14px;right:16px;font-family:var(--mono);font-size:.56rem;letter-spacing:.2em;color:rgba(237,239,236,.5)}
+  .bio-close{position:absolute;top:16px;right:16px;z-index:3;width:38px;height:38px;border-radius:50%;border:1px solid var(--line-dark);background:rgba(11,35,33,.5);color:var(--porcelain);cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:.25s}
+  .bio-close:hover{background:var(--silica);color:var(--ink);border-color:var(--silica);transform:rotate(90deg)}
+  .bp-body{padding:clamp(24px,3vw,38px);display:flex;flex-direction:column;flex:1}
+  .bp-rank{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--silica)}
+  .bp-name{font-family:var(--serif);font-weight:500;font-size:clamp(1.6rem,3vw,2.1rem);margin:.35em 0 .12em;letter-spacing:-.01em;color:#fff}
+  .bp-title{font-size:.96rem;color:rgba(237,239,236,.7);font-weight:300}
+  .bp-rule{height:1px;background:var(--line-dark);margin:22px 0}
+  .bp-bio{font-size:.98rem;font-weight:300;color:rgba(237,239,236,.82);line-height:1.7}
+  .bp-contact{margin-top:auto;padding-top:26px}
+  .bp-contact a{display:inline-flex;align-items:center;gap:.6em;font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;color:var(--silica);border:1px solid var(--line-dark);border-radius:100px;padding:11px 18px;transition:.25s}
+  .bp-contact a:hover{background:var(--silica);color:var(--ink);border-color:var(--silica)}
+
+  /* CONTACT / CTA */
+  .cta{background:var(--ink);color:var(--porcelain);text-align:center;padding:clamp(80px,12vw,150px) 0;position:relative;overflow:hidden}
   .cta .glow{position:absolute;inset:0;background:radial-gradient(60% 90% at 50% 120%,rgba(56,214,190,.18),transparent 60%);pointer-events:none}
   .cta .eyebrow{color:var(--silica)}
-  .cta h2{font-size:clamp(2.2rem,6vw,5rem);margin:.3em auto .1em;max-width:16ch}
+  .cta h2{font-size:clamp(2.2rem,6vw,4.6rem);margin:.3em auto .1em;max-width:16ch}
   .cta h2 em{font-style:italic;color:var(--silica)}
   .cta p{color:rgba(237,239,236,.65);font-weight:300;max-width:44ch;margin:1.4em auto 2.4em}
+  .cform{max-width:560px;margin:0 auto;text-align:left;display:grid;gap:16px}
+  .cform .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .cform label{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(237,239,236,.55);display:block;margin-bottom:7px}
+  .cform input,.cform textarea{width:100%;background:var(--ink-2);border:1px solid var(--line-dark);border-radius:10px;padding:13px 15px;color:var(--porcelain);font-family:var(--sans);font-size:.95rem}
+  .cform input:focus,.cform textarea:focus{outline:none;border-color:var(--silica)}
+  .cform textarea{min-height:120px;resize:vertical}
 
-  /* ---------- FOOTER ---------- */
+  /* FOOTER */
   footer.site{background:var(--ink-2);color:rgba(237,239,236,.7);padding:clamp(56px,7vw,90px) 0 40px;border-top:1px solid var(--line-dark)}
   .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:34px;padding-bottom:48px;border-bottom:1px solid var(--line-dark)}
-  .foot-top .brand{color:var(--porcelain);font-size:1.6rem;margin-bottom:14px}
-  .foot-top .about{font-weight:300;font-size:.9rem;max-width:38ch;color:rgba(237,239,236,.55)}
+  .foot-top .brand .word{color:var(--porcelain);font-size:1.7rem}
+  .foot-top .about{font-weight:300;font-size:.9rem;max-width:38ch;color:rgba(237,239,236,.55);margin-top:14px}
   .fcol h4{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--silica);margin-bottom:16px;font-weight:500}
-  .fcol a{display:block;font-size:.9rem;font-weight:300;padding:5px 0;color:rgba(237,239,236,.7);transition:color .2s}
+  .fcol a{display:block;font-size:.9rem;font-weight:300;padding:5px 0;color:rgba(237,239,236,.7);transition:color .2s;cursor:pointer}
   .fcol a:hover{color:var(--silica)}
   .foot-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;padding-top:26px;font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;color:rgba(237,239,236,.4)}
 
-  /* ---------- REVEAL ---------- */
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
   .reveal.in{opacity:1;transform:none}
 
-  /* ---------- RESPONSIVE ---------- */
   @media(max-width:1020px){
-    .statgrid{grid-template-columns:repeat(2,1fr)}
-    .props{grid-template-columns:repeat(2,1fr)}
-    .apps{grid-template-columns:repeat(3,1fr)}
-    .mill-grid{grid-template-columns:1fr}
-    .pozz-top{grid-template-columns:1fr}
+    .statgrid,.props{grid-template-columns:repeat(2,1fr)}
+    .team-grid{grid-template-columns:repeat(3,1fr)}
+    .mill-grid,.pozz-top{grid-template-columns:1fr}
+    .ov{grid-template-columns:1fr}
   }
   @media(max-width:760px){
+    .brand-img{height:36px}
+    .brand-mark{height:30px}
+    .brand-word{font-size:1.12rem}
+    header.nav.solid .brand-mark{height:28px}
+    /* top-anchored dropdown menu */
     nav.links{
-      position:fixed;inset:0 0 0 auto;width:min(78vw,340px);background:var(--ink);
-      flex-direction:column;justify-content:center;gap:26px;padding:40px;
-      transform:translateX(100%);transition:transform .4s cubic-bezier(.2,.7,.2,1);box-shadow:-20px 0 60px rgba(0,0,0,.4);
+      position:fixed;top:var(--navh,64px);left:0;right:0;
+      background:rgba(11,35,33,.98);backdrop-filter:blur(16px);
+      flex-direction:column;align-items:stretch;gap:0;
+      padding:10px 20px 22px;
+      transform:translateY(-14px);opacity:0;pointer-events:none;
+      transition:transform .38s cubic-bezier(.2,.7,.2,1),opacity .28s ease;
+      box-shadow:0 26px 50px rgba(0,0,0,.5);border-bottom:1px solid var(--line-dark);
+      max-height:calc(100vh - var(--navh,64px));overflow-y:auto;
     }
-    nav.links.open{transform:none}
-    nav.links a{font-size:1.1rem;opacity:1}
+    nav.links.open{transform:none;opacity:1;pointer-events:auto}
+    nav.links a{font-size:1.02rem;opacity:.92;padding:16px 4px;border-top:1px solid var(--line-dark)}
+    nav.links a:first-child{border-top:0}
+    nav.links a.active{color:var(--silica)}
+    nav.links a.active::after{display:none}
+    nav.links a.nav-cta{margin-top:16px;text-align:center;justify-content:center;display:flex;
+      border:1px solid var(--silica);color:var(--silica);border-radius:100px;
+      padding:15px 18px;font-size:.8rem;background:transparent;opacity:1}
+    nav.links a.nav-cta:hover{background:var(--silica);color:var(--ink)}
     .burger{display:flex;z-index:120}
-    header.nav.menuopen{color:var(--porcelain)}
+    header.nav.menuopen{color:var(--porcelain);background:rgba(11,35,33,.98);backdrop-filter:blur(16px)}
     header.nav.menuopen .burger span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
     header.nav.menuopen .burger span:nth-child(2){opacity:0}
     header.nav.menuopen .burger span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-    .props{grid-template-columns:1fr}
-    .apps{grid-template-columns:1fr}
-    .proc{grid-template-columns:1fr}
-    .split{grid-template-columns:1fr}
+    .proc,.split,.apps,.team-grid{grid-template-columns:1fr}
     .split.rev .txt{order:0}
+    .statgrid,.props{grid-template-columns:1fr}
     .foot-top{grid-template-columns:1fr 1fr}
-    .foot-top .brandcol{grid-column:1/-1}
-    .hero-tag{display:none}
+    .cform .row{grid-template-columns:1fr}
   }
   @media(prefers-reduced-motion:reduce){
     *{animation:none!important;scroll-behavior:auto!important}
     .reveal{opacity:1;transform:none;transition:none}
+    .page{animation:none}
   }
 </style>
 </head>
 <body>
-
 <header class="nav" id="nav">
-  <a href="#top" class="brand" aria-label="AggrePlex home"><img src="logo.png" alt="AggrePlex — Sustainable Pozzolans"></a>
+  <div class="brand" data-nav="home" aria-label="AggrePlex home">
+    <img class="brand-img brand-color" src="logo.png" alt="AggrePlex — Sustainable Pozzolans">
+    <img class="brand-img brand-white" src="logo-white.png" alt="AggrePlex — Sustainable Pozzolans">
+  </div>
   <nav class="links" id="links">
-    <a href="#pozzodyne">PozzoDyne™</a>
-    <a href="#process">The Difference</a>
-    <a href="#scale">Scale</a>
-    <a href="#applications">Applications</a>
-    <a href="#contact" class="nav-cta">Contact</a>
+    <a data-nav="home">Home</a>
+    <a data-nav="pozzodyne">PozzoDyne™</a>
+    <a data-nav="difference">The Difference</a>
+    <a data-nav="applications">Applications</a>
+    <a data-nav="team">Meet the Team</a>
+    <a data-nav="contact" class="nav-cta">Contact</a>
   </nav>
   <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
 </header>
 
-<!-- HERO -->
-<section class="hero" id="top">
-  <video id="herovid" autoplay muted loop playsinline preload="auto" poster="hero-poster.jpg">
-    <source src="hero.mp4" type="video/mp4">
-  </video>
-  <div class="hero-inner">
-    <span class="eyebrow" style="color:var(--silica)">Activated Ground Glass Pozzolan</span>
-    <h1 class="display">Micronized for performance.<br><em>Engineered</em> for the future.</h1>
-    <p class="lede">AggrePlex™ transforms underutilized glass into high-performing pozzolans and technical powders — precision materials that lower embodied carbon and outperform on the jobsite, at commercial scale.</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn btn-primary">Request Technical Data →</a>
-      <a href="#pozzodyne" class="btn btn-ghost">Explore PozzoDyne™</a>
+<!-- ============ HOME ============ -->
+<main class="page active" id="page-home">
+  <section class="hero">
+    <video id="herovid" autoplay muted loop playsinline preload="auto" poster="hero-poster.jpg">
+      <source src="hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-inner">
+      <span class="eyebrow" style="color:var(--silica)">Activated Ground Glass Pozzolan</span>
+      <h1 class="display">Micronized for performance.<br><em>Engineered</em> for the future.</h1>
+      <p class="lede">AggrePlex™ transforms underutilized glass into high-performing pozzolans and technical powders — precision materials that lower embodied carbon and outperform on the jobsite, at commercial scale.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" data-nav="contact">Request Technical Data →</a>
+        <a class="btn btn-ghost" data-nav="pozzodyne">Explore PozzoDyne™</a>
+      </div>
     </div>
-  </div>
-  <div class="scrollcue"><span class="bar"></span>Scroll</div>
-  <div class="hero-tag">Micronization · Activation<br>Classification</div>
-</section>
+    <div class="scrollcue"><span class="bar"></span>Scroll</div>
+  </section>
 
-<!-- STATS -->
-<section class="stats" id="stats">
-  <div class="wrap">
-    <div class="head reveal">
-      <div>
-        <span class="eyebrow">The opportunity, by the numbers</span>
-        <h2 class="display" style="font-size:clamp(1.7rem,3.4vw,2.6rem);margin-top:.4em;color:var(--porcelain)">A vast, wasted feedstock — re-engineered into value.</h2>
+  <section class="stats">
+    <div class="wrap">
+      <div class="head reveal">
+        <div>
+          <span class="eyebrow">The opportunity, by the numbers</span>
+          <h2 class="display" style="font-size:clamp(1.7rem,3.4vw,2.6rem);margin-top:.4em;color:var(--porcelain)">A vast, wasted feedstock — re-engineered into value.</h2>
+        </div>
+        <p>Every year the world discards enough glass to reshape how concrete is made. PozzoDyne™ turns that stream into supply security.</p>
       </div>
-      <p>Every year the world discards enough glass to reshape how concrete is made. PozzoDyne™ turns that stream into supply security.</p>
+      <div class="statgrid reveal">
+        <div class="stat"><div class="num" data-count="200" data-suffix="M+">0</div><div class="lbl">tons of glass generated globally each year</div></div>
+        <div class="stat"><div class="num" data-count="30" data-suffix="B+">0</div><div class="lbl">tons of concrete used every year</div></div>
+        <div class="stat"><div class="num" data-count="130" data-suffix="M+">0</div><div class="lbl">tons of glass underutilized annually</div></div>
+        <div class="stat"><div class="num"><span class="u">↑</span><span data-count="30" data-suffix="%">0</span></div><div class="lbl">potential cement replacement with PozzoDyne™</div></div>
+      </div>
     </div>
-    <div class="statgrid reveal">
-      <div class="stat"><div class="num" data-count="200" data-suffix="M+">0</div><div class="lbl">tons of glass generated globally each year</div></div>
-      <div class="stat"><div class="num" data-count="30" data-suffix="B+">0</div><div class="lbl">tons of concrete used every year</div></div>
-      <div class="stat"><div class="num" data-count="130" data-suffix="M+">0</div><div class="lbl">tons of glass underutilized annually</div></div>
-      <div class="stat"><div class="num"><span class="u">↑</span><span data-count="30" data-suffix="%">0</span></div><div class="lbl">potential cement replacement with PozzoDyne™</div></div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- POZZODYNE -->
-<section class="band band-light" id="pozzodyne">
-  <div class="wrap">
-    <div class="pozz-top reveal">
-      <div class="mark display">PozzoDyne<span class="tm">™</span><span>Engineered to perform.</span></div>
-      <p>The next-generation supplementary cementitious material reshaping low-carbon construction — an activated ground glass pozzolan built to replace cement without compromising strength, durability, or cost.</p>
-    </div>
-    <div class="props reveal">
-      <div class="prop">
-        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 20h18M6 20V9m4 11V5m4 15v-7m4 7V8"/></svg>
-        <span class="tag">01 · Performance</span>
-        <h3>Superior performance</h3>
-        <p>Improves long-term strength, durability, and resistance to chemical attack across demanding applications.</p>
+  <section class="band band-light">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">What we do</span>
+        <h2 class="display">Advanced materials, meet practical solutions.</h2>
+        <p class="sub">Explore the platform — from our flagship product to the process and markets it serves.</p>
       </div>
-      <div class="prop">
-        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.2c0-1.2 1.1-2 2.5-2s2.5.8 2.5 2-1.1 1.8-2.5 1.8-2.5.6-2.5 1.9 1.1 2 2.5 2 2.5-.8 2.5-2"/></svg>
-        <span class="tag">02 · Economics</span>
-        <h3>Cost-competitive</h3>
-        <p>Priced to compete with cement while improving performance and lowering total lifecycle cost.</p>
-      </div>
-      <div class="prop">
-        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l7 3v6c0 4.5-3 7.3-7 9-4-1.7-7-4.5-7-9V6l7-3z"/></svg>
-        <span class="tag">03 · Supply</span>
-        <h3>Reliable &amp; local</h3>
-        <p>Consistent quality and optimized reactivity, proudly produced in the U.S. for a resilient supply chain.</p>
-      </div>
-      <div class="prop">
-        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 17l-3-3 3-3m10-2l3 3-3 3M5 14h11a3 3 0 0 0 3-3M19 10H8a3 3 0 0 0-3 3"/></svg>
-        <span class="tag">04 · Sustainability</span>
-        <h3>Sustainable solution</h3>
-        <p>Diverts glass from landfill and cuts the embodied carbon of every structure it goes into.</p>
+      <div class="ov reveal">
+        <div class="ovc" data-nav="pozzodyne"><span class="n">01</span><h3>PozzoDyne™</h3><p>An activated ground glass pozzolan engineered to replace cement without compromising strength, durability, or cost.</p><span class="go">Explore product →</span></div>
+        <div class="ovc" data-nav="difference"><span class="n">02</span><h3>The Difference</h3><p>Milling and air-classification that micronizes material to unlock reactivity conventional grinding can't reach.</p><span class="go">See how it works →</span></div>
+        <div class="ovc" data-nav="applications"><span class="n">03</span><h3>Applications</h3><p>Lower-carbon concrete, precast and ready-mix, and custom technical powders for expanding industrial markets.</p><span class="go">View applications →</span></div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- MICRONIZATION SIGNATURE -->
-<section class="mill" id="micronize">
-  <div class="glow"></div>
-  <div class="wrap">
-    <div class="mill-grid">
+  </section>
+  <section class="mill">
+    <div class="glow"></div>
+    <div class="wrap"><div class="mill-grid">
       <div class="reveal">
         <span class="eyebrow">The signature process</span>
         <h2 class="display">It's not ground. <em>It's micronized.</em></h2>
         <p class="copy">Conventional grinding reduces size. Our milling and air-classification systems engineer it — driving particles down to the micron level to unlock surface area, and with it, reactivity. Take the material finer and watch performance climb.</p>
-        <p class="copy" style="margin-bottom:0;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:rgba(237,239,236,.5)">Drag to mill →</p>
+        <a class="btn btn-ghost" data-nav="difference" style="margin-top:6px">Explore the process →</a>
       </div>
       <div class="mill-stage reveal">
-        <canvas id="millCanvas"></canvas>
+        <canvas class="millCanvas"></canvas>
         <div class="mill-readout">
-          <div class="ro"><div class="k">Particle size</div><div class="v" id="roSize">300<span class="u">µm</span></div></div>
-          <div class="ro"><div class="k">Surface area</div><div class="v" id="roSurf">1.0<span class="u">×</span></div></div>
-          <div class="ro"><div class="k">Reactivity</div><div class="v" id="roReact">Low</div></div>
+          <div class="ro"><div class="k">Particle size</div><div class="v roSize">300<span class="u">µm</span></div></div>
+          <div class="ro"><div class="k">Surface area</div><div class="v roSurf">1.0<span class="u">×</span></div></div>
+          <div class="ro"><div class="k">Reactivity</div><div class="v roReact">Low</div></div>
         </div>
-        <div class="slider-row">
-          <span class="caplabel">Cullet</span>
-          <input type="range" id="millSlider" min="0" max="100" value="8" aria-label="Milling fineness">
-          <span class="caplabel">Micronized</span>
-        </div>
+        <div class="slider-row"><span class="caplabel">Cullet</span><input type="range" class="millSlider" min="0" max="100" value="8" aria-label="Milling fineness"><span class="caplabel">Micronized</span></div>
         <div class="mill-note">Illustrative model — finer particles expose more reactive surface per unit mass.</div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS / DIFFERENCE -->
-<section class="band band-porc2" id="process">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">The AggrePlex™ Difference</span>
-      <h2 class="display">Advanced materials, meet practical solutions.</h2>
-      <p class="sub">Powered by Microtec's advanced milling and air-classification systems, we produce ultra-fine powders with tightly controlled particle-size distributions that conventional grinding simply can't reach.</p>
-    </div>
-    <div class="proc reveal">
-      <div class="pcell">
-        <span class="spec">Ultra-fine production</span>
-        <h3>Engineered down to the micron</h3>
-        <p>Particle sizes reduced to the micron level increase surface area and lift material performance where it counts.</p>
-      </div>
-      <div class="pcell">
-        <span class="spec">Precision classification</span>
-        <h3>Consistent, repeatable output</h3>
-        <p>Tightly controlled particle-size distributions deliver consistency and repeatability across every application.</p>
-      </div>
-      <div class="pcell">
-        <span class="spec">Engineered reactivity</span>
-        <h3>Stronger pozzolanic reactions</h3>
-        <p>Optimized particle design supports stronger reactions and improved cementitious performance.</p>
-      </div>
-      <div class="pcell">
-        <span class="spec">Commercial scale</span>
-        <h3>Built for volume, not the lab</h3>
-        <p>Designed for high-volume production — real supply for real infrastructure, not laboratory-scale results.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SCALE SPLIT -->
-<section class="band band-light" id="scale">
-  <div class="wrap">
-    <div class="split reveal">
-      <div class="txt">
-        <span class="eyebrow">Built for scale</span>
-        <h2 class="display">Performance that survives contact with reality.</h2>
-        <p>Many advanced materials shine in controlled environments, then falter when scaled. <strong>Ours are designed for scale from the start.</strong></p>
-        <p>By pairing an abundantly available feedstock with proven manufacturing technology, we deliver a reliable supply of high-performance material for construction and industry worldwide — the availability, process control, and capacity to support large-scale infrastructure.</p>
-        <a href="#contact" class="btn btn-primary" style="margin-top:14px">Talk to our team →</a>
-      </div>
-      <div class="figblock"><canvas id="fig1"></canvas><span class="cap">Micronized glass · PozzoDyne™</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- SUSTAINABILITY SPLIT -->
-<section class="band band-porc2">
-  <div class="wrap">
-    <div class="split rev reveal">
-      <div class="txt">
-        <span class="eyebrow">Sustainability, simplified</span>
-        <h2 class="display">A greener build without the trade-off.</h2>
-        <p>By converting underutilized glass into high-value SCMs, we cut reliance on carbon-intensive raw materials and extend the life of resources already in circulation.</p>
-        <p>Unlike traditional supplementary materials tied to constrained supply chains, <strong>PozzoDyne™ draws on a readily available feedstock</strong> — enabling long-term scalability and genuine material security. Environmental goals and economic performance, aligned.</p>
-      </div>
-      <div class="figblock"><canvas id="fig2"></canvas><span class="cap">Diverted from landfill · Re-engineered</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- APPLICATIONS -->
-<section class="band band-light" id="applications">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Beyond concrete</span>
-      <h2 class="display">Engineered powders, expanding markets.</h2>
-      <p class="sub">The same precision that reshapes concrete supports a growing range of industrial applications — helping manufacturers improve efficiency, performance, and resource utilization.</p>
-    </div>
-    <div class="apps reveal">
-      <div class="app"><span class="an">A01</span><div><h3>Concrete &amp; cement</h3><p>Lower-carbon, higher-durability mixes for infrastructure and commercial construction.</p></div></div>
-      <div class="app"><span class="an">A02</span><div><h3>Precast &amp; ready-mix</h3><p>Consistent reactivity engineered for reliable performance at commercial volume.</p></div></div>
-      <div class="app"><span class="an">A03</span><div><h3>Technical powders</h3><p>Custom-classified fines for emerging industrial and manufacturing uses.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta" id="contact">
-  <div class="glow"></div>
-  <div class="wrap">
+    </div></div>
+  </section>
+  <section class="cta"><div class="glow"></div><div class="wrap">
     <span class="eyebrow">Get in touch</span>
     <h2 class="display">Built to perform.<br><em>Built to last.</em></h2>
     <p>Let's talk about how PozzoDyne™ fits your mix designs, your carbon targets, and your supply chain.</p>
-    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-      <a href="mailto:info@aggreplex.com" class="btn btn-primary">Contact us →</a>
-      <a href="#top" class="btn btn-ghost">Request technical data</a>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap"><a class="btn btn-primary" data-nav="contact">Contact us →</a><a class="btn btn-ghost" data-nav="team">Meet the team</a></div>
+  </div></section>
+</main>
+
+<!-- ============ POZZODYNE ============ -->
+<main class="page" id="page-pozzodyne">
+  <section class="page-top"><div class="glow"></div><div class="wrap">
+    <span class="eyebrow">Flagship Product</span>
+    <h1 class="display">PozzoDyne™ — <em>engineered</em> to perform.</h1>
+    <p class="sub">The next-generation supplementary cementitious material reshaping low-carbon construction — an activated ground glass pozzolan built to replace cement without compromising strength, durability, or cost.</p>
+  </div></section>
+  <section class="band band-light">
+    <div class="wrap">
+      <div class="props reveal">
+        <div class="prop"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 20h18M6 20V9m4 11V5m4 15v-7m4 7V8"/></svg><span class="tag">01 · Performance</span><h3>Superior performance</h3><p>Improves long-term strength, durability, and resistance to chemical attack across demanding applications.</p></div>
+        <div class="prop"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.2c0-1.2 1.1-2 2.5-2s2.5.8 2.5 2-1.1 1.8-2.5 1.8-2.5.6-2.5 1.9 1.1 2 2.5 2 2.5-.8 2.5-2"/></svg><span class="tag">02 · Economics</span><h3>Cost-competitive</h3><p>Priced to compete with cement while improving performance and lowering total lifecycle cost.</p></div>
+        <div class="prop"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l7 3v6c0 4.5-3 7.3-7 9-4-1.7-7-4.5-7-9V6l7-3z"/></svg><span class="tag">03 · Supply</span><h3>Reliable &amp; local</h3><p>Consistent quality and optimized reactivity, proudly produced in the U.S. for a resilient supply chain.</p></div>
+        <div class="prop"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 17l-3-3 3-3m10-2l3 3-3 3M5 14h11a3 3 0 0 0 3-3M19 10H8a3 3 0 0 0-3 3"/></svg><span class="tag">04 · Sustainability</span><h3>Sustainable solution</h3><p>Diverts glass from landfill and cuts the embodied carbon of every structure it goes into.</p></div>
+      </div>
     </div>
+  </section>
+  <section class="cta"><div class="glow"></div><div class="wrap">
+    <span class="eyebrow">Request technical data</span>
+    <h2 class="display">See how PozzoDyne™ <em>performs.</em></h2>
+    <p>Get mix-design guidance, performance data, and supply details for your project.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap"><a class="btn btn-primary" data-nav="contact">Request data →</a><a class="btn btn-ghost" data-nav="difference">The process</a></div>
+  </div></section>
+</main>
+
+<!-- ============ THE DIFFERENCE ============ -->
+<main class="page" id="page-difference">
+  <section class="page-top"><div class="glow"></div><div class="wrap">
+    <span class="eyebrow">The AggrePlex™ Difference</span>
+    <h1 class="display">It's not ground. <em>It's micronized.</em></h1>
+    <p class="sub">Powered by Microtec's advanced milling and air-classification systems, we produce ultra-fine powders with tightly controlled particle-size distributions that conventional grinding simply can't reach.</p>
+  </div></section>
+
+  <section class="mill">
+    <div class="glow"></div>
+    <div class="wrap"><div class="mill-grid">
+      <div class="reveal">
+        <span class="eyebrow">The signature process</span>
+        <h2 class="display">Take it finer. <em>Watch performance climb.</em></h2>
+        <p class="copy">Conventional grinding reduces size. Our milling and air-classification systems engineer it — driving particles down to the micron level to unlock surface area, and with it, reactivity.</p>
+        <p class="copy" style="margin-bottom:0;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:rgba(237,239,236,.5)">Drag to mill →</p>
+      </div>
+      <div class="mill-stage reveal">
+        <canvas class="millCanvas"></canvas>
+        <div class="mill-readout">
+          <div class="ro"><div class="k">Particle size</div><div class="v roSize">300<span class="u">µm</span></div></div>
+          <div class="ro"><div class="k">Surface area</div><div class="v roSurf">1.0<span class="u">×</span></div></div>
+          <div class="ro"><div class="k">Reactivity</div><div class="v roReact">Low</div></div>
+        </div>
+        <div class="slider-row"><span class="caplabel">Cullet</span><input type="range" class="millSlider" min="0" max="100" value="8" aria-label="Milling fineness"><span class="caplabel">Micronized</span></div>
+        <div class="mill-note">Illustrative model — finer particles expose more reactive surface per unit mass.</div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="band band-porc2">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="eyebrow">How we do it</span><h2 class="display">Advanced materials, meet practical solutions.</h2></div>
+      <div class="proc reveal">
+        <div class="pcell"><span class="spec">Ultra-fine production</span><h3>Engineered down to the micron</h3><p>Particle sizes reduced to the micron level increase surface area and lift material performance where it counts.</p></div>
+        <div class="pcell"><span class="spec">Precision classification</span><h3>Consistent, repeatable output</h3><p>Tightly controlled particle-size distributions deliver consistency and repeatability across every application.</p></div>
+        <div class="pcell"><span class="spec">Engineered reactivity</span><h3>Stronger pozzolanic reactions</h3><p>Optimized particle design supports stronger reactions and improved cementitious performance.</p></div>
+        <div class="pcell"><span class="spec">Commercial scale</span><h3>Built for volume, not the lab</h3><p>Designed for high-volume production — real supply for real infrastructure, not laboratory-scale results.</p></div>
+      </div>
+      <div class="split reveal">
+        <div class="txt"><span class="eyebrow">Built for scale</span><h2 class="display">Performance that survives contact with reality.</h2><p>Many advanced materials shine in controlled environments, then falter when scaled. <strong>Ours are designed for scale from the start.</strong></p><p>By pairing an abundantly available feedstock with proven manufacturing technology, we deliver a reliable supply of high-performance material for construction and industry worldwide.</p></div>
+        <div class="figblock"><canvas id="fig1"></canvas><span class="cap">Micronized glass · PozzoDyne™</span></div>
+      </div>
+      <div class="split rev reveal">
+        <div class="txt"><span class="eyebrow">Sustainability, simplified</span><h2 class="display">A greener build without the trade-off.</h2><p>By converting underutilized glass into high-value SCMs, we cut reliance on carbon-intensive raw materials and extend the life of resources already in circulation.</p><p><strong>PozzoDyne™ draws on a readily available feedstock</strong> — enabling long-term scalability and genuine material security.</p></div>
+        <div class="figblock"><canvas id="fig2"></canvas><span class="cap">Diverted from landfill · Re-engineered</span></div>
+      </div>
+    </div>
+  </section>
+  <section class="cta"><div class="glow"></div><div class="wrap">
+    <span class="eyebrow">Engineered for scale</span>
+    <h2 class="display">Advanced materials, <em>practical</em> solutions.</h2>
+    <p>Bring our milling and classification expertise to your material challenge.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap"><a class="btn btn-primary" data-nav="contact">Talk to our team →</a><a class="btn btn-ghost" data-nav="applications">Applications</a></div>
+  </div></section>
+</main>
+
+<!-- ============ APPLICATIONS ============ -->
+<main class="page" id="page-applications">
+  <section class="page-top"><div class="glow"></div><div class="wrap">
+    <span class="eyebrow">Beyond concrete</span>
+    <h1 class="display">Engineered powders, <em>expanding</em> markets.</h1>
+    <p class="sub">The same precision that reshapes concrete supports a growing range of industrial applications — helping manufacturers improve efficiency, performance, and resource utilization.</p>
+  </div></section>
+  <section class="band band-light">
+    <div class="wrap">
+      <div class="apps reveal">
+        <div class="app"><span class="an">A01</span><div><h3>Concrete &amp; cement</h3><p>Lower-carbon, higher-durability mixes for infrastructure and commercial construction.</p></div></div>
+        <div class="app"><span class="an">A02</span><div><h3>Precast &amp; ready-mix</h3><p>Consistent reactivity engineered for reliable performance at commercial volume.</p></div></div>
+        <div class="app"><span class="an">A03</span><div><h3>Technical powders</h3><p>Custom-classified fines for emerging industrial and manufacturing uses.</p></div></div>
+      </div>
+    </div>
+  </section>
+  <section class="cta"><div class="glow"></div><div class="wrap">
+    <span class="eyebrow">Expanding markets</span>
+    <h2 class="display">A material for <em>what's next.</em></h2>
+    <p>From concrete to custom technical powders — let's find the fit for your application.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap"><a class="btn btn-primary" data-nav="contact">Start a conversation →</a><a class="btn btn-ghost" data-nav="pozzodyne">About PozzoDyne™</a></div>
+  </div></section>
+</main>
+
+<!-- ============ TEAM ============ -->
+<main class="page" id="page-team">
+  <section class="page-top"><div class="glow"></div><div class="wrap">
+    <span class="eyebrow">Meet the Team</span>
+    <h1 class="display">The people behind <em>the material.</em></h1>
+    <p class="sub">A team spanning founding leadership, engineering, operations, and strategy across Microtec Development &amp; Holdings and AggrePlex. Select any team member to read their bio.</p>
+  </div></section>
+  <section class="band band-light">
+    <div class="wrap">
+      <div class="team-grid reveal" id="teamGrid"><!--TEAM_CARDS--></div>
+    </div>
+  </section>
+  <section class="cta"><div class="glow"></div><div class="wrap">
+    <span class="eyebrow">Join us</span>
+    <h2 class="display">Build the future <em>with us.</em></h2>
+    <p>We're growing our team across engineering, operations, and strategy.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap"><a class="btn btn-primary" href="#">View careers →</a><a class="btn btn-ghost" data-nav="contact">Contact us</a></div>
+  </div></section>
+</main>
+
+<!-- ============ CONTACT ============ -->
+<main class="page" id="page-contact">
+  <section class="cta" style="text-align:left;padding-top:clamp(150px,20vh,220px)">
+    <div class="glow"></div>
+    <div class="wrap">
+      <div style="max-width:640px">
+        <span class="eyebrow">Get in touch</span>
+        <h2 class="display" style="text-align:left;margin-left:0;font-size:clamp(2.2rem,5vw,4rem)">Built to perform.<br><em>Built to last.</em></h2>
+        <p style="margin-left:0;text-align:left">Let's talk about how PozzoDyne™ fits your mix designs, your carbon targets, and your supply chain.</p>
+      </div>
+      <form class="cform" onsubmit="return false">
+        <div class="row">
+          <div><label>Name</label><input type="text" placeholder="Your name"></div>
+          <div><label>Company</label><input type="text" placeholder="Company"></div>
+        </div>
+        <div><label>Email</label><input type="email" placeholder="you@company.com"></div>
+        <div><label>How can we help?</label><textarea placeholder="Tell us about your project or request technical data…"></textarea></div>
+        <div><button class="btn btn-primary" type="submit">Send message →</button></div>
+        <p style="font-family:var(--mono);font-size:.68rem;color:rgba(237,239,236,.4);letter-spacing:.04em;margin:6px 0 0">Or email us directly — <a href="mailto:info@aggreplex.com" style="color:var(--silica)">info@aggreplex.com</a>. (Demo form — not yet wired to a mailbox.)</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- BIO MODAL -->
+<div class="bio-overlay" id="bioOverlay"></div>
+<aside class="bio-panel" id="bioPanel" aria-hidden="true">
+  <div class="bp-photo"><span class="mono" id="bpMono">A</span><button class="bio-close" id="bioClose" aria-label="Close">✕</button></div>
+  <div class="bp-body">
+    <span class="bp-rank" id="bpRank">01 · Founder</span>
+    <h2 class="bp-name" id="bpName">Name</h2>
+    <div class="bp-title" id="bpTitle">Title</div>
+    <div class="bp-rule"></div>
+    <p class="bp-bio" id="bpBio">Bio</p>
+    <div class="bp-contact" id="bpContact"></div>
   </div>
-</section>
+</aside>
 
 <!-- FOOTER -->
 <footer class="site">
   <div class="wrap">
     <div class="foot-top">
       <div class="brandcol">
-        <div class="brand"><img src="logo-white.png" alt="AggrePlex" style="height:64px;width:auto;display:block;margin-bottom:4px"></div>
+        <div class="brand" data-nav="home" style="color:var(--porcelain)">
+          <img class="brand-img" src="logo-white.png" alt="AggrePlex" style="height:58px" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'">
+          <span class="brand-lockup">
+            <svg class="brand-mark" viewBox="0 0 62 52" aria-hidden="true" style="height:50px">
+              <polygon points="6,48 6,18 11,13 23,13 23,43 18,48"/>
+              <polygon points="24,48 24,6 29,1 41,1 41,43 36,48"/>
+              <polygon points="42,48 42,28 47,23 57,23 57,43 52,48"/>
+            </svg>
+            <span class="brand-wordwrap"><span class="brand-word" style="font-size:1.5rem">AGGRE<b>PLEX</b><sup>™</sup></span><span class="brand-tag">Sustainable Pozzolans</span></span>
+          </span>
+        </div>
         <p class="about">Transforming underutilized materials into high-performing pozzolans and technical powders — engineered on Microtec's proven, scalable technology.</p>
       </div>
-      <div class="fcol">
-        <h4>Product</h4>
-        <a href="#pozzodyne">About PozzoDyne™</a>
-        <a href="#process">The Difference</a>
-        <a href="#micronize">Micronization</a>
-      </div>
-      <div class="fcol">
-        <h4>Company</h4>
-        <a href="#scale">Built for Scale</a>
-        <a href="#applications">Applications</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <div class="fcol">
-        <h4>Connect</h4>
-        <a href="mailto:info@aggreplex.com">info@aggreplex.com</a>
-        <a href="#">LinkedIn</a>
-        <a href="#">Careers</a>
-      </div>
+      <div class="fcol"><h4>Product</h4><a data-nav="pozzodyne">PozzoDyne™</a><a data-nav="difference">The Difference</a><a data-nav="applications">Applications</a></div>
+      <div class="fcol"><h4>Company</h4><a data-nav="team">Meet the Team</a><a data-nav="contact">Contact</a><a href="#">Careers</a></div>
+      <div class="fcol"><h4>Connect</h4><a href="mailto:info@aggreplex.com">info@aggreplex.com</a><a href="#">LinkedIn</a><a href="#">Careers</a></div>
     </div>
-    <div class="foot-bot">
-      <span>© 2026 AggrePlex™ · A Microtec Company</span>
-      <span>Micronized for Performance · Engineered for the Future</span>
-    </div>
+    <div class="foot-bot"><span>© 2026 AggrePlex™ · A Microtec Company</span><span>Micronized for Performance · Engineered for the Future</span></div>
   </div>
 </footer>
 
 <script>
+/* ===== TEAM DATA ===== */
+var TEAM = [
+  {n:'Anthony Cialone', t:'President and Founder', e:'Tony@microtecdhus.com', b:"Anthony founded Microtec Development & Holdings to turn advanced materials science into real-world industrial capacity. As President and Founder, he sets the company's strategic direction and drives the innovation agenda behind PozzoDyne™ — building a durable, U.S.-based platform for sustainable pozzolans at commercial scale."},
+  {n:'David Haughie', t:'Executive Chairman', e:'david@microtecdhus.com', b:"David serves as Executive Chairman, guiding governance and long-term strategy across the Microtec and AggrePlex portfolio. He brings decades of leadership experience to the board, helping align the company's growth with its sustainability mission."},
+  {n:'William Cialone', t:'VP of Corporate Strategy', e:'will@microtecdhus.com', b:"William leads corporate strategy, shaping how AggrePlex scales its supply, partnerships, and market position. He connects the company's technical strengths to commercial opportunity across the construction and industrial sectors."},
+  {n:'Josef Fischer', t:'Chief Technology Officer', e:'info@microtec-bobingen.de', b:"As Chief Technology Officer, Josef oversees the science and engineering behind Microtec's milling and air-classification technology. Based in Germany, he leads the R&D that pushes particle performance to the micron level."},
+  {n:'Alan Wessel', t:'Senior Strategic Advisor', e:'alan@aggreplexus.com', b:"Alan advises the leadership team on strategy and growth, bringing an experienced outside perspective to AggrePlex's expansion. He helps steer key decisions across market development and partnerships."},
+  {n:'Mike Kneller', t:'Controller', e:'mike@microtecdhus.com', b:"Mike manages the company's financial operations as Controller, overseeing accounting, reporting, and fiscal discipline. He ensures AggrePlex's growth is built on a sound financial foundation."},
+  {n:'Merritt Scott', t:'Director of Digital Intelligence & Technology Integration', e:'merritt@microtecdhus.com', b:"Merritt leads digital intelligence and technology integration, building the systems and data infrastructure that keep AggrePlex running efficiently. He bridges operations and technology across the organization."},
+  {n:'Joe Meierhoff', t:'National Glass Acquisition & Logistics Director', e:'joe@aggreplexus.com', b:"Joe directs national glass acquisition and logistics, securing the post-consumer glass feedstock at the heart of PozzoDyne™. He manages the supply relationships and transport network that keep material flowing to production."},
+  {n:'Martín Guzman', t:'Plant Manager, Modesto', e:'martin@aggreplexus.com', b:"Martín manages day-to-day operations at the Modesto plant, overseeing production, safety, and quality on the floor. He turns AggrePlex's process technology into consistent, commercial-scale output."},
+  {n:'Tabitha Eaves', t:'Document Controls Manager', e:'tabitha@aggreplexus.com', b:"Tabitha manages document controls, keeping the company's technical, compliance, and operational records organized and accessible. She supports quality and accountability across every project."},
+  {n:'Christopher Cheadle', t:'Lead Process Engineer', e:'chris@microtecdhus.com', b:"Christopher leads process engineering, designing and optimizing the milling and classification systems that define AggrePlex's material performance. He translates lab results into repeatable industrial processes."},
+  {n:'Nick Tenley', t:'Mechanical Engineering Specialist', e:'nick@microtecdhus.com', b:"Nick specializes in mechanical engineering, supporting the design, maintenance, and reliability of AggrePlex's production equipment. He keeps the systems that power micronization running at peak."},
+  {n:'Stan Gibson', t:'Engineering', e:'stan@microtecdhus.com', b:"Stan supports the engineering team across design and implementation, contributing to the systems and equipment that bring AggrePlex's materials to commercial scale."}
+];
+
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* HERO VIDEO — autoplay, or show poster only if reduced motion */
-  var hv=document.getElementById('herovid');
-  if(hv){
-    if(reduce){hv.removeAttribute('autoplay');try{hv.pause()}catch(e){}}
-    else{var pr=hv.play();if(pr&&pr.catch)pr.catch(function(){});}
-  }
+  /* ===== BUILD TEAM CARDS ===== */
+  var grid=document.getElementById('teamGrid');
+  TEAM.forEach(function(m,i){
+    var initials=m.n.split(' ').map(function(w){return w[0]}).slice(0,2).join('');
+    var rank=String(i+1).padStart(2,'0');
+    var card=document.createElement('div');
+    card.className='member';card.setAttribute('data-i',i);
+    card.innerHTML='<div class="photo"><span class="rank">'+rank+'</span><span class="mono">'+initials+'</span></div>'+
+      '<div class="info"><div class="nm">'+m.n+'</div><div class="ti">'+m.t+'</div><div class="view">View bio →</div></div>';
+    card.addEventListener('click',function(){openBio(i)});
+    grid.appendChild(card);
+  });
 
-  /* NAV scroll + mobile */
+  /* ===== BIO MODAL ===== */
+  var overlay=document.getElementById('bioOverlay'),panel=document.getElementById('bioPanel');
+  function openBio(i){
+    var m=TEAM[i];
+    document.getElementById('bpMono').textContent=m.n.split(' ').map(function(w){return w[0]}).slice(0,2).join('');
+    document.getElementById('bpRank').textContent=String(i+1).padStart(2,'0')+' · '+m.t.split(',')[0].split(' ').slice(-1)[0];
+    document.getElementById('bpName').textContent=m.n;
+    document.getElementById('bpTitle').textContent=m.t;
+    document.getElementById('bpBio').textContent=m.b;
+    document.getElementById('bpContact').innerHTML='<a href="mailto:'+m.e+'">✉ '+m.e+'</a>';
+    overlay.classList.add('open');panel.classList.add('open');panel.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+  }
+  function closeBio(){overlay.classList.remove('open');panel.classList.remove('open');panel.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+  overlay.addEventListener('click',closeBio);
+  document.getElementById('bioClose').addEventListener('click',closeBio);
+  addEventListener('keydown',function(e){if(e.key==='Escape')closeBio()});
+
+  /* ===== PAGE ROUTER ===== */
   var nav=document.getElementById('nav'),links=document.getElementById('links'),burger=document.getElementById('burger');
-  addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>40)},{passive:true});
-  burger.addEventListener('click',function(){links.classList.toggle('open');nav.classList.toggle('menuopen')});
-  links.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){links.classList.remove('open');nav.classList.remove('menuopen')})});
-
-  /* REVEAL */
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.16});
-  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
-
-  /* COUNT UP */
-  function countUp(el){
-    var target=parseFloat(el.dataset.count),suf=el.dataset.suffix||'',t0=null,dur=1400;
-    function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var e=1-Math.pow(1-p,3);el.textContent=Math.round(target*e)+suf;if(p<1)requestAnimationFrame(step)}
-    requestAnimationFrame(step);
+  var navItems=document.querySelectorAll('[data-nav]');
+  function setNavH(){document.documentElement.style.setProperty('--navh',nav.offsetHeight+'px')}
+  addEventListener('resize',setNavH);setNavH();
+  function go(page){
+    document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
+    var target=document.getElementById('page-'+page)||document.getElementById('page-home');
+    target.classList.add('active');
+    links.querySelectorAll('a').forEach(function(a){a.classList.toggle('active',a.getAttribute('data-nav')===page)});
+    // nav appearance: transparent over hero on home-top, else solid
+    setNavState(page);setNavH();
+    window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});
+    links.classList.remove('open');nav.classList.remove('menuopen');
+    if(location.hash!=='#'+page){history.replaceState(null,'','#'+page)}
+    // reveal this page's content on entry (stagger)
+    revealPage(target);
+    // (re)size + start any interactive canvases now that the page is visible
+    if(typeof refitMillsIn==='function'){requestAnimationFrame(function(){refitMillsIn(target);setTimeout(function(){refitMillsIn(target)},80);});}
   }
+  function setNavState(page){
+    if(page==='home'&&scrollY<40){nav.classList.remove('solid')}else{nav.classList.add('solid')}
+  }
+  navItems.forEach(function(el){el.addEventListener('click',function(e){e.preventDefault();go(el.getAttribute('data-nav'))})});
+  burger.addEventListener('click',function(){links.classList.toggle('open');nav.classList.toggle('menuopen')});
+  addEventListener('scroll',function(){var active=document.querySelector('.page.active');setNavState(active&&active.id==='page-home'?'home':'x')},{passive:true});
+
+  /* ===== REVEAL (stagger on page-enter — not scroll-dependent) ===== */
+  function revealPage(scope){
+    var els=(scope||document).querySelectorAll('.reveal');
+    els.forEach(function(el,i){
+      if(reduce){el.classList.add('in');return}
+      el.classList.remove('in');
+      setTimeout(function(){el.classList.add('in')}, 60+i*80);
+    });
+  }
+
+  /* ===== COUNT UP ===== */
+  function countUp(el){var target=parseFloat(el.dataset.count),suf=el.dataset.suffix||'',t0=null,dur=1400;function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var e=1-Math.pow(1-p,3);el.textContent=Math.round(target*e)+suf;if(p<1)requestAnimationFrame(step)}requestAnimationFrame(step)}
   var co=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){countUp(e.target);co.unobserve(e.target)}})},{threshold:.6});
   document.querySelectorAll('[data-count]').forEach(function(el){if(reduce){el.textContent=el.dataset.count+(el.dataset.suffix||'')}else co.observe(el)});
 
-  /* HERO PARTICLE FIELD — micronized glass drifting + refracting */
+  /* ===== HERO VIDEO / PARTICLES ===== */
+  var hv=document.getElementById('herovid');
+  if(hv){if(reduce){hv.removeAttribute('autoplay');try{hv.pause()}catch(e){}}else{var pr=hv.play();if(pr&&pr.catch)pr.catch(function(){})}}
   (function(){
     var c=document.getElementById('particles');if(!c)return;var x=c.getContext('2d'),w,h,pts=[],DPR=Math.min(devicePixelRatio||1,2);
     var hues=['rgba(56,214,190,','rgba(127,168,255,','rgba(231,178,76,','rgba(237,239,236,'];
     function size(){w=c.width=innerWidth*DPR;h=c.height=c.offsetHeight*DPR;c.style.width=innerWidth+'px'}
-    function seed(){pts=[];var n=Math.round((innerWidth*c.offsetHeight)/9000);n=Math.min(n,190);for(var i=0;i<n;i++){pts.push({x:Math.random()*w,y:Math.random()*h,r:(Math.random()*1.7+.3)*DPR,vx:(Math.random()-.5)*.14*DPR,vy:(Math.random()-.5)*.14*DPR,a:Math.random()*.5+.15,hue:hues[Math.random()<.72?3:Math.floor(Math.random()*3)],tw:Math.random()*Math.PI*2})}}
+    function seed(){pts=[];var n=Math.round((innerWidth*c.offsetHeight)/9000);n=Math.min(n,170);for(var i=0;i<n;i++){pts.push({x:Math.random()*w,y:Math.random()*h,r:(Math.random()*1.7+.3)*DPR,vx:(Math.random()-.5)*.14*DPR,vy:(Math.random()-.5)*.14*DPR,a:Math.random()*.5+.15,hue:hues[Math.random()<.72?3:Math.floor(Math.random()*3)],tw:Math.random()*Math.PI*2})}}
     function draw(){x.clearRect(0,0,w,h);for(var i=0;i<pts.length;i++){var p=pts[i];p.x+=p.vx;p.y+=p.vy;p.tw+=.02;if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;var a=p.a*(0.6+0.4*Math.sin(p.tw));x.beginPath();x.arc(p.x,p.y,p.r,0,6.28);x.fillStyle=p.hue+a+')';x.fill()}
-      /* faint connective glints */
       for(var j=0;j<pts.length;j+=3){for(var k=j+1;k<j+7&&k<pts.length;k++){var dx=pts[j].x-pts[k].x,dy=pts[j].y-pts[k].y,d=dx*dx+dy*dy,lim=(120*DPR)*(120*DPR);if(d<lim){x.strokeStyle='rgba(56,214,190,'+(0.05*(1-d/lim))+')';x.lineWidth=DPR*.5;x.beginPath();x.moveTo(pts[j].x,pts[j].y);x.lineTo(pts[k].x,pts[k].y);x.stroke()}}}
       if(!reduce)requestAnimationFrame(draw)}
-    size();seed();draw();
-    addEventListener('resize',function(){size();seed();if(reduce)draw()});
+    size();seed();draw();addEventListener('resize',function(){size();seed();if(reduce)draw()});
   })();
 
-  /* MICRONIZATION INTERACTIVE */
-  (function(){
-    var cv=document.getElementById('millCanvas'),g=cv.getContext('2d'),slider=document.getElementById('millSlider');
-    var roSize=document.getElementById('roSize'),roSurf=document.getElementById('roSurf'),roReact=document.getElementById('roReact');
-    var DPR=Math.min(devicePixelRatio||1,2),W,H,parts=[];
-    function fit(){W=cv.width=cv.offsetWidth*DPR;H=cv.height=cv.offsetHeight*DPR}
+  /* ===== MICRONIZATION INTERACTIVE (per .mill-stage; re-fits when its page becomes visible) ===== */
+  var millInstances=[];
+  function setupMill(stage){
+    var cv=stage.querySelector('.millCanvas'); if(!cv) return null;
+    var g=cv.getContext('2d'), slider=stage.querySelector('.millSlider');
+    var roSize=stage.querySelector('.roSize'), roSurf=stage.querySelector('.roSurf'), roReact=stage.querySelector('.roReact');
+    var DPR=Math.min(devicePixelRatio||1,2), W=0, H=0, parts=[], running=false;
+    function fit(){var ow=cv.offsetWidth||cv.clientWidth||600, oh=cv.offsetHeight||230; W=cv.width=Math.max(ow,1)*DPR; H=cv.height=Math.max(oh,1)*DPR;}
     function build(){
-      var v=+slider.value; // 0..100
-      // size in microns: 300 (coarse) -> 8 (micronized), log-ish
-      var micron=Math.round(300*Math.pow(8/300, v/100));
-      var count=Math.round(18 + v*3.2);
-      var pr=(v/100);
-      var radius=(9 - pr*7.4); // visual radius shrinks
+      var v=+slider.value;
+      var micron=Math.round(300*Math.pow(8/300,v/100));
+      var count=Math.round(26+v*3.4);
+      var pr=(v/100), radius=(10-pr*8.2);
       parts=[];
       for(var i=0;i<count;i++){
-        parts.push({x:Math.random()*W,y:Math.random()*H,r:(radius*(0.55+Math.random()*0.9))*DPR,
-          vx:(Math.random()-.5)*.3*DPR,vy:(Math.random()-.5)*.3*DPR,
-          hue:Math.random()<.30?['56,214,190','127,168,255','231,178,76'][Math.floor(Math.random()*3)]:'210,224,220',
-          a:.35+Math.random()*.5});
+        parts.push({x:Math.random()*W,y:Math.random()*H,r:(radius*(0.55+Math.random()*0.95))*DPR,
+          vx:(Math.random()-.5)*.32*DPR,vy:(Math.random()-.5)*.32*DPR,
+          hue:Math.random()<.34?['56,214,190','127,168,255','231,178,76'][Math.floor(Math.random()*3)]:'214,226,222',
+          a:.4+Math.random()*.5});
       }
-      // readouts
       roSize.innerHTML=micron+'<span class="u">µm</span>';
-      var surf=(300/micron); // relative surface area ~ inverse of size
-      roSurf.innerHTML=surf.toFixed(surf<10?1:0)+'<span class="u">×</span>';
-      roReact.textContent = v<25?'Low':v<55?'Moderate':v<80?'High':'Peak';
-      roReact.style.color = v<25?'':v<80?'':'var(--silica)';
+      var surf=(300/micron); roSurf.innerHTML=surf.toFixed(surf<10?1:0)+'<span class="u">×</span>';
+      roReact.textContent=v<25?'Low':v<55?'Moderate':v<80?'High':'Peak';
+      roReact.style.color=v<80?'':'var(--silica)';
     }
-    function loop(){
+    function frame(){
       g.clearRect(0,0,W,H);
       for(var i=0;i<parts.length;i++){var p=parts[i];p.x+=p.vx;p.y+=p.vy;
         if(p.x<p.r){p.x=p.r;p.vx*=-1}if(p.x>W-p.r){p.x=W-p.r;p.vx*=-1}
         if(p.y<p.r){p.y=p.r;p.vy*=-1}if(p.y>H-p.r){p.y=H-p.r;p.vy*=-1}
         var grd=g.createRadialGradient(p.x-p.r*.3,p.y-p.r*.3,p.r*.1,p.x,p.y,p.r);
-        grd.addColorStop(0,'rgba('+p.hue+','+Math.min(p.a+.25,1)+')');
-        grd.addColorStop(1,'rgba('+p.hue+','+(p.a*.25)+')');
+        grd.addColorStop(0,'rgba('+p.hue+','+Math.min(p.a+.28,1)+')');
+        grd.addColorStop(1,'rgba('+p.hue+','+(p.a*.22)+')');
         g.beginPath();g.arc(p.x,p.y,p.r,0,6.28);g.fillStyle=grd;g.fill();
       }
-      if(!reduce)requestAnimationFrame(loop);
+      if(!reduce && running) requestAnimationFrame(frame);
     }
-    fit();build();loop();
+    function start(){ if(reduce){frame();return;} if(!running){running=true;requestAnimationFrame(frame);} }
     slider.addEventListener('input',build);
-    addEventListener('resize',function(){fit();build();if(reduce)loop()});
-    if(reduce){slider.addEventListener('input',function(){loop()})}
-  })();
+    return {canvas:cv, refit:function(){fit();build();start();}};
+  }
+  document.querySelectorAll('.mill-stage').forEach(function(st){var m=setupMill(st); if(m) millInstances.push(m);});
+  function refitMillsIn(pageEl){ millInstances.forEach(function(m){ if(!pageEl || pageEl.contains(m.canvas)) m.refit(); }); }
+  addEventListener('resize',function(){ millInstances.forEach(function(m){ m.refit(); }); });
+  refitMillsIn(document.querySelector('.page.active'));
 
-  /* SMALL FIGURE CANVASES (glass shimmer blocks) */
-  function shimmer(id,tint){
-    var cv=document.getElementById(id);if(!cv)return;var g=cv.getContext('2d'),DPR=Math.min(devicePixelRatio||1,2),W,H,ps=[];
+  /* ===== FIGURE SHIMMER ===== */
+  function shimmer(id,tint){var cv=document.getElementById(id);if(!cv)return;var g=cv.getContext('2d'),DPR=Math.min(devicePixelRatio||1,2),W,H,ps=[];
     function fit(){W=cv.width=cv.offsetWidth*DPR;H=cv.height=cv.offsetHeight*DPR}
     function seed(){ps=[];var n=Math.round((cv.offsetWidth*cv.offsetHeight)/5200);n=Math.min(n,120);for(var i=0;i<n;i++)ps.push({x:Math.random()*W,y:Math.random()*H,r:(Math.random()*2+.4)*DPR,vx:(Math.random()-.5)*.18*DPR,vy:(Math.random()-.5)*.18*DPR,a:Math.random()*.6+.15,h:Math.random()<.4?tint:'210,224,220',tw:Math.random()*6.28})}
     function loop(){g.clearRect(0,0,W,H);for(var i=0;i<ps.length;i++){var p=ps[i];p.x+=p.vx;p.y+=p.vy;p.tw+=.025;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;var a=p.a*(.6+.4*Math.sin(p.tw));g.beginPath();g.arc(p.x,p.y,p.r,0,6.28);g.fillStyle='rgba('+p.h+','+a+')';g.fill()}if(!reduce)requestAnimationFrame(loop)}
-    fit();seed();loop();addEventListener('resize',function(){fit();seed();if(reduce)loop()});
-  }
-  shimmer('fig1','56,214,190');
-  shimmer('fig2','127,168,255');
+    fit();seed();loop();addEventListener('resize',function(){fit();seed();if(reduce)loop()})}
+  shimmer('fig1','56,214,190');shimmer('fig2','127,168,255');
+
+  /* ===== INITIAL ROUTE ===== */
+  var start=(location.hash||'#home').replace('#','');
+  go(document.getElementById('page-'+start)?start:'home');
 })();
 </script>
 </body>
