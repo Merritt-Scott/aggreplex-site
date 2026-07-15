@@ -1504,8 +1504,9 @@ var TEAM = [
         roSize.innerHTML=(mu>=1000?mu.toLocaleString('en-US'):mu)+'<span class="u">µm</span>';
       }
       var surf=(MAXU/micron); roSurf.innerHTML=(surf>=100?Math.round(surf).toLocaleString('en-US'):surf.toFixed(surf<10?1:0))+'<span class="u">×</span>';
-      roReact.textContent=v<25?'Low':v<55?'Moderate':v<80?'High':'Peak';
-      roReact.style.color=v<80?'':'var(--silica)';
+      var tier=micron>=2000?'Low':micron>=150?'Developing':micron>=20?'Moderate':micron>=6?'High':'Peak';
+      roReact.textContent=tier;
+      roReact.style.color=tier==='Peak'?'var(--silica)':'';
     }
     function frame(){
       g.clearRect(0,0,W,H);
