@@ -504,7 +504,7 @@
           <div class="ro"><div class="k">Surface area</div><div class="v roSurf">1.0<span class="u">×</span></div></div>
           <div class="ro"><div class="k">Reactivity</div><div class="v roReact">Low</div></div>
         </div>
-        <div class="slider-row"><span class="caplabel">Cullet</span><input type="range" class="millSlider" min="0" max="100" value="8" aria-label="Milling fineness"><span class="caplabel">Micronized</span></div>
+        <div class="slider-row"><span class="caplabel">Cullet</span><input type="range" class="millSlider" min="0" max="100" value="0" aria-label="Milling fineness"><span class="caplabel">Micronized</span></div>
         <div class="mill-note">Illustrative model — finer particles expose more reactive surface per unit mass.</div>
       </div>
     </div></div>
@@ -770,7 +770,7 @@
           <div class="ro"><div class="k">Surface area</div><div class="v roSurf">1.0<span class="u">×</span></div></div>
           <div class="ro"><div class="k">Reactivity</div><div class="v roReact">Low</div></div>
         </div>
-        <div class="slider-row"><span class="caplabel">Cullet</span><input type="range" class="millSlider" min="0" max="100" value="8" aria-label="Milling fineness"><span class="caplabel">Micronized</span></div>
+        <div class="slider-row"><span class="caplabel">Cullet</span><input type="range" class="millSlider" min="0" max="100" value="0" aria-label="Milling fineness"><span class="caplabel">Micronized</span></div>
         <div class="mill-note">Illustrative model — finer particles expose more reactive surface per unit mass.</div>
       </div>
     </div></div>
@@ -1135,8 +1135,9 @@ var TEAM = [
     function build(){
       var v=+slider.value;
       var micron=Math.round(2000*Math.pow(3/2000,v/100));
-      var count=Math.round(26+v*3.4);
-      var pr=(v/100), radius=(10-pr*8.2);
+      var pr=(v/100), radius=(10-pr*7.4);
+      var cover=2600*(1+2.2*Math.pow(pr,1.4));   // total covered area grows with fineness (surface-area cue)
+      var count=Math.round(cover/(radius*radius));
       parts=[];
       for(var i=0;i<count;i++){
         var SH=['255,255,255','247,249,248','236,240,238','222,227,225','206,212,210','190,197,195','176,184,182'];
