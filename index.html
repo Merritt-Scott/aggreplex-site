@@ -350,8 +350,7 @@
   #page-home .ovc .go{color:rgba(237,239,236,.78)}
   #page-home .statgrid{background:transparent;gap:16px}
   #page-home .stat{background:rgba(14,44,41,.55);border:1px solid var(--line-dark);border-radius:16px;backdrop-filter:blur(6px)}
-  #page-home .mv-scene::after{content:"";position:absolute;left:0;right:0;bottom:0;height:150px;background:linear-gradient(180deg,rgba(11,35,33,0),#0B2321);pointer-events:none;z-index:2}
-  #page-home .mv-scene .mv-lbl{z-index:3}
+  #page-home .mv-scene canvas{-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 7%,#000 70%,transparent 97%);mask-image:linear-gradient(180deg,transparent 0%,#000 7%,#000 70%,transparent 97%)}
 
   .cta .eyebrow{color:#33715C}
   .cta h2{font-size:clamp(2.2rem,6vw,4.6rem);margin:.3em auto .1em;max-width:16ch}
