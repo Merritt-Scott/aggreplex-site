@@ -706,14 +706,15 @@
       <div class="sec-head reveal">
         <span class="eyebrow">Step 01 · Material Separation</span>
         <h2 class="display">Mixed glass in. <em>Clean cullet out.</em></h2>
-        <p class="sub">The recycled stream arrives mixed. Screening and sorting strip out paper, plastic, and metals — leaving nothing but glass.</p>
+        <p class="sub">The recycled stream rides the screening line: fines and dirt shake through the vibrating deck, oversize non-glass is air-ejected into the reject bin, and only sorted glass cullet makes it to the end of the line.</p>
       </div>
     </div>
     <div class="pv-scene" data-pscene="sep">
       <canvas></canvas>
       <div class="mv-lbl mvl1"><div class="t">Mixed Recycled Glass</div><div class="s">Post-consumer stream</div></div>
-      <div class="mv-lbl mvl2"><div class="t">Material Separation</div><div class="s">Paper · Plastic · Metals removed</div></div>
-      <div class="mv-lbl mvl3"><div class="t">Sorted Glass Cullet</div><div class="s">Non-glass removed</div></div>
+      <div class="mv-lbl mvl2"><div class="t">Vibrating Screen</div><div class="s">Fines &amp; dirt shaken out</div></div>
+      <div class="mv-lbl mvl3"><div class="t">Oversize Reject</div><div class="s">Plastics · Non-glass removed</div></div>
+      <div class="mv-lbl mvl4"><div class="t">Sorted Glass Cullet</div><div class="s">Screened &amp; sorted</div></div>
       <div class="mv-hint">Move cursor to explore</div>
     </div>
   </section>
@@ -1320,7 +1321,7 @@ function stepParticle(p,dt){
   }
 }
 
-var SIL='56,214,190',TAN='196,183,150';
+var SIL='56,214,190',TAN='196,183,150',GLW='238,242,240',GLG='188,196,194';
 var t0=null,rotorA=0,coreP=0;
 function ring(r,y,color,w,glow,phase,dashed){
   var prev=null;
@@ -1361,7 +1362,8 @@ function frame(ts){
       var x=v[0]*cr-v[2]*sr,z=v[0]*sr+v[2]*cr;
       return [sh.c[0]+x,sh.c[1]+v[1],sh.c[2]+z];
     });
-    for(var e=0;e<sh.e.length;e++)line(pts[sh.e[e][0]],pts[sh.e[e][1]],'rgba('+TAN+',.55)',.8,'rgba('+TAN+',.10)');
+    var shc=s%2?GLG:GLW;
+    for(var e=0;e<sh.e.length;e++)line(pts[sh.e[e][0]],pts[sh.e[e][1]],'rgba('+shc+',.6)',.8,'rgba('+GLW+',.08)');
   }
 
   for(var c=0;c<CLOUD.length;c++){
@@ -1432,10 +1434,10 @@ function frame(ts){
     var pq=parts[p3];stepParticle(pq,dt);
     if(pq.t<0)continue;
     if(pq.ph<1){
-      chunk([pq.x,pq.y,pq.z],pq.ang,3.1,'rgba('+TAN+',.9)');
+      chunk([pq.x,pq.y,pq.z],pq.ang,3.1,'rgba('+(pq.idx%2?GLG:GLW)+',.9)');
     }else if(pq.ph===1){
       var k2=Math.max(0,Math.min(1,(72-pq.y)/108));
-      if(k2<.4)chunk([pq.x,pq.y,pq.z],pq.ang+coreP*4,2.4-k2*2,'rgba('+TAN+','+(0.85-k2*.5)+')');
+      if(k2<.4)chunk([pq.x,pq.y,pq.z],pq.ang+coreP*4,2.4-k2*2,'rgba('+GLW+','+(0.85-k2*.5)+')');
       else dot([pq.x,pq.y,pq.z],2.1-k2,'rgba('+SIL+','+(0.5+k2*.5)+')');
     }else if(pq.ph===2){
       dot([pq.x,pq.y,pq.z],1.5,'rgba(255,255,255,.95)');
@@ -1806,6 +1808,7 @@ function bez(a,b,c,d,u){
            v*v*v*a[2]+3*v*v*u*b[2]+3*v*u*u*c[2]+u*u*u*d[2] ];
 }
 var GY=-92,SIL='56,214,190',TAN='196,183,150',BRIGHT='232,228,202',
+    GLASS_W='238,242,240',GLASS_G='188,196,194',DUST='166,128,88',
     PLASTIC='127,168,255',METAL='182,192,198',PAPER='237,239,236',AMBER='231,178,76';
 
 /* ================= SCENE 1: MATERIAL SEPARATION ================= */
@@ -1813,125 +1816,243 @@ var GY=-92,SIL='56,214,190',TAN='196,183,150',BRIGHT='232,228,202',
   var scene=document.querySelector('.pv-scene[data-pscene="sep"]');if(!scene)return;
   var cv=scene.querySelector('canvas');if(!cv)return;
   var E=makeEngine(scene,cv),g=cv.getContext('2d');
-  var L1=scene.querySelector('.mvl1'),L2=scene.querySelector('.mvl2'),L3=scene.querySelector('.mvl3');
+  var L1=scene.querySelector('.mvl1'),L2=scene.querySelector('.mvl2'),L3=scene.querySelector('.mvl3'),L4=scene.querySelector('.mvl4');
+  function glassCol(){return Math.random()<.55?GLASS_W:GLASS_G}
 
-  // piles: mixed (left) / sorted glass (right)
-  var mixed=[E.shard(-232,-56,-4,18,11),E.shard(-198,-40,26,24,23),E.shard(-166,-58,-16,19,37),E.shard(-188,-8,-28,12,53),E.shard(-152,-24,36,11,67)];
-  var mixCols=['rgba('+TAN+',.55)','rgba('+PLASTIC+',.5)','rgba('+TAN+',.55)','rgba('+METAL+',.5)','rgba('+PAPER+',.45)'];
-  var sorted=[E.shard(215,-48,14,20,19),E.shard(188,-58,-12,15,31),E.shard(238,-60,-4,13,43),E.shard(206,-20,-24,10,59)];
+  // mixed pile (left): white/grey glass + colored contaminants + dusty base
+  var mixedPile=[
+    {sh:E.shard(-311,-52,-6,18,11),col:'rgba('+GLASS_G+',.6)'},
+    {sh:E.shard(-281,-38,24,22,23),col:'rgba('+GLASS_W+',.55)'},
+    {sh:E.shard(-255,-58,-18,16,37),col:'rgba('+PLASTIC+',.55)'},
+    {sh:E.shard(-287,-8,-26,12,53),col:'rgba('+AMBER+',.5)'},
+    {sh:E.shard(-245,-24,32,12,67),col:'rgba('+GLASS_W+',.55)'},
+    {sh:E.shard(-309,-20,20,10,79),col:'rgba('+METAL+',.5)'}
+  ];
+  var pileDust=[];(function(){for(var i=0;i<26;i++){var a=Math.random()*6.283,r=Math.sqrt(Math.random())*46;pileDust.push([-279+Math.cos(a)*r,GY+3+Math.random()*7,Math.sin(a)*r*.7,Math.random()*6.28])}})();
 
-  // inclined trommel drum: rings around X axis, higher at feed (left)
-  var DR=30,DX0=-55,DX1=55;
-  function drumY(x){return 15-(x-DX0)*0.11}
-  var ringsX=[-55,-33,-11,11,33,55];
+  // cullet pile (right): white/grey only
+  var culletPile=[
+    {sh:E.shard(230,-48,12,19,17),col:'rgba('+GLASS_W+',.7)'},
+    {sh:E.shard(204,-58,-12,14,31),col:'rgba('+GLASS_G+',.65)'},
+    {sh:E.shard(256,-58,-4,13,43),col:'rgba('+GLASS_W+',.7)'},
+    {sh:E.shard(230,-22,-22,10,59),col:'rgba('+GLASS_G+',.6)'}
+  ];
 
-  // particles
-  var parts=[];
-  var FA=[-195,-38,8],FB=[-160,74,26],FC=[-110,96,8],FD=[-72,drumY(-55)+20,0];
+  /* machine layout */
+  var FB={x0:-232,x1:-132,y:34,hw:15};                          // feed belt
+  var SD={x0:-122,x1:73,y0:8,y1:-38,hw:17};                     // vibrating screen deck
+  function deckY(x){return SD.y0+(x-SD.x0)*(SD.y1-SD.y0)/(SD.x1-SD.x0)}
+  var EJX=10;                                                   // air-eject station
+  var HOP={cx:116,cz:84,mouth:16,base:7,yTop:-14,yBase:GY+6};   // reject bin (deep right)
+  var AR1=[EJX,deckY(EJX)+4,0],AR2=[EJX+14,80,10],AR3=[78,56,48],AR4=[HOP.cx,HOP.yTop+8,HOP.cz];
+  var fillN=0,fillY=GY+10,flashT=0;
+  var mound=[];(function(){for(var i=0;i<62;i++){var a=Math.random()*6.283,r=Math.sqrt(Math.random());mound.push([-26+Math.cos(a)*r*58,GY+2+Math.random()*8*(1-r*.6),Math.sin(a)*r*20,Math.random()*6.28])}})();
+
+  /* particles */
+  var parts=[],binItems=[],jetFlash=0;
+  var FEED_A=[-277,-30,4],FEED_B=[-288,54,20],FEED_C=[-262,44,6],FEED_D=[FB.x0+8,FB.y+3,0];
   function spawn(i){
-    var d=Math.random()*6.28,rr=Math.sqrt(Math.random())*26;
     var roll=Math.random();
-    var kind=roll<.62?'glass':(roll<.78?'plastic':(roll<.9?'metal':'paper'));
-    return {ph:0,t:-Math.random()*3,u:0,kind:kind,
-      x:FA[0]+Math.cos(d)*rr,y:FA[1]+(Math.random()-.5)*26,z:FA[2]+Math.sin(d)*rr*.8,
-      ang:Math.random()*6.28,spin:(Math.random()-.5)*7,
-      dropX:-20+Math.random()*60,fade:1,idx:i};
+    var kind=roll<.58?'glass':(roll<.78?'dust':'large');
+    var d=Math.random()*6.283,rr=Math.sqrt(Math.random())*24;
+    return {ph:0,t:-Math.random()*2.8,u:0,kind:kind,
+      x:FEED_A[0]+Math.cos(d)*rr,y:FEED_A[1]+(Math.random()-.5)*22,z:FEED_A[2]+Math.sin(d)*rr*.7,
+      ang:Math.random()*6.283,spin:(Math.random()-.5)*6,
+      col:kind==='glass'?glassCol():(kind==='dust'?DUST:[PLASTIC,AMBER,METAL][Math.floor(Math.random()*3)]),
+      dropX:SD.x0+18+Math.random()*(EJX-SD.x0-30),lane:(Math.random()-.5)*22,idx:i};
   }
-  for(var i=0;i<56;i++){var pp=spawn(i);pp.t=-Math.random()*8;parts.push(pp)}
-  function step(p,dt){
+  for(var i=0;i<62;i++){var pp=spawn(i);pp.t=-Math.random()*8;parts.push(pp)}
+
+  function step(p,dt,vibr){
     p.t+=dt;if(p.t<0)return;
-    if(p.ph===0){ // conveyed to feed end
-      p.u+=dt*.5;p.ang+=p.spin*dt;
-      var q=bez(FA,FB,FC,FD,Math.min(1,p.u));
+    if(p.ph===0){ // lifted from pile onto feed belt
+      p.u+=dt*.55;p.ang+=p.spin*dt;
+      var q=bez(FEED_A,FEED_B,FEED_C,FEED_D,Math.min(1,p.u));
       p.x=q[0];p.y=q[1];p.z=q[2];
-      if(p.u>=1){p.ph=1;p.tumble=Math.random()*6.28}
-    }else if(p.ph===1){ // tumbling along the drum
-      p.x+=dt*34;p.tumble+=dt*5.5;
-      var r2=18;
-      p.y=drumY(p.x)+Math.sin(p.tumble)*r2;
-      p.z=Math.cos(p.tumble)*r2*.8;
-      if(p.kind==='glass'&&p.x>p.dropX){p.ph=2;p.vy=-10;p.vx=26+Math.random()*20;p.vz=(Math.random()-.5)*14}
-      else if(p.x>=DX1+4){p.ph=4;p.vx=34+Math.random()*22;p.vy=46+Math.random()*24;p.vz=-24-Math.random()*22;p.fade=1}
-    }else if(p.ph===2){ // glass falls through the screen
-      p.vy-=dt*150;p.y+=p.vy*dt;p.x+=p.vx*dt*.4;p.z+=p.vz*dt;
-      if(p.y<=-80){p.y=-80;p.ph=3}
-    }else if(p.ph===3){ // slide across the floor to the sorted pile
-      var dx=208-p.x,dz=-p.z;
-      p.x+=dx*dt*1.1;p.z+=dz*dt*1.1;p.ang+=dt*3;
-      if(Math.abs(dx)<16){Object.assign(p,spawn(p.idx));p.t=-Math.random()*1.2}
-    }else{ // contaminant ejected + fades
-      p.x+=p.vx*dt;p.y+=p.vy*dt;p.z+=p.vz*dt;p.vy-=dt*30;p.fade-=dt*1.15;
-      if(p.fade<=0){Object.assign(p,spawn(p.idx));p.t=-Math.random()*1.2}
+      if(p.u>=1){p.ph=1;p.z=p.lane*.55}
+    }else if(p.ph===1){ // riding the feed belt
+      p.x+=dt*44;p.y=FB.y+3;
+      if(p.x>=FB.x1-4){p.ph=2;p.vy=0}
+    }else if(p.ph===2){ // falling onto the screen deck
+      p.vy-=dt*220;p.y+=p.vy*dt;p.x+=dt*24;
+      var dy=deckY(p.x)+3;
+      if(p.y<=dy){p.y=dy;p.ph=3}
+    }else if(p.ph===3){ // shaking down the deck
+      p.x+=dt*46;p.ang+=dt*2.5;
+      p.y=deckY(p.x)+3+vibr;p.z=p.lane*.5;
+      if(p.kind==='dust'&&p.x>=p.dropX){p.ph=4;p.vy=-8}
+      else if(p.kind==='large'&&p.x>=EJX){p.ph=5;p.u=0;jetFlash=1}
+      else if(p.x>=SD.x1-3){p.ph=6;p.u=0}
+    }else if(p.ph===4){ // fines fall through to the mound
+      p.vy-=dt*200;p.y+=p.vy*dt;
+      if(p.y<=GY+7){Object.assign(p,spawn(p.idx));p.t=-Math.random()*1.4}
+    }else if(p.ph===5){ // air-jet eject along the arc into the hopper
+      p.u+=dt*.95;p.ang+=dt*7;
+      var q2=bez(AR1,AR2,AR3,AR4,Math.min(1,p.u));
+      p.x=q2[0];p.y=q2[1];p.z=q2[2];
+      if(p.u>=1){
+        fillN++;
+        var iy=Math.min(HOP.yTop-8,GY+10+fillN*3.4);
+        var hwAt=HOP.base+(iy-HOP.yBase)/(HOP.yTop-HOP.yBase)*(HOP.mouth-HOP.base);
+        binItems.push({x:HOP.cx+(Math.random()-.5)*hwAt*1.2,y:iy,z:HOP.cz+(Math.random()-.5)*hwAt*1.2,col:p.col,ang:Math.random()*6.283});
+        if(fillN>=13){fillN=3;binItems.splice(0,binItems.length-3);flashT=1}
+        Object.assign(p,spawn(p.idx));p.t=-Math.random()*1.2;
+      }
+    }else{ // clean cullet off the end of the line
+      p.u+=dt*1.05;p.ang+=dt*3;
+      var q3=bez([SD.x1,SD.y1+3,0],[SD.x1+48,SD.y1-8,-16],[186,-30,-18],[228,-50,-2],Math.min(1,p.u));
+      p.x=q3[0];p.y=q3[1];p.z=q3[2];
+      if(p.u>=1){Object.assign(p,spawn(p.idx));p.t=-Math.random()*1.2}
     }
   }
-  var t0=null,rotA=0;
+
+  function beltRail(x0,y0,x1,y1,hw,color){
+    E.line([x0,y0,hw],[x1,y1,hw],color,1.15,'rgba('+SIL+',.12)');
+    E.line([x0,y0,-hw],[x1,y1,-hw],color,1.15,'rgba('+SIL+',.12)');
+    E.line([x0,y0-6,hw],[x1,y1-6,hw],'rgba('+SIL+',.4)',.75);
+    E.line([x0,y0-6,-hw],[x1,y1-6,-hw],'rgba('+SIL+',.4)',.75);
+    E.line([x0,y0,hw],[x0,y0-6,hw],'rgba('+SIL+',.5)',.8);
+    E.line([x1,y1,hw],[x1,y1-6,hw],'rgba('+SIL+',.5)',.8);
+    E.line([x0,y0,-hw],[x0,y0-6,-hw],'rgba('+SIL+',.5)',.8);
+    E.line([x1,y1,-hw],[x1,y1-6,-hw],'rgba('+SIL+',.5)',.8);
+  }
+  function roller(x,y,hw,phase){
+    E.line([x,y-2,hw],[x,y-2,-hw],'rgba('+SIL+',.6)',.8);
+    for(var e=-1;e<=1;e+=2){
+      var prev=null;
+      for(var a=0;a<=8;a++){
+        var ang=a/8*6.283+phase;
+        var pt=[x+Math.cos(ang)*4,y-2+Math.sin(ang)*4,e*hw];
+        if(prev&&a%2)E.line(prev,pt,'rgba('+SIL+',.55)',.7);
+        prev=pt;
+      }
+    }
+  }
+
+  var t0=null,beltT=0,now=0;
   function frame(ts){
     if(scene.offsetParent===null){t0=ts;if(!reduce)requestAnimationFrame(frame);return}
     if(!E.W||!E.H){E.fit();t0=ts;if(!reduce)requestAnimationFrame(frame);return}
     if(t0===null)t0=ts;var dt=Math.min(.05,(ts-t0)/1000);t0=ts;
+    now+=dt;beltT+=dt*44;
     E.yaw+=(E.tyaw-E.yaw)*.06;E.pitch+=(E.tpitch-E.pitch)*.06;
-    rotA+=dt*2.2;
+    var vibr=reduce?0:Math.sin(now*26)*1.5;
+    jetFlash=Math.max(0,jetFlash-dt*3.2);
     g.clearRect(0,0,E.W,E.H);g.lineCap='round';
     E.grid(GY,.16);
-    E.groundGlow(0,GY,'rgba('+SIL+',.09)');
+    E.groundGlow(-24,GY,'rgba('+SIL+',.09)');
 
     // piles
-    for(var s=0;s<mixed.length;s++)E.drawShard(mixed[s],mixCols[s],'rgba('+TAN+',.08)');
-    for(var s2=0;s2<sorted.length;s2++)E.drawShard(sorted[s2],'rgba('+TAN+',.6)','rgba('+TAN+',.1)');
+    for(var m1=0;m1<mixedPile.length;m1++)E.drawShard(mixedPile[m1].sh,mixedPile[m1].col,'rgba('+GLASS_G+',.07)');
+    for(var pd=0;pd<pileDust.length;pd++){var d1=pileDust[pd];d1[3]+=dt*2;
+      E.dot([d1[0],d1[1],d1[2]],1,'rgba('+DUST+','+(0.35+0.25*Math.abs(Math.sin(d1[3])))+')')}
+    for(var m2=0;m2<culletPile.length;m2++)E.drawShard(culletPile[m2].sh,culletPile[m2].col,'rgba('+GLASS_W+',.1)');
 
-    // feed chute
-    E.line([-84,drumY(-55)+38,10],[-62,drumY(-55)+16,4],'rgba('+SIL+',.8)',1);
-    E.line([-84,drumY(-55)+38,-10],[-62,drumY(-55)+16,-4],'rgba('+SIL+',.8)',1);
+    // dust mound under deck
+    for(var md=0;md<mound.length;md++){var mp=mound[md];mp[3]+=dt*1.6;
+      E.dot([mp[0],mp[1],mp[2]],1.5,'rgba('+DUST+','+(0.4+0.3*Math.abs(Math.sin(mp[3])))+')')}
 
-    // trommel drum
-    for(var r=0;r<ringsX.length;r++){
-      var rx=ringsX[r];
-      E.ringX(rx,drumY(rx),DR,'rgba('+SIL+',.7)',.85,'rgba('+SIL+',.1)');
+    /* ---- feed belt ---- */
+    beltRail(FB.x0,FB.y,FB.x1,FB.y,FB.hw,'rgba('+SIL+',.85)');
+    roller(FB.x0+2,FB.y,FB.hw,beltT*.15);
+    roller(FB.x1-2,FB.y,FB.hw,beltT*.15);
+    var off=beltT%16;
+    for(var bx=FB.x0+off;bx<FB.x1;bx+=16)E.line([bx,FB.y,FB.hw-1],[bx,FB.y,1-FB.hw],'rgba('+SIL+',.3)',.6);
+    [[FB.x0+12,1],[FB.x1-12,1],[FB.x0+12,-1],[FB.x1-12,-1]].forEach(function(l){
+      E.line([l[0],FB.y-6,l[1]*(FB.hw-3)],[l[0],GY+2,l[1]*(FB.hw+4)],'rgba('+SIL+',.4)',.7);
+    });
+
+    /* ---- vibrating screen deck ---- */
+    var vy0=SD.y0+vibr,vy1=SD.y1+vibr;
+    beltRail(SD.x0,vy0,SD.x1,vy1,SD.hw,'rgba('+SIL+',.9)');
+    var off2=beltT%14;
+    for(var sx=SD.x0+off2;sx<SD.x1;sx+=14){
+      var syy=deckY(sx)+vibr;
+      E.line([sx,syy,SD.hw-1],[sx,syy,1-SD.hw],'rgba('+SIL+',.34)',.6);
     }
-    for(var a=0;a<6;a++){ // rotating longitudinal bars
-      var ang=a/6*6.283+rotA,prev=null;
-      for(var r2=0;r2<ringsX.length;r2++){
-        var rx2=ringsX[r2];
-        var pt=[rx2,drumY(rx2)+Math.cos(ang)*DR,Math.sin(ang)*DR];
-        if(prev)E.line(prev,pt,'rgba('+SIL+',.48)',.7);
-        prev=pt;
+    E.line([SD.x0,vy0-8,0],[SD.x1,vy1-8,0],'rgba('+SIL+',.22)',.6);
+    [[SD.x0+22,1],[SD.x1-26,1],[SD.x0+22,-1],[SD.x1-26,-1]].forEach(function(l){
+      var ly=deckY(l[0])+vibr;
+      E.line([l[0],ly-6,l[1]*(SD.hw-3)],[l[0],GY+2,l[1]*(SD.hw+5)],'rgba('+SIL+',.4)',.7);
+    });
+
+    /* ---- air puff (no hardware) ---- */
+    var ejy=deckY(EJX);
+    if(jetFlash>0){
+      for(var j=0;j<4;j++){
+        var ja=1.0+j*.24;
+        E.line([EJX,ejy+1,(j-1.5)*3],[EJX+Math.cos(ja)*22*jetFlash,ejy+1+Math.sin(ja)*30*jetFlash,(j-1.5)*5],'rgba(255,255,255,'+(0.75*jetFlash)+')',1.05);
       }
     }
-    // internal helix (screw)
-    var hp=null;
-    for(var h=0;h<=30;h++){
-      var u=h/30,hx=DX0+110*u,ha=rotA*1.4+u*10;
-      var pt2=[hx,drumY(hx)+Math.cos(ha)*20,Math.sin(ha)*20];
-      if(hp&&h%2)E.line(hp,pt2,'rgba(255,255,255,.55)',.8,'rgba('+SIL+',.15)');
-      hp=pt2;
-    }
-    // legs
-    [[-33,1],[33,1],[-33,-1],[33,-1]].forEach(function(l){
-      E.line([l[0],drumY(l[0])-DR+2,l[1]*10],[l[0]+l[1]*4,GY+2,l[1]*22],'rgba('+SIL+',.4)',.7);
-    });
-    // reject horn (top right)
-    E.line([55,drumY(55)+24,0],[80,drumY(55)+44,-10],'rgba('+SIL+',.5)',.8);
-    E.line([55,drumY(55)+16,10],[80,drumY(55)+38,2],'rgba('+SIL+',.5)',.8);
+    /* ---- ghost trajectory arc (deck -> hopper) ---- */
+    (function(){
+      var pulse=.2+.12*Math.sin(now*2.4);
+      var prev=null;
+      for(var ga=0;ga<=26;ga++){
+        var q=bez(AR1,AR2,AR3,AR4,ga/26);
+        if(prev&&ga%2)E.line(prev,q,'rgba('+SIL+','+pulse+')',.7);
+        prev=q;
+      }
+    })();
+    /* ---- reject hopper (tapered, with fill level) ---- */
+    (function(){
+      flashT=Math.max(0,flashT-dt*1.6);
+      var cx=HOP.cx,cz=HOP.cz,mt=HOP.mouth,bs=HOP.base,yT=HOP.yTop,yB=HOP.yBase;
+      var C=[[1,1],[1,-1],[-1,-1],[-1,1]];
+      for(var e=0;e<4;e++){
+        var a=C[e],b=C[(e+1)%4];
+        E.line([cx+a[0]*mt,yT,cz+a[1]*mt],[cx+b[0]*mt,yT,cz+b[1]*mt],'rgba('+SIL+',.85)',1.05,'rgba('+SIL+',.14)');
+        E.line([cx+a[0]*(mt+3),yT+3,cz+a[1]*(mt+3)],[cx+b[0]*(mt+3),yT+3,cz+b[1]*(mt+3)],'rgba('+SIL+',.4)',.7);
+        E.line([cx+a[0]*mt,yT,cz+a[1]*mt],[cx+a[0]*(mt+3),yT+3,cz+a[1]*(mt+3)],'rgba('+SIL+',.4)',.7);
+        E.line([cx+a[0]*mt,yT,cz+a[1]*mt],[cx+a[0]*bs,yB,cz+a[1]*bs],'rgba('+SIL+',.65)',.85);
+        E.line([cx+a[0]*bs,yB,cz+a[1]*bs],[cx+b[0]*bs,yB,cz+b[1]*bs],'rgba('+SIL+',.6)',.85);
+        E.line([cx+a[0]*bs,yB,cz+a[1]*bs],[cx+a[0]*(bs+3),GY+1,cz+a[1]*(bs+3)],'rgba('+SIL+',.35)',.7);
+      }
+      var yM=(yT+yB)/2,hwM=(mt+bs)/2;
+      for(var e2=0;e2<4;e2++){
+        var a2=C[e2],b2=C[(e2+1)%4];
+        var m1=[cx+a2[0]*hwM,yM,cz+a2[1]*hwM],m2=[cx+b2[0]*hwM,yM,cz+b2[1]*hwM];
+        E.line(m1,[(m1[0]+m2[0])/2,yM,(m1[2]+m2[2])/2],'rgba('+SIL+',.3)',.6);
+      }
+      var target=Math.min(yT-8,GY+10+fillN*3.4);
+      fillY+=(target-fillY)*dt*3;
+      var hwF=bs+(fillY-yB)/(yT-yB)*(mt-bs);
+      for(var e3=0;e3<4;e3++){
+        var a3=C[e3],b3=C[(e3+1)%4];
+        var f1=[cx+a3[0]*hwF,fillY,cz+a3[1]*hwF],f2=[cx+b3[0]*hwF,fillY,cz+b3[1]*hwF];
+        E.line(f1,[(f1[0]+f2[0])*.5,fillY,(f1[2]+f2[2])*.5],'rgba(255,255,255,.4)',.7);
+        E.line([(f1[0]+f2[0])*.5,fillY,(f1[2]+f2[2])*.5],f2,'rgba(255,255,255,.12)',.7);
+      }
+      if(flashT>0){
+        var fr=1-flashT;
+        for(var e4=0;e4<4;e4++){
+          var a4=C[e4],b4=C[(e4+1)%4],hwX=mt+fr*14;
+          E.line([cx+a4[0]*hwX,yT+fr*10,cz+a4[1]*hwX],[cx+b4[0]*hwX,yT+fr*10,cz+b4[1]*hwX],'rgba('+SIL+','+(0.5*flashT)+')',.8);
+        }
+      }
+    })();
+    for(var b2=0;b2<binItems.length;b2++){var bi=binItems[b2];bi.ang+=dt*.6;
+      E.chunk([bi.x,bi.y,bi.z],bi.ang,2.8,'rgba('+bi.col+',.85)')}
 
-    // particles
+    /* ---- particles ---- */
     for(var p3=0;p3<parts.length;p3++){
-      var pq=parts[p3];step(pq,dt);
+      var pq=parts[p3];step(pq,dt,vibr);
       if(pq.t<0)continue;
-      var col;
-      if(pq.kind==='glass')col=TAN;else if(pq.kind==='plastic')col=PLASTIC;else if(pq.kind==='metal')col=METAL;else col=PAPER;
-      if(pq.ph===4){E.dot([pq.x,pq.y,pq.z],1.8,'rgba('+col+','+Math.max(0,pq.fade*.9)+')')}
-      else if(pq.ph>=2){E.dot([pq.x,pq.y,pq.z],1.9,'rgba('+TAN+',.9)')}
-      else{E.chunk([pq.x,pq.y,pq.z],pq.ang||0,2.9,'rgba('+col+',.9)')}
+      if(pq.kind==='dust'){E.dot([pq.x,pq.y,pq.z],1.4,'rgba('+DUST+',.85)')}
+      else if(pq.kind==='large'){E.chunk([pq.x,pq.y,pq.z],pq.ang,3.6,'rgba('+pq.col+',.9)')}
+      else{E.chunk([pq.x,pq.y,pq.z],pq.ang,2.7,'rgba('+pq.col+',.9)')}
     }
 
-    E.label(L1,[-195,GY,-34],18);
-    E.label(L2,[0,GY,-26],20);
-    E.label(L3,[210,GY,-30],18);
+    /* ---- labels ---- */
+    E.label(L1,[-279,GY,-60],20);
+    E.label(L2,[-24,GY,-24],18);
+    E.label(L3,[176,14,84],-46);
+    E.label(L4,[236,GY,-34],20);
     E.vignette();
     if(!reduce)requestAnimationFrame(frame);
   }
   refits.push(function(){E.fit()});
-  if(reduce){t0=0;for(var w=0;w<400;w++){parts.forEach(function(p){step(p,.05)})}frame(16.7)}else requestAnimationFrame(frame);
+  if(reduce){t0=0;for(var w=0;w<400;w++){parts.forEach(function(p){step(p,.05,0)})}frame(16.7)}else requestAnimationFrame(frame);
 })();
 
 /* ================= SCENE 2: CLEANING & DRYING ================= */
@@ -1951,7 +2072,7 @@ var GY=-92,SIL='56,214,190',TAN='196,183,150',BRIGHT='232,228,202',
   var FA=[-205,-40,6],FB=[-180,66,24],FC=[-130,92,8],FD=[WX,64,0];
   function spawn(i){
     var d=Math.random()*6.28,rr=Math.sqrt(Math.random())*22;
-    return {ph:0,t:-Math.random()*3,u:0,
+    return {ph:0,t:-Math.random()*3,u:0,col:Math.random()<.55?GLASS_W:GLASS_G,
       x:FA[0]+Math.cos(d)*rr,y:FA[1]+(Math.random()-.5)*24,z:FA[2]+Math.sin(d)*rr*.8,
       ang:Math.random()*6.28,spin:(Math.random()-.5)*7,idx:i};
   }
@@ -1998,8 +2119,9 @@ var GY=-92,SIL='56,214,190',TAN='196,183,150',BRIGHT='232,228,202',
     E.grid(GY,.16);
     E.groundGlow(-20,GY,'rgba('+SIL+',.09)');
 
-    for(var s=0;s<pileL.length;s++)E.drawShard(pileL[s],'rgba('+TAN+',.55)','rgba('+TAN+',.08)');
-    for(var s2=0;s2<pileR.length;s2++)E.drawShard(pileR[s2],'rgba('+BRIGHT+',.7)','rgba('+BRIGHT+',.12)');
+    var plc=['rgba('+GLASS_W+',.6)','rgba('+GLASS_G+',.55)','rgba('+GLASS_W+',.55)'];
+    for(var s=0;s<pileL.length;s++)E.drawShard(pileL[s],plc[s],'rgba('+GLASS_G+',.07)');
+    for(var s2=0;s2<pileR.length;s2++)E.drawShard(pileR[s2],'rgba('+GLASS_W+',.7)','rgba('+GLASS_W+',.12)');
 
     /* washer: vertical vessel */
     [-38,-14,10,34].forEach(function(y){E.ringY(WX,y,34,'rgba('+SIL+',.7)',.85,'rgba('+SIL+',.1)')});
@@ -2056,10 +2178,10 @@ var GY=-92,SIL='56,214,190',TAN='196,183,150',BRIGHT='232,228,202',
     for(var p3=0;p3<parts.length;p3++){
       var pq=parts[p3];step(pq,dt);
       if(pq.t<0)continue;
-      if(pq.ph<1){E.chunk([pq.x,pq.y,pq.z],pq.ang,2.9,'rgba('+TAN+',.9)')}
-      else if(pq.ph<3){E.dot([pq.x,pq.y,pq.z],1.9,'rgba('+TAN+',.85)')}
-      else if(pq.ph===3){var k2=(pq.x-DXa)/(DXb-DXa);E.dot([pq.x,pq.y,pq.z],1.9,'rgba('+BRIGHT+','+(0.55+k2*.45)+')')}
-      else{E.dot([pq.x,pq.y,pq.z],1.9,'rgba('+BRIGHT+',.95)')}
+      if(pq.ph<1){E.chunk([pq.x,pq.y,pq.z],pq.ang,2.9,'rgba('+pq.col+',.9)')}
+      else if(pq.ph<3){E.dot([pq.x,pq.y,pq.z],1.9,'rgba('+pq.col+',.85)')}
+      else if(pq.ph===3){var k2=(pq.x-DXa)/(DXb-DXa);E.dot([pq.x,pq.y,pq.z],1.9,'rgba('+GLASS_W+','+(0.55+k2*.45)+')')}
+      else{E.dot([pq.x,pq.y,pq.z],1.9,'rgba('+GLASS_W+',.95)')}
     }
 
     E.label(L1,[-215,GY,-72],20);
