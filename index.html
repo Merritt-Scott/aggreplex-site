@@ -399,7 +399,8 @@
 /* ===== MIX OPTIMIZER ===== */
 .mx-app{background:var(--ink);color:var(--porcelain);padding:clamp(10px,2vw,26px) 0 clamp(70px,8vw,110px);position:relative;overflow:hidden}
 .mx-app::before{content:"";position:absolute;bottom:-30%;left:-12%;width:50vw;height:50vw;background:radial-gradient(circle,rgba(56,214,190,.07),transparent 62%);pointer-events:none}
-.mx-grid{display:grid;grid-template-columns:390px 1fr;gap:22px;align-items:start;position:relative}
+.mx-app .wrap{max-width:min(1460px,100%)}
+.mx-grid{display:grid;grid-template-columns:370px 1fr;gap:22px;align-items:start;position:relative}
 .mx-panel{background:var(--ink-2);border:1px solid var(--line-dark);border-radius:16px;padding:clamp(18px,2.2vw,26px)}
 .mx-rail{display:flex;flex-direction:column;gap:18px;position:sticky;top:92px}
 .mx-dash{display:flex;flex-direction:column;gap:18px}
@@ -447,10 +448,10 @@
 .mx-optnote{font-size:.8rem;margin-top:12px;color:var(--silica);font-weight:400;min-height:1.2em}
 .mx-optnote.warn{color:#E0B15C}
 /* readout cards */
-.mx-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.mx-card{background:var(--ink-2);border:1px solid var(--line-dark);border-radius:14px;padding:17px 18px}
+.mx-cards{display:grid;grid-template-columns:1fr 1.3fr 1fr 1fr;gap:12px}
+.mx-card{background:var(--ink-2);border:1px solid var(--line-dark);border-radius:14px;padding:16px 15px;min-width:0}
 .mx-card .k{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(237,239,236,.5);margin-bottom:9px}
-.mx-card .v{font-family:var(--serif);font-weight:650;font-size:clamp(1.15rem,1.7vw,1.5rem);line-height:1.1;font-variant-numeric:tabular-nums}
+.mx-card .v{font-family:var(--serif);font-weight:650;font-size:clamp(.98rem,1.3vw,1.3rem);line-height:1.15;font-variant-numeric:tabular-nums;white-space:nowrap}
 .mx-card .v.good{color:var(--silica)}
 .mx-card .v.warn{color:#E0B15C}
 .mx-card .s{font-size:.72rem;color:rgba(237,239,236,.45);font-weight:300;margin-top:7px;line-height:1.45}
@@ -2741,7 +2742,7 @@ function compute(){
     $('mxCardCO2').textContent='−'+fmt(r.co2pct[0]*100,0)+'–'+fmt(r.co2pct[2]*100,0)+'%';
     $('mxCardCO2s').textContent='−'+fmt(r.co2[0]*volDiv,0)+' … −'+fmt(r.co2[2]*volDiv,0)+' kg CO₂e per '+volLbl;
     var s0=r.sav[0]*volDiv,s2=r.sav[2]*volDiv,neg=r.sav[1]<0;
-    $('mxCardCost').textContent=(neg?'+':'−')+'$'+fmt(Math.abs(neg?s0:s0),2)+' … '+(neg?'+':'−')+'$'+fmt(Math.abs(s2),2);
+    $('mxCardCost').textContent=(neg?'+':'−')+'$'+fmt(Math.abs(s0),2)+'…'+(neg?'+':'−')+'$'+fmt(Math.abs(s2),2);
     $('mxCardCost').className='v '+(neg?'warn':'good');
     $('mxCardCosts').textContent='per '+volLbl+' at your delivered prices';
     $('mxCard28').textContent=fmt(r.s28[0]*100,0)+'–'+fmt(r.s28[1]*100,0)+'%';
