@@ -488,6 +488,8 @@
 .mx-fixed{display:flex;align-items:center;justify-content:space-between;background:var(--ink-3);border:1px dashed rgba(56,214,190,.35);border-radius:10px;padding:11px 13px;font-size:.95rem;font-variant-numeric:tabular-nums}
 .mx-fixed .tag{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--silica);border:1px solid rgba(56,214,190,.4);border-radius:100px;padding:3px 8px}
 .mx-confirm{width:100%;justify-content:center}
+.mx-confirm-sec{width:100%;justify-content:center;margin-top:16px;padding:11px 20px;background:transparent}
+.mx-confirm-sec.attn{border-color:var(--silica);color:var(--silica);animation:mxPulse 1.6s infinite}
 .mx-confirm.attn{animation:mxPulse 1.6s infinite}
 @keyframes mxPulse{0%,100%{box-shadow:0 0 0 0 rgba(56,214,190,.45)}50%{box-shadow:0 0 0 10px rgba(56,214,190,0)}}
 .mx-dirty{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#E0B15C;text-align:center;min-height:1em;margin-top:-6px}
@@ -985,6 +987,7 @@
               <div class="mx-chip"><span class="k">Total</span><span class="v" id="mxTotal">—</span></div>
               <div class="mx-chip"><span class="k">Cement share</span><span class="v" id="mxCemPct">—</span></div>
             </div>
+            <button type="button" class="btn btn-ghost mx-confirm-sec" id="mxConfirm1">Confirm mix →</button>
           </div>
 
           <div class="mx-panel">
@@ -1039,6 +1042,7 @@
               </div>
             </div>
             <p class="mx-note">Region feeds the delivered-price model below — and every anonymized mix strengthens the dataset behind future recommendations.</p>
+            <button type="button" class="btn btn-ghost mx-confirm-sec" id="mxConfirm2">Confirm context →</button>
           </div>
 
           <div class="mx-panel">
@@ -1048,9 +1052,10 @@
               <div class="mx-fixed"><span id="mxPAggpV">$135</span><span class="tag">Fixed</span></div>
             </div>
             <p class="mx-note">Delivered PozzoDyne™ pricing is set by AggrePlex. As our logistics dataset grows, it will automatically reflect regional transportation and production costs for your selected region.</p>
+            <button type="button" class="btn btn-ghost mx-confirm-sec" id="mxConfirm3">Confirm economics →</button>
           </div>
 
-          <button type="button" class="btn btn-primary mx-confirm" id="mxConfirm">Confirm changes →</button>
+          <button type="button" class="btn btn-primary mx-confirm" id="mxConfirm">Confirm all changes →</button>
           <p class="mx-dirty" id="mxDirty"></p>
         </aside>
 
@@ -2562,14 +2567,13 @@ function fmt(n,d){return n.toLocaleString('en-US',{minimumFractionDigits:d||0,ma
 /* ---------- fixed delivered price & confirmed-input snapshot ---------- */
 var AGGP=135; /* $/short ton — fixed delivered price; future: modeled from regional transportation + production data keyed on Region */
 var A=null;   /* applied (confirmed) inputs — canonical imperial (lb/yd3, psi, $/short ton) */
-function snapshot(){
-  A={cem:imp(elCem),water:imp(elWater),fine:imp(elFine),mid:imp(elMid),coarse:imp(elCoarse),
-     target:units==='imp'?num(elTarget):num(elTarget)*PSI2MPA,
-     pcem:impPrice(elPCem),type:elType.value,
-     region:$('mxRegion').value||null,proj:$('mxProj').value||null,
-     vol:$('mxVol').value||null,scm:$('mxScm').value||null,
-     repnow:$('mxRepNow').value||null,when:$('mxWhen').value||null};
-}
+function snap1(){A.cem=imp(elCem);A.water=imp(elWater);A.fine=imp(elFine);A.mid=imp(elMid);A.coarse=imp(elCoarse);
+  A.target=units==='imp'?num(elTarget):num(elTarget)*PSI2MPA;A.type=elType.value}
+function snap2(){A.region=$('mxRegion').value||null;A.proj=$('mxProj').value||null;
+  A.vol=$('mxVol').value||null;A.scm=$('mxScm').value||null;
+  A.repnow=$('mxRepNow').value||null;A.when=$('mxWhen').value||null}
+function snap3(){A.pcem=impPrice(elPCem)}
+function snapshot(){A=A||{};snap1();snap2();snap3()}
 
 /* ---------- core evaluation at substitution fraction x ---------- */
 function evalMix(x){
@@ -2856,21 +2860,35 @@ $('mxTalk').addEventListener('click',function(){
 });
 
 /* ---------- wiring ---------- */
-var dirty=false;
-function markDirty(){dirty=true;refreshDirty()}
+var dirty=[false,false,false];
 function refreshDirty(){
-  $('mxConfirm').classList.toggle('attn',dirty);
-  $('mxDirty').textContent=dirty?'Unconfirmed changes — outputs show your last confirmed inputs':'';
+  for(var i=0;i<3;i++){var b=$('mxConfirm'+(i+1));if(b)b.classList.toggle('attn',dirty[i])}
+  var any=dirty[0]||dirty[1]||dirty[2];
+  $('mxConfirm').classList.toggle('attn',any);
+  $('mxDirty').textContent=any?'Unconfirmed changes — outputs show your last confirmed inputs':'';
 }
-[elCem,elWater,elFine,elMid,elCoarse,elTarget,elPCem,elType,
- $('mxRegion'),$('mxProj'),$('mxVol'),$('mxScm'),$('mxRepNow'),$('mxWhen')].forEach(function(el){
-  el.addEventListener('input',markDirty);el.addEventListener('change',markDirty);
-});
+function wireSection(els,idx){
+  els.forEach(function(el){
+    var f=function(){dirty[idx]=true;refreshDirty()};
+    el.addEventListener('input',f);el.addEventListener('change',f);
+  });
+}
+wireSection([elCem,elWater,elFine,elMid,elCoarse,elTarget,elType],0);
+wireSection([$('mxRegion'),$('mxProj'),$('mxVol'),$('mxScm'),$('mxRepNow'),$('mxWhen')],1);
+wireSection([elPCem],2);
 [elPin28,elPin28v,elPinCost,elPin7,elPin7v].forEach(function(el){
   el.addEventListener('input',compute);el.addEventListener('change',compute);
 });
+function confirmSec(idx){
+  [snap1,snap2,snap3][idx]();
+  dirty[idx]=false;refreshDirty();
+  $('mxOptNote').textContent='';compute();
+}
+$('mxConfirm1').addEventListener('click',function(){confirmSec(0)});
+$('mxConfirm2').addEventListener('click',function(){confirmSec(1)});
+$('mxConfirm3').addEventListener('click',function(){confirmSec(2)});
 $('mxConfirm').addEventListener('click',function(){
-  snapshot();dirty=false;refreshDirty();
+  snapshot();dirty=[false,false,false];refreshDirty();
   $('mxOptNote').textContent='';compute();
 });
 elSub.addEventListener('input',function(){$('mxOptNote').textContent='';compute()});
