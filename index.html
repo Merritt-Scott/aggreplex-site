@@ -106,6 +106,8 @@
 
   /* SECTION SHELL */
   section.band{padding:clamp(70px,10vw,130px) 0}
+  #page-team section.band{padding-top:clamp(26px,3.5vw,44px)}
+  #page-team .team-grid{margin-top:0}
   .band-light{background:var(--porcelain)}
   .band-porc2{background:var(--porcelain-2)}
   .sec-head{max-width:60ch}
@@ -137,6 +139,8 @@
 
   /* MICRONIZATION */
   .mill{background:var(--ink);color:var(--porcelain);padding:clamp(70px,9vw,130px) 0;position:relative;overflow:hidden}
+  section.mill:has(+ section.mill){padding-bottom:clamp(18px,2.5vw,36px)}
+  section.mill + section.mill{padding-top:clamp(18px,2.5vw,36px)}
   .mill .glow{position:absolute;top:-30%;right:-10%;width:60vw;height:60vw;background:radial-gradient(circle,rgba(56,214,190,.10),transparent 60%);pointer-events:none}
   .mill-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(36px,5vw,80px);align-items:center;position:relative}
   .mill h2{font-size:clamp(1.9rem,4vw,3.2rem);margin:.4em 0 .5em}
