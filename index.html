@@ -448,7 +448,7 @@
 .mx-optnote{font-size:.8rem;margin-top:12px;color:var(--silica);font-weight:400;min-height:1.2em}
 .mx-optnote.warn{color:#E0B15C}
 /* readout cards */
-.mx-cards{display:grid;grid-template-columns:1fr 1.3fr 1fr 1fr;gap:12px}
+.mx-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .mx-card{background:var(--ink-2);border:1px solid var(--line-dark);border-radius:14px;padding:16px 15px;min-width:0}
 .mx-card .k{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(237,239,236,.5);margin-bottom:9px}
 .mx-card .v{font-family:var(--serif);font-weight:650;font-size:clamp(.98rem,1.3vw,1.3rem);line-height:1.15;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -600,10 +600,10 @@
         <p class="copy">Conventional grinding reduces size. Our milling and air-classification systems engineer it — driving particles down to the micron level to unlock surface area, and with it, reactivity. Take the material finer and watch performance climb.</p>
         <a class="btn btn-ghost" data-nav="difference" style="margin-top:6px">Explore the process →</a>
       </div>
-      <div class="mill-stage reveal">
+      <div class="mill-stage reveal" data-max="12700" data-min="3" data-inches="1">
         <canvas class="millCanvas"></canvas>
         <div class="mill-readout">
-          <div class="ro"><div class="k">Particle size</div><div class="v roSize">2000<span class="u">µm</span></div></div>
+          <div class="ro"><div class="k">Particle size</div><div class="v roSize">0.50<span class="u">in</span></div></div>
           <div class="ro"><div class="k">Surface area</div><div class="v roSurf">1.0<span class="u">×</span></div></div>
           <div class="ro"><div class="k">Reactivity</div><div class="v roReact">Low</div></div>
         </div>
@@ -612,6 +612,28 @@
       </div>
     </div></div>
   </section>
+  <section class="mill">
+    <div class="glow"></div>
+    <div class="wrap"><div class="mill-grid">
+      <div class="reveal">
+        <span class="eyebrow">The comparison</span>
+        <h2 class="display">Where the industry stops, <em>we start.</em></h2>
+        <p class="copy">The industry's average ground-glass pozzolan is milled to about 45 microns. PozzoDyne™ begins there and keeps going — down to 3 microns, multiplying reactive surface area along the way.</p>
+        <p class="copy" style="margin-bottom:0;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:rgba(237,239,236,.5)">Drag to compare →</p>
+      </div>
+      <div class="mill-stage reveal" data-max="45" data-min="3">
+        <canvas class="millCanvas"></canvas>
+        <div class="mill-readout">
+          <div class="ro"><div class="k">Particle size</div><div class="v roSize">45<span class="u">µm</span></div></div>
+          <div class="ro"><div class="k">Surface area</div><div class="v roSurf">1.0<span class="u">×</span></div></div>
+          <div class="ro"><div class="k">Reactivity</div><div class="v roReact">Low</div></div>
+        </div>
+        <div class="slider-row"><span class="caplabel">45 <span style="text-transform:none">µm</span> · Industry avg</span><input type="range" class="millSlider" min="0" max="100" value="0" aria-label="Pozzolan fineness comparison"><span class="caplabel">3 <span style="text-transform:none">µm</span> · PozzoDyne™</span></div>
+        <div class="mill-note">Illustrative model — average ground-glass pozzolan (~45 µm) vs PozzoDyne™ micronization (down to 3 µm).</div>
+      </div>
+    </div></div>
+  </section>
+
   <section class="cta"><div class="glow"></div><div class="wrap">
     <span class="eyebrow">Get in touch</span>
     <h2 class="display">Built to perform.<br><em>Built to last.</em></h2>
@@ -866,10 +888,10 @@
         <p class="copy">Conventional grinding reduces size. Our milling and air-classification systems engineer it — driving particles down to the micron level to unlock surface area, and with it, reactivity.</p>
         <p class="copy" style="margin-bottom:0;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:rgba(237,239,236,.5)">Drag to mill →</p>
       </div>
-      <div class="mill-stage reveal">
+      <div class="mill-stage reveal" data-max="12700" data-min="3" data-inches="1">
         <canvas class="millCanvas"></canvas>
         <div class="mill-readout">
-          <div class="ro"><div class="k">Particle size</div><div class="v roSize">2000<span class="u">µm</span></div></div>
+          <div class="ro"><div class="k">Particle size</div><div class="v roSize">0.50<span class="u">in</span></div></div>
           <div class="ro"><div class="k">Surface area</div><div class="v roSurf">1.0<span class="u">×</span></div></div>
           <div class="ro"><div class="k">Reactivity</div><div class="v roReact">Low</div></div>
         </div>
@@ -878,6 +900,28 @@
       </div>
     </div></div>
   </section>
+  <section class="mill">
+    <div class="glow"></div>
+    <div class="wrap"><div class="mill-grid">
+      <div class="reveal">
+        <span class="eyebrow">The comparison</span>
+        <h2 class="display">Where the industry stops, <em>we start.</em></h2>
+        <p class="copy">The industry's average ground-glass pozzolan is milled to about 45 microns. PozzoDyne™ begins there and keeps going — down to 3 microns, multiplying reactive surface area along the way.</p>
+        <p class="copy" style="margin-bottom:0;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:rgba(237,239,236,.5)">Drag to compare →</p>
+      </div>
+      <div class="mill-stage reveal" data-max="45" data-min="3">
+        <canvas class="millCanvas"></canvas>
+        <div class="mill-readout">
+          <div class="ro"><div class="k">Particle size</div><div class="v roSize">45<span class="u">µm</span></div></div>
+          <div class="ro"><div class="k">Surface area</div><div class="v roSurf">1.0<span class="u">×</span></div></div>
+          <div class="ro"><div class="k">Reactivity</div><div class="v roReact">Low</div></div>
+        </div>
+        <div class="slider-row"><span class="caplabel">45 <span style="text-transform:none">µm</span> · Industry avg</span><input type="range" class="millSlider" min="0" max="100" value="0" aria-label="Pozzolan fineness comparison"><span class="caplabel">3 <span style="text-transform:none">µm</span> · PozzoDyne™</span></div>
+        <div class="mill-note">Illustrative model — average ground-glass pozzolan (~45 µm) vs PozzoDyne™ micronization (down to 3 µm).</div>
+      </div>
+    </div></div>
+  </section>
+
 
   <section class="band band-porc2">
     <div class="wrap">
@@ -1431,7 +1475,8 @@ var TEAM = [
     function fit(){var ow=cv.offsetWidth||cv.clientWidth||600, oh=cv.offsetHeight||230; W=cv.width=Math.max(ow,1)*DPR; H=cv.height=Math.max(oh,1)*DPR;}
     function build(){
       var v=+slider.value;
-      var micron=Math.round(2000*Math.pow(3/2000,v/100));
+      var MAXU=parseFloat(stage.dataset.max)||2000,MINU=parseFloat(stage.dataset.min)||3;
+      var micron=MAXU*Math.pow(MINU/MAXU,v/100);
       var pr=(v/100), radius=(10-pr*7.4);
       var cover=2600*(1+2.2*Math.pow(pr,1.4));   // total covered area grows with fineness (surface-area cue)
       var count=Math.round(cover/(radius*radius));
@@ -1449,8 +1494,14 @@ var TEAM = [
           shade:shade,sph:sph,verts:verts,rot:Math.random()*6.283,spin:(Math.random()-.5)*.028,
           a:.4+Math.random()*.5});
       }
-      roSize.innerHTML=micron+'<span class="u">µm</span>';
-      var surf=(2000/micron); roSurf.innerHTML=(surf>=100?Math.round(surf).toLocaleString():surf.toFixed(surf<10?1:0))+'<span class="u">×</span>';
+      if(stage.dataset.inches==='1'&&micron>=2000){
+        var inch=micron/25400;
+        roSize.innerHTML=inch.toFixed(inch>=0.1?2:3)+'<span class="u">in</span>';
+      }else{
+        var mu=Math.round(micron);
+        roSize.innerHTML=(mu>=1000?mu.toLocaleString('en-US'):mu)+'<span class="u">µm</span>';
+      }
+      var surf=(MAXU/micron); roSurf.innerHTML=(surf>=100?Math.round(surf).toLocaleString('en-US'):surf.toFixed(surf<10?1:0))+'<span class="u">×</span>';
       roReact.textContent=v<25?'Low':v<55?'Moderate':v<80?'High':'Peak';
       roReact.style.color=v<80?'':'var(--silica)';
     }
@@ -2742,7 +2793,7 @@ function compute(){
     $('mxCardCO2').textContent='−'+fmt(r.co2pct[0]*100,0)+'–'+fmt(r.co2pct[2]*100,0)+'%';
     $('mxCardCO2s').textContent='−'+fmt(r.co2[0]*volDiv,0)+' … −'+fmt(r.co2[2]*volDiv,0)+' kg CO₂e per '+volLbl;
     var s0=r.sav[0]*volDiv,s2=r.sav[2]*volDiv,neg=r.sav[1]<0;
-    $('mxCardCost').textContent=(neg?'+':'−')+'$'+fmt(Math.abs(s0),2)+'…'+(neg?'+':'−')+'$'+fmt(Math.abs(s2),2);
+    $('mxCardCost').textContent=(neg?'+':'−')+'$'+fmt(Math.abs(s0),2)+'–$'+fmt(Math.abs(s2),2);
     $('mxCardCost').className='v '+(neg?'warn':'good');
     $('mxCardCosts').textContent='per '+volLbl+' at your delivered prices';
     $('mxCard28').textContent=fmt(r.s28[0]*100,0)+'–'+fmt(r.s28[1]*100,0)+'%';
