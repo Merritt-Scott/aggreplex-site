@@ -1477,8 +1477,10 @@ var TEAM = [
       var v=+slider.value;
       var MAXU=parseFloat(stage.dataset.max)||2000,MINU=parseFloat(stage.dataset.min)||3;
       var micron=MAXU*Math.pow(MINU/MAXU,v/100);
-      var pr=(v/100), radius=(10-pr*7.4);
-      var cover=2600*(1+2.2*Math.pow(pr,1.4));   // total covered area grows with fineness (surface-area cue)
+      var prv=Math.log(12700/micron)/Math.log(12700/3);  // absolute fineness on the universal cullet->3um scale
+      prv=Math.max(0,Math.min(1,prv));
+      var radius=(10-prv*7.4);
+      var cover=2600*(1+2.2*Math.pow(prv,1.4));   // total covered area grows with fineness (surface-area cue)
       var count=Math.round(cover/(radius*radius));
       parts=[];
       for(var i=0;i<count;i++){
