@@ -1138,9 +1138,15 @@ var TEAM = [
       var pr=(v/100), radius=(10-pr*8.2);
       parts=[];
       for(var i=0;i<count;i++){
+        var shade=Math.random()<.5?'255,255,255':(Math.random()<.6?'212,218,216':'180,187,185');
+        var sph=Math.random()<.3,verts=null;
+        if(!sph){
+          var vn=5+Math.floor(Math.random()*3);verts=[];
+          for(var q=0;q<vn;q++)verts.push({a:q/vn*6.283+(Math.random()-.5)*.55,d:.6+Math.random()*.58});
+        }
         parts.push({x:Math.random()*W,y:Math.random()*H,r:(radius*(0.55+Math.random()*0.95))*DPR,
           vx:(Math.random()-.5)*.32*DPR,vy:(Math.random()-.5)*.32*DPR,
-          hue:Math.random()<.34?['56,214,190','127,168,255','231,178,76'][Math.floor(Math.random()*3)]:'214,226,222',
+          shade:shade,sph:sph,verts:verts,rot:Math.random()*6.283,spin:(Math.random()-.5)*.028,
           a:.4+Math.random()*.5});
       }
       roSize.innerHTML=micron+'<span class="u">µm</span>';
@@ -1153,10 +1159,22 @@ var TEAM = [
       for(var i=0;i<parts.length;i++){var p=parts[i];p.x+=p.vx;p.y+=p.vy;
         if(p.x<p.r){p.x=p.r;p.vx*=-1}if(p.x>W-p.r){p.x=W-p.r;p.vx*=-1}
         if(p.y<p.r){p.y=p.r;p.vy*=-1}if(p.y>H-p.r){p.y=H-p.r;p.vy*=-1}
-        var grd=g.createRadialGradient(p.x-p.r*.3,p.y-p.r*.3,p.r*.1,p.x,p.y,p.r);
-        grd.addColorStop(0,'rgba('+p.hue+','+Math.min(p.a+.28,1)+')');
-        grd.addColorStop(1,'rgba('+p.hue+','+(p.a*.22)+')');
-        g.beginPath();g.arc(p.x,p.y,p.r,0,6.28);g.fillStyle=grd;g.fill();
+        if(p.sph){
+          var grd=g.createRadialGradient(p.x-p.r*.3,p.y-p.r*.3,p.r*.1,p.x,p.y,p.r);
+          grd.addColorStop(0,'rgba('+p.shade+','+Math.min(p.a+.3,1)+')');
+          grd.addColorStop(1,'rgba('+p.shade+','+(p.a*.18)+')');
+          g.beginPath();g.arc(p.x,p.y,p.r,0,6.28);g.fillStyle=grd;g.fill();
+        }else{
+          p.rot+=p.spin;
+          g.beginPath();
+          for(var q2=0;q2<p.verts.length;q2++){
+            var vv=p.verts[q2],ax=p.x+Math.cos(vv.a+p.rot)*p.r*vv.d,ay=p.y+Math.sin(vv.a+p.rot)*p.r*vv.d;
+            q2?g.lineTo(ax,ay):g.moveTo(ax,ay);
+          }
+          g.closePath();
+          g.fillStyle='rgba('+p.shade+','+(p.a*.34)+')';g.fill();
+          g.strokeStyle='rgba('+p.shade+','+Math.min(p.a+.32,1)+')';g.lineWidth=Math.max(.6,.8*DPR);g.stroke();
+        }
       }
       if(!reduce && running) requestAnimationFrame(frame);
     }
