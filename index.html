@@ -1055,8 +1055,6 @@
             <button type="button" class="btn btn-ghost mx-confirm-sec" id="mxConfirm3">Confirm economics →</button>
           </div>
 
-          <button type="button" class="btn btn-primary mx-confirm" id="mxConfirm">Confirm all changes →</button>
-          <p class="mx-dirty" id="mxDirty"></p>
         </aside>
 
         <!-- ============ DASHBOARD ============ -->
@@ -2863,9 +2861,6 @@ $('mxTalk').addEventListener('click',function(){
 var dirty=[false,false,false];
 function refreshDirty(){
   for(var i=0;i<3;i++){var b=$('mxConfirm'+(i+1));if(b)b.classList.toggle('attn',dirty[i])}
-  var any=dirty[0]||dirty[1]||dirty[2];
-  $('mxConfirm').classList.toggle('attn',any);
-  $('mxDirty').textContent=any?'Unconfirmed changes — outputs show your last confirmed inputs':'';
 }
 function wireSection(els,idx){
   els.forEach(function(el){
@@ -2887,10 +2882,6 @@ function confirmSec(idx){
 $('mxConfirm1').addEventListener('click',function(){confirmSec(0)});
 $('mxConfirm2').addEventListener('click',function(){confirmSec(1)});
 $('mxConfirm3').addEventListener('click',function(){confirmSec(2)});
-$('mxConfirm').addEventListener('click',function(){
-  snapshot();dirty=[false,false,false];refreshDirty();
-  $('mxOptNote').textContent='';compute();
-});
 elSub.addEventListener('input',function(){$('mxOptNote').textContent='';compute()});
 $('mxRun').addEventListener('click',optimize);
 addEventListener('resize',function(){if(page.offsetParent!==null){fitChart();drawChart()}});
