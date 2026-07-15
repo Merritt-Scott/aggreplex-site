@@ -1828,9 +1828,11 @@ function frame(ts){
   updLbl(L2,[0,GY,-26],20);
   updLbl(L3,[CLOUD_C[0],GY,-30],18);
 
-  var vg=g.createRadialGradient(W/2,H*.46,Math.min(W,H)*.25,W/2,H*.5,Math.max(W,H)*.75);
-  vg.addColorStop(0,'rgba(5,15,14,0)');vg.addColorStop(1,'rgba(5,15,14,.88)');
-  g.fillStyle=vg;g.fillRect(0,0,W,H);
+  if(!scene.closest('#page-home')){
+    var vg=g.createRadialGradient(W/2,H*.46,Math.min(W,H)*.25,W/2,H*.5,Math.max(W,H)*.75);
+    vg.addColorStop(0,'rgba(5,15,14,0)');vg.addColorStop(1,'rgba(5,15,14,.88)');
+    g.fillStyle=vg;g.fillRect(0,0,W,H);
+  }
 
   if(!reduce)requestAnimationFrame(frame);
 }
