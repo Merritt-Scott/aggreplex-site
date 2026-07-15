@@ -485,6 +485,12 @@
 .mx-repnote.warn{color:#E0B15C}
 .mx-repbtns button{-webkit-appearance:none;appearance:none}
 .mx-repbtns button.btn-ghost{background:transparent}
+.mx-fixed{display:flex;align-items:center;justify-content:space-between;background:var(--ink-3);border:1px dashed rgba(56,214,190,.35);border-radius:10px;padding:11px 13px;font-size:.95rem;font-variant-numeric:tabular-nums}
+.mx-fixed .tag{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--silica);border:1px solid rgba(56,214,190,.4);border-radius:100px;padding:3px 8px}
+.mx-confirm{width:100%;justify-content:center}
+.mx-confirm.attn{animation:mxPulse 1.6s infinite}
+@keyframes mxPulse{0%,100%{box-shadow:0 0 0 0 rgba(56,214,190,.45)}50%{box-shadow:0 0 0 10px rgba(56,214,190,0)}}
+.mx-dirty{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#E0B15C;text-align:center;min-height:1em;margin-top:-6px}
 @media(max-width:1080px){.mx-grid{grid-template-columns:1fr}.mx-rail{position:static}.mx-cards{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:680px){.mx-report{grid-template-columns:1fr}.mx-subhead{gap:14px}.mx-objwrap{margin-left:0}.mx-tr{grid-template-columns:1fr;gap:8px}.mx-tr .val{text-align:left}}
 </style>
@@ -982,16 +988,7 @@
           </div>
 
           <div class="mx-panel">
-            <div class="mx-phead"><span class="mx-step">02</span><h3>Your economics</h3></div>
-            <div class="mx-frow">
-              <div class="mx-field"><label>Cement price <span class="mx-unit u-price">$/ton</span></label><input type="number" id="mxPCem" value="160" min="0" step="1"></div>
-              <div class="mx-field"><label>PozzoDyne™ delivered <span class="mx-unit u-price">$/ton</span></label><input type="number" id="mxPAggp" value="135" min="0" step="1"></div>
-            </div>
-            <p class="mx-note">Defaults are indicative — set your delivered market prices for an accurate spread.</p>
-          </div>
-
-          <div class="mx-panel">
-            <div class="mx-phead"><span class="mx-step">03</span><h3>Context</h3><span class="mx-opt">optional</span></div>
+            <div class="mx-phead"><span class="mx-step">02</span><h3>Project context</h3><span class="mx-opt">optional</span></div>
             <div class="mx-frow">
               <div class="mx-field"><label>Region</label>
                 <select id="mxRegion">
@@ -1010,8 +1007,51 @@
                 </select>
               </div>
             </div>
-            <p class="mx-note">Context sharpens the model — and every anonymized mix builds the industry dataset behind future recommendations.</p>
+            <div class="mx-frow">
+              <div class="mx-field"><label>Annual volume</label>
+                <select id="mxVol">
+                  <option value="" selected>Select…</option>
+                  <option>&lt; 10k yd³/yr</option><option>10–50k yd³/yr</option>
+                  <option>50–250k yd³/yr</option><option>250k–1M yd³/yr</option><option>&gt; 1M yd³/yr</option>
+                </select>
+              </div>
+              <div class="mx-field"><label>Current SCM use</label>
+                <select id="mxScm">
+                  <option value="" selected>Select…</option>
+                  <option>None</option><option>Fly ash</option><option>Slag</option>
+                  <option>Silica fume</option><option>Ground glass</option><option>Blend / other</option>
+                </select>
+              </div>
+            </div>
+            <div class="mx-frow">
+              <div class="mx-field"><label>Replacement today</label>
+                <select id="mxRepNow">
+                  <option value="" selected>Select…</option>
+                  <option>0%</option><option>1–10%</option><option>11–20%</option><option>21–30%</option><option>&gt; 30%</option>
+                </select>
+              </div>
+              <div class="mx-field"><label>Timeline</label>
+                <select id="mxWhen">
+                  <option value="" selected>Select…</option>
+                  <option>Active project</option><option>Next 3–6 months</option>
+                  <option>6–12 months</option><option>Exploring</option>
+                </select>
+              </div>
+            </div>
+            <p class="mx-note">Region feeds the delivered-price model below — and every anonymized mix strengthens the dataset behind future recommendations.</p>
           </div>
+
+          <div class="mx-panel">
+            <div class="mx-phead"><span class="mx-step">03</span><h3>Your economics</h3></div>
+            <div class="mx-field"><label>Cement price <span class="mx-unit u-price">$/ton</span></label><input type="number" id="mxPCem" value="160" min="0" step="1"></div>
+            <div class="mx-field"><label>PozzoDyne™ delivered <span class="mx-unit u-price">$/ton</span></label>
+              <div class="mx-fixed"><span id="mxPAggpV">$135</span><span class="tag">Fixed</span></div>
+            </div>
+            <p class="mx-note">Delivered PozzoDyne™ pricing is set by AggrePlex. As our logistics dataset grows, it will automatically reflect regional transportation and production costs for your selected region.</p>
+          </div>
+
+          <button type="button" class="btn btn-primary mx-confirm" id="mxConfirm">Confirm changes →</button>
+          <p class="mx-dirty" id="mxDirty"></p>
         </aside>
 
         <!-- ============ DASHBOARD ============ -->
@@ -2508,7 +2548,7 @@ function curve(key,x){
 /* ---------- elements ---------- */
 var units='imp';
 var elCem=$('mxCem'),elWater=$('mxWater'),elFine=$('mxFine'),elMid=$('mxMid'),elCoarse=$('mxCoarse'),
-    elTarget=$('mxTarget'),elPCem=$('mxPCem'),elPAggp=$('mxPAggp'),elType=$('mxCemType'),
+    elTarget=$('mxTarget'),elPCem=$('mxPCem'),elType=$('mxCemType'),
     elSub=$('mxSub'),elObj=$('mxObj'),
     elPin28=$('mxPin28'),elPin28v=$('mxPin28v'),elPinCost=$('mxPinCost'),elPin7=$('mxPin7'),elPin7v=$('mxPin7v');
 var chart=$('mxChart'),chartWrap=chart.parentElement,g=chart.getContext('2d'),DPR=Math.min(devicePixelRatio||1,2),CW=0,CH=0;
@@ -2519,16 +2559,28 @@ function imp(el){var v=num(el);return units==='imp'?v:v/MASS}                 //
 function impPrice(el){var v=num(el);return units==='imp'?v:v*TON2TONNE}      // price -> $/short ton
 function fmt(n,d){return n.toLocaleString('en-US',{minimumFractionDigits:d||0,maximumFractionDigits:d||0})}
 
+/* ---------- fixed delivered price & confirmed-input snapshot ---------- */
+var AGGP=135; /* $/short ton — fixed delivered price; future: modeled from regional transportation + production data keyed on Region */
+var A=null;   /* applied (confirmed) inputs — canonical imperial (lb/yd3, psi, $/short ton) */
+function snapshot(){
+  A={cem:imp(elCem),water:imp(elWater),fine:imp(elFine),mid:imp(elMid),coarse:imp(elCoarse),
+     target:units==='imp'?num(elTarget):num(elTarget)*PSI2MPA,
+     pcem:impPrice(elPCem),type:elType.value,
+     region:$('mxRegion').value||null,proj:$('mxProj').value||null,
+     vol:$('mxVol').value||null,scm:$('mxScm').value||null,
+     repnow:$('mxRepNow').value||null,when:$('mxWhen').value||null};
+}
+
 /* ---------- core evaluation at substitution fraction x ---------- */
 function evalMix(x){
-  var cem=imp(elCem),water=imp(elWater),agg=imp(elFine)+imp(elMid)+imp(elCoarse);
-  var ef=EF[elType.value]||EF.t1;
+  var cem=A.cem,water=A.water,agg=A.fine+A.mid+A.coarse;
+  var ef=EF[A.type]||EF.t1;
   var cemKg=cem*LB2KG,waterKg=water*LB2KG,aggKg=agg*LB2KG;
   var baseCO2=cemKg*ef+waterKg*EF.water+aggKg*EF.agg;                          // kg CO2e per yd3
   var redC=cemKg*x*(ef-EF.aggp);                                              // kg CO2e saved per yd3
   var co2=[redC*.87,redC,redC*1.13];
   var co2pct=baseCO2>0?[co2[0]/baseCO2,co2[1]/baseCO2,co2[2]/baseCO2]:[0,0,0];
-  var spread=impPrice(elPCem)-impPrice(elPAggp);                              // $/ton saved per ton swapped
+  var spread=A.pcem-AGGP;                                                     // $/ton saved per ton swapped
   var savC=cem*x*spread/2000;                                                 // $ per yd3 (positive = savings)
   var sav=[savC*.92,savC,savC*1.08];if(savC<0){sav=[savC*1.08,savC,savC*.92]}
   return {cem:cem,replaced:cem*x,baseCO2:baseCO2,co2:co2,co2pct:co2pct,sav:sav,
@@ -2695,7 +2747,7 @@ function compute(){
     $('mxCardRep').textContent=fmt(repDisp,0)+' '+mUnit+'/'+volLbl;
   }
   /* chips */
-  var cm=imp(elCem),wt=imp(elWater),tot=cm+wt+imp(elFine)+imp(elMid)+imp(elCoarse);
+  var cm=A.cem,wt=A.water,tot=cm+wt+A.fine+A.mid+A.coarse;
   $('mxWC').textContent=cm>0?(wt/cm).toFixed(2):'—';
   $('mxTotal').innerHTML=tot>0?fmt(units==='imp'?tot:tot*MASS,0)+' <i>'+mUnit+'/'+volLbl+'</i>':'—';
   $('mxCemPct').textContent=tot>0?fmt(cm/tot*100,1)+'%':'—';
@@ -2749,12 +2801,13 @@ function buildPayload(reason){
     schema:'agx.mixopt.v1',
     ts:new Date().toISOString(),
     reason:reason,
-    units:units,
-    mix:{cementType:elType.value,cement:num(elCem),water:num(elWater),
-      aggFine:num(elFine),aggIntermediate:num(elMid),aggCoarse:num(elCoarse),
-      target28:num(elTarget)},
-    prices:{cement:num(elPCem),pozzodyne:num(elPAggp)},
-    context:{region:$('mxRegion').value||null,projectType:$('mxProj').value||null},
+    units:units,unitsCanonical:'imperial-lb-yd3-psi-ton',
+    mix:{cementType:A.type,cement:A.cem,water:A.water,
+      aggFine:A.fine,aggIntermediate:A.mid,aggCoarse:A.coarse,
+      target28:A.target},
+    prices:{cement:A.pcem,pozzodyne:AGGP,pozzodyneFixed:true},
+    context:{region:A.region,projectType:A.proj,annualVolume:A.vol,
+      currentSCM:A.scm,currentReplacementPct:A.repnow,timeline:A.when},
     objective:elObj.value,
     constraints:{
       s28:elPin28.checked?parseFloat(elPin28v.value)||98:null,
@@ -2775,7 +2828,8 @@ $('mxUnits').addEventListener('click',function(e){
   var massEls=[elCem,elWater,elFine,elMid,elCoarse];
   massEls.forEach(function(el){var v=num(el);if(v)el.value=Math.round(to==='met'?v*MASS:v/MASS)});
   var tv=num(elTarget);if(tv)elTarget.value=to==='met'?(tv/PSI2MPA).toFixed(1):Math.round(tv*PSI2MPA/50)*50;
-  [elPCem,elPAggp].forEach(function(el){var v=num(el);if(v)el.value=Math.round(to==='met'?v/TON2TONNE:v*TON2TONNE)});
+  var pv=num(elPCem);if(pv)elPCem.value=Math.round(to==='met'?pv/TON2TONNE:pv*TON2TONNE);
+  $('mxPAggpV').textContent='$'+(to==='met'?Math.round(AGGP/TON2TONNE):AGGP);
   units=to;
   this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x.dataset.u===to)});
   document.querySelectorAll('#page-mixopt .u-mass').forEach(function(s){s.textContent=to==='imp'?'lb/yd³':'kg/m³'});
@@ -2802,9 +2856,22 @@ $('mxTalk').addEventListener('click',function(){
 });
 
 /* ---------- wiring ---------- */
-[elCem,elWater,elFine,elMid,elCoarse,elTarget,elPCem,elPAggp,elType,
- elPin28,elPin28v,elPinCost,elPin7,elPin7v].forEach(function(el){
+var dirty=false;
+function markDirty(){dirty=true;refreshDirty()}
+function refreshDirty(){
+  $('mxConfirm').classList.toggle('attn',dirty);
+  $('mxDirty').textContent=dirty?'Unconfirmed changes — outputs show your last confirmed inputs':'';
+}
+[elCem,elWater,elFine,elMid,elCoarse,elTarget,elPCem,elType,
+ $('mxRegion'),$('mxProj'),$('mxVol'),$('mxScm'),$('mxRepNow'),$('mxWhen')].forEach(function(el){
+  el.addEventListener('input',markDirty);el.addEventListener('change',markDirty);
+});
+[elPin28,elPin28v,elPinCost,elPin7,elPin7v].forEach(function(el){
   el.addEventListener('input',compute);el.addEventListener('change',compute);
+});
+$('mxConfirm').addEventListener('click',function(){
+  snapshot();dirty=false;refreshDirty();
+  $('mxOptNote').textContent='';compute();
 });
 elSub.addEventListener('input',function(){$('mxOptNote').textContent='';compute()});
 $('mxRun').addEventListener('click',optimize);
@@ -2812,6 +2879,7 @@ addEventListener('resize',function(){if(page.offsetParent!==null){fitChart();dra
 window.mxRefit=function(){if(page.offsetParent===null)return;fitChart();compute()};
 
 buildTrades();
+snapshot();refreshDirty();
 compute();
 })();
 </script>
