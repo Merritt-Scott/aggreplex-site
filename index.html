@@ -500,7 +500,7 @@
       <div class="mill-stage reveal">
         <canvas class="millCanvas"></canvas>
         <div class="mill-readout">
-          <div class="ro"><div class="k">Particle size</div><div class="v roSize">300<span class="u">µm</span></div></div>
+          <div class="ro"><div class="k">Particle size</div><div class="v roSize">2000<span class="u">µm</span></div></div>
           <div class="ro"><div class="k">Surface area</div><div class="v roSurf">1.0<span class="u">×</span></div></div>
           <div class="ro"><div class="k">Reactivity</div><div class="v roReact">Low</div></div>
         </div>
@@ -766,7 +766,7 @@
       <div class="mill-stage reveal">
         <canvas class="millCanvas"></canvas>
         <div class="mill-readout">
-          <div class="ro"><div class="k">Particle size</div><div class="v roSize">300<span class="u">µm</span></div></div>
+          <div class="ro"><div class="k">Particle size</div><div class="v roSize">2000<span class="u">µm</span></div></div>
           <div class="ro"><div class="k">Surface area</div><div class="v roSurf">1.0<span class="u">×</span></div></div>
           <div class="ro"><div class="k">Reactivity</div><div class="v roReact">Low</div></div>
         </div>
@@ -1134,16 +1134,17 @@ var TEAM = [
     function fit(){var ow=cv.offsetWidth||cv.clientWidth||600, oh=cv.offsetHeight||230; W=cv.width=Math.max(ow,1)*DPR; H=cv.height=Math.max(oh,1)*DPR;}
     function build(){
       var v=+slider.value;
-      var micron=Math.round(300*Math.pow(8/300,v/100));
+      var micron=Math.round(2000*Math.pow(3/2000,v/100));
       var count=Math.round(26+v*3.4);
       var pr=(v/100), radius=(10-pr*8.2);
       parts=[];
       for(var i=0;i<count;i++){
-        var shade=Math.random()<.5?'255,255,255':(Math.random()<.6?'212,218,216':'180,187,185');
-        var sph=Math.random()<.3,verts=null;
-        if(!sph){
-          var vn=5+Math.floor(Math.random()*3);verts=[];
-          for(var q=0;q<vn;q++)verts.push({a:q/vn*6.283+(Math.random()-.5)*.55,d:.6+Math.random()*.58});
+        var SH=['255,255,255','247,249,248','236,240,238','222,227,225','206,212,210','190,197,195','176,184,182'];
+        var shade=SH[Math.floor(Math.random()*SH.length)];
+        var sph=false,verts=null;
+        {
+          var vn=5+Math.floor(Math.random()*4);verts=[];
+          for(var q=0;q<vn;q++)verts.push({a:q/vn*6.283+(Math.random()-.5)*.6,d:.52+Math.random()*.62});
         }
         parts.push({x:Math.random()*W,y:Math.random()*H,r:(radius*(0.55+Math.random()*0.95))*DPR,
           vx:(Math.random()-.5)*.32*DPR,vy:(Math.random()-.5)*.32*DPR,
@@ -1151,7 +1152,7 @@ var TEAM = [
           a:.4+Math.random()*.5});
       }
       roSize.innerHTML=micron+'<span class="u">µm</span>';
-      var surf=(300/micron); roSurf.innerHTML=surf.toFixed(surf<10?1:0)+'<span class="u">×</span>';
+      var surf=(2000/micron); roSurf.innerHTML=(surf>=100?Math.round(surf).toLocaleString():surf.toFixed(surf<10?1:0))+'<span class="u">×</span>';
       roReact.textContent=v<25?'Low':v<55?'Moderate':v<80?'High':'Peak';
       roReact.style.color=v<80?'':'var(--silica)';
     }
