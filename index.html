@@ -1315,7 +1315,7 @@
     <div class="gl-meta">
       <div class="gl-legend">
         <span><i style="background:rgb(56,214,190)"></i>Production Facility</span>
-        <span><i style="background:rgb(244,177,105)"></i>Pilot Plant</span>
+        <span><i style="background:rgb(244,177,105)"></i>Pilot Facility</span>
       </div>
       <div class="gl-hint">Drag to spin · Scroll to zoom · Click a plant</div>
     </div>
@@ -1990,29 +1990,34 @@ function ll2v(lat,lon){var la=lat*Math.PI/180,lo=lon*Math.PI/180;return [Math.co
 
 /* ---------- plants ---------- */
 var PLANTS=[
- {id:'modesto',name:'AggrePlex — Modesto',loc:'Modesto, California, USA',tag:'Production Facility',
+ {id:'modesto',name:'AggrePlex — Modesto',loc:'Modesto, California, USA',tag:'Full-Scale Commercial Production Facility',
   lat:37.639,lon:-120.997,label:'MODESTO, USA',col:'56,214,190',
-  desc:"AggrePlex's U.S. production plant converts post-consumer glass from California's recycling stream into PozzoDyne™ micronized pozzolan. Built on Microtec's UTM milling and air-classification technology, Modesto anchors domestic supply for West Coast concrete and industrial markets.",
-  facts:[['Role','PozzoDyne™ production'],['Feedstock','Post-consumer glass cullet'],['Technology','UTM Turbo Mill + air classification'],['Plant Manager','Martín Guzman']]},
- {id:'bobingen',name:'Microtec — Bobingen',loc:'Bobingen, Bavaria, Germany',tag:'Pilot Plant — Technology & Engineering',
+  desc:"Co-located with Halo Glass Recycling, AggrePlex's Modesto facility will have direct access to one of the West Coast's largest recycled-glass streams. Using proprietary Microtec™ micronization and precision air-classification technology, the plant will transform this feedstock into PozzoDyne™, an engineered ground-glass pozzolan for lower-carbon, high-performance concrete. As AggrePlex's first commercial production facility, Modesto will establish the blueprint for a nationwide network of advanced recycled-glass manufacturing plants.",
+  facts:[['Status','Final Engineering'],['Projected Operations','Q4 2027'],['Annual Capacity','190,000 metric tons per year'],['Co-located With','Halo Glass Recycling']]},
+ {id:'bobingen',name:'AggrePlex — Bobingen',loc:'Bobingen, Bavaria, Germany',tag:'Technology & Pilot Center',
   lat:48.271,lon:10.834,label:'BOBINGEN, DE',col:'244,177,105',
-  desc:"The engineering home of Microtec's milling and air-classification systems. The Bobingen facility develops, tests, and builds the UTM Turbo Mill technology behind AggrePlex's micronization process — decades of German process-engineering expertise powering U.S. production.",
-  facts:[['Role','R&D & equipment engineering'],['Technology','UTM Turbo Mill development'],['Heritage','Microtec GmbH'],['Chief Technology Officer','Josef Fischer']]}
+  desc:"AggrePlex's Bobingen, Germany pilot plant has served as the company's initial technology and process development center, where feedstocks are validated, customer samples are produced, and commercial manufacturing processes are refined. Powered by proprietary Microtec™ micronization and precision air-classification technology, the facility has laid the foundation for AggrePlex's commercial-scale production network.",
+  facts:[['Status','Operational'],['Location','Bobingen, Bavaria, Germany'],['Technology','Microtec™ micronization + air classification']]},
+ {id:'temperance',name:'AggrePlex — Temperance',loc:'Temperance, Michigan, USA',tag:'U.S. Pilot Facility',
+  lat:41.776,lon:-83.582,label:'TEMPERANCE, USA',col:'244,177,105',
+  desc:"AggrePlex's U.S. Pilot Facility in Temperance, Michigan will serve as the company's North American center for pilot production, customer qualification, and technology validation. Utilizing proprietary Microtec™ micronization and precision air-classification technology, the facility will produce customer samples, validate new feedstocks, optimize commercial processes, train operators, and demonstrate technology performance. As the bridge between laboratory development and full-scale manufacturing, the U.S. pilot plant will accelerate product qualification and support the deployment of AggrePlex's commercial production network across North America.",
+  facts:[['Status','Engineering & Development'],['Projected Operations','Q2 2027'],['Technology','Microtec™ micronization + air classification']]}
 ];
 PLANTS.forEach(function(p){p.v=ll2v(p.lat,p.lon)});
 
-/* great-circle arc between the two plants */
-var ARC=[];
-(function(){
-  var a=PLANTS[0].v,b=PLANTS[1].v;
+/* great-circle route: Bobingen -> Temperance -> Modesto (pulse travels end-to-start) */
+function gcSeg(a,b){
+  var pts=[];
   var dotp=a[0]*b[0]+a[1]*b[1]+a[2]*b[2],om=Math.acos(Math.max(-1,Math.min(1,dotp)));
   for(var i=0;i<=64;i++){
     var t=i/64,s1=Math.sin((1-t)*om)/Math.sin(om),s2=Math.sin(t*om)/Math.sin(om);
     var x=s1*a[0]+s2*b[0],y=s1*a[1]+s2*b[1],z=s1*a[2]+s2*b[2];
     var lift=1+0.16*Math.sin(Math.PI*t);
-    ARC.push([x*lift,y*lift,z*lift]);
+    pts.push([x*lift,y*lift,z*lift]);
   }
-})();
+  return pts;
+}
+var ARC=gcSeg(PLANTS[0].v,PLANTS[2].v).concat(gcSeg(PLANTS[2].v,PLANTS[1].v));
 
 /* ---------- camera / projection ---------- */
 var rotY=2.53,rotX=0.42,vy=0,vx=0,zoom=1,tzoom=1;
