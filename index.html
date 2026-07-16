@@ -235,6 +235,7 @@
   .mv-lbl{position:absolute;text-align:center;transform:translateX(-50%);pointer-events:none;user-select:none}
   .mv-lbl .t{font-family:var(--mono);font-size:clamp(.6rem,.95vw,.76rem);letter-spacing:.18em;text-transform:uppercase;color:#33715C;font-weight:500}
   .mv-lbl .s{font-family:var(--mono);font-size:clamp(.56rem,.85vw,.7rem);letter-spacing:.14em;text-transform:uppercase;color:rgba(237,239,236,.55);margin-top:6px}
+  .mv-lbl.big .t{font-size:clamp(.74rem,1.15vw,.95rem);letter-spacing:.3em}
   .mv-hint{position:absolute;top:14px;right:18px;font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(237,239,236,.35)}
 
   /* ---------- PLANTS GLOBE ---------- */
@@ -906,9 +907,10 @@
       <canvas></canvas>
       <div class="mv-lbl mvl1"><div class="t">Mixed Recycled Glass</div><div class="s">Post-consumer stream</div></div>
       <div class="mv-lbl mvl2"><div class="t">Screening Belt</div><div class="s">Dirt &amp; dust fall through</div></div>
-      <div class="mv-lbl mvl3"><div class="t">Metals</div><div class="s">Removal 01</div></div>
-      <div class="mv-lbl mvl4"><div class="t">Paper</div><div class="s">Removal 02</div></div>
-      <div class="mv-lbl mvl5"><div class="t">Plastics</div><div class="s">Removal 03</div></div>
+      <div class="mv-lbl big mvl7"><div class="t">Removal Process</div></div>
+      <div class="mv-lbl mvl3"><div class="t">Metals</div></div>
+      <div class="mv-lbl mvl4"><div class="t">Papers</div></div>
+      <div class="mv-lbl mvl5"><div class="t">Plastics</div></div>
       <div class="mv-lbl mvl6"><div class="t">Sorted Glass Cullet</div><div class="s">Screened &amp; sorted</div></div>
       <div class="mv-hint">Move cursor to explore</div>
     </div>
@@ -2226,7 +2228,7 @@ var GY=-92,SIL='56,214,190',TAN='196,183,150',BRIGHT='232,228,202',
   var E=makeEngine(scene,cv),g=cv.getContext('2d');
   var L1=scene.querySelector('.mvl1'),L2=scene.querySelector('.mvl2'),
       LM=scene.querySelector('.mvl3'),LP=scene.querySelector('.mvl4'),LL=scene.querySelector('.mvl5'),
-      L4=scene.querySelector('.mvl6');
+      L4=scene.querySelector('.mvl6'),LR=scene.querySelector('.mvl7');
   var PAPER_M='226,213,175';
   function glassCol(){return Math.random()<.55?GLASS_W:GLASS_G}
 
@@ -2449,9 +2451,19 @@ var GY=-92,SIL='56,214,190',TAN='196,183,150',BRIGHT='232,228,202',
     // labels
     E.label(L1,[-309,GY,-60],20);
     E.label(L2,[-45,GY,-42],20);
-    E.label(LM,[EJ[0].cx,10,EJ[0].cz],-46);
-    E.label(LP,[EJ[1].cx,10,EJ[1].cz],-46);
-    E.label(LL,[EJ[2].cx,10,EJ[2].cz],-46);
+    E.label(LM,[EJ[0].cx,10,EJ[0].cz],-40);
+    E.label(LP,[EJ[1].cx,10,EJ[1].cz],-40);
+    E.label(LL,[EJ[2].cx,10,EJ[2].cz],-40);
+    // removal-process bracket over the three stations
+    (function(){
+      var bx0=EJ[0].cx-BIN.mouth-4,bx1=EJ[2].cx+BIN.mouth+4,byk=74,bz=EJ[0].cz;
+      var mid=(bx0+bx1)/2,gap=40;
+      E.line([bx0,byk,bz],[mid-gap,byk,bz],'rgba('+SIL+',.38)',.8);
+      E.line([mid+gap,byk,bz],[bx1,byk,bz],'rgba('+SIL+',.38)',.8);
+      E.line([bx0,byk,bz],[bx0,byk-8,bz],'rgba('+SIL+',.5)',.8);
+      E.line([bx1,byk,bz],[bx1,byk-8,bz],'rgba('+SIL+',.5)',.8);
+      E.label(LR,[mid,byk,bz],-9);
+    })();
     E.label(L4,[258,GY,-38],20);
 
     if(!reduce)requestAnimationFrame(frame);
