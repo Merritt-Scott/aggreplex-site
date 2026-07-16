@@ -1034,11 +1034,11 @@
       </div>
       <div class="split reveal">
         <div class="txt"><span class="eyebrow">Built for scale</span><h2 class="display">Performance that survives contact with reality.</h2><p>Many advanced materials shine in controlled environments, then falter when scaled. <strong>Ours are designed for scale from the start.</strong></p><p>By pairing an abundantly available feedstock with proven manufacturing technology, we deliver a reliable supply of high-performance material for construction and industry worldwide.</p></div>
-        <div class="figblock"><img src="aggreplexpowder.webp" onerror="this.onerror=null;this.src='aggreplexpowder.jpg'" alt="PozzoDyne™ micronized glass powder" loading="lazy"><span class="cap">Micronized glass · PozzoDyne™</span></div>
+        <div class="figblock"><img src="aggreplexpowder.jpg" alt="PozzoDyne™ micronized glass powder" loading="lazy"><span class="cap">Micronized glass · PozzoDyne™</span></div>
       </div>
       <div class="split rev reveal">
         <div class="txt"><span class="eyebrow">Sustainability, simplified</span><h2 class="display">A greener build without the trade-off.</h2><p>By converting underutilized glass into high-value SCMs, we cut reliance on carbon-intensive raw materials and extend the life of resources already in circulation.</p><p><strong>PozzoDyne™ draws on a readily available feedstock</strong> — enabling long-term scalability and genuine material security.</p></div>
-        <div class="figblock"><img src="recycledglass.webp" onerror="this.onerror=null;this.src='recycledglass.jpg'" alt="Recycled glass cullet feedstock" loading="lazy"><span class="cap">Diverted from landfill · Re-engineered</span></div>
+        <div class="figblock"><img src="RecycledGlass.webp" alt="Recycled glass cullet feedstock" loading="lazy"><span class="cap">Diverted from landfill · Re-engineered</span></div>
       </div>
     </div>
   </section>
@@ -2818,8 +2818,8 @@ function updTrades(r){
     var v=r[a.key],lo,hi,txt,dir,cls;
     if(a.pct){
       if(a.invert){lo=1-v[1];hi=1-v[0]}else{lo=v[0]-1;hi=v[1]-1}
-      txt=(lo>=0?'+':'−')+fmt(Math.abs(lo*100),1)+'% to '+(hi>=0?'+':'−')+fmt(Math.abs(hi*100),1)+'%';
-    }else{lo=v[0];hi=v[1];txt='+'+fmt(lo,0)+' to +'+fmt(hi,0)+' min'}
+      txt=(lo>=0?'+':'−')+fmt(Math.abs(lo*100),1)+'% — '+(hi>=0?'+':'−')+fmt(Math.abs(hi*100),1)+'%';
+    }else{lo=v[0];hi=v[1];txt='+'+fmt(lo,0)+' — +'+fmt(hi,0)+' days'}
     var mid=(lo+hi)/2,eff=mid;
     var favorable=a.neutral?0:(a.goodUp?(eff>0.004?1:eff<-0.004?-1:0):(eff<(a.pct?-0.004:-0.5)?1:eff>(a.pct?0.004:0.5)?-1:0));
     cls=a.neutral||favorable===0?'neutral':(favorable>0?'':'trade');
@@ -2934,7 +2934,7 @@ function compute(){
     $('mxCard28').textContent='100%';$('mxCardRep').textContent='0 '+mUnit+'/'+volLbl;
   }else{
     $('mxCardCO2').textContent='−'+fmt(r.co2pct[0]*100,0)+'–'+fmt(r.co2pct[2]*100,0)+'%';
-    $('mxCardCO2s').textContent='−'+fmt(r.co2[0]*volDiv,0)+' to −'+fmt(r.co2[2]*volDiv,0)+' kg CO₂e per '+volLbl;
+    $('mxCardCO2s').textContent='−'+fmt(r.co2[0]*volDiv,0)+' — −'+fmt(r.co2[2]*volDiv,0)+' kg CO₂e per '+volLbl;
     var s0=r.sav[0]*volDiv,s2=r.sav[2]*volDiv,neg=r.sav[1]<0;
     $('mxCardCost').textContent=(neg?'+':'−')+'$'+fmt(Math.abs(s0),2)+'–$'+fmt(Math.abs(s2),2);
     $('mxCardCost').className='v '+(neg?'warn':'good');
