@@ -92,6 +92,10 @@
   .btn-primary:hover{background:#5fe6d1;transform:translateY(-2px)}
   .btn-ghost{border-color:rgba(255,255,255,.3);color:var(--porcelain)}
   .btn-ghost:hover{border-color:var(--silica);color:#328371}
+  .btn-brand{background:linear-gradient(135deg,#3B997E,#2C7263);color:#fff;font-weight:500;box-shadow:0 12px 28px rgba(50,131,113,.35)}
+  .btn-brand:hover{background:linear-gradient(135deg,#43A98B,#328371);transform:translateY(-2px);box-shadow:0 16px 34px rgba(50,131,113,.45)}
+  .btn-silica{border-color:rgba(56,214,190,.55);color:var(--silica)}
+  .btn-silica:hover{border-color:var(--silica);background:rgba(56,214,190,.1);transform:translateY(-2px)}
   .scrollcue{position:absolute;left:var(--pad);bottom:26px;z-index:3;font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,239,236,.5);display:flex;align-items:center;gap:10px}
   .scrollcue .bar{width:1px;height:34px;background:linear-gradient(var(--silica),transparent);animation:drop 2.2s infinite}
   @keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
@@ -632,8 +636,9 @@
       <h1 class="display">PozzoDyne™: <em>Engineered to Perform</em></h1>
       <p class="lede">AggrePlex transforms landfill-destined glass into activated ground-glass pozzolan (AGGP), a high-performance supplementary cementitious material that enhances concrete durability, long-term strength, and resilience while significantly reducing its carbon footprint.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" data-nav="contact">Request Technical Data →</a>
-        <a class="btn btn-ghost" data-nav="pozzodyne">Explore PozzoDyne™</a>
+        <a class="btn btn-silica" data-nav="pozzodyne">Explore PozzoDyne™</a>
+        <a class="btn btn-silica" data-nav="mixopt">Optimize Your Mix →</a>
+        <a class="btn btn-brand" data-nav="contact">Request Technical Data →</a>
       </div>
     </div>
     <div class="scrollcue"><span class="bar"></span>Scroll</div>
