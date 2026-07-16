@@ -475,6 +475,10 @@
 .mx-grid{display:grid;grid-template-columns:370px 1fr;gap:22px;align-items:start;position:relative}
 .mx-panel{background:var(--ink-2);border:1px solid var(--line-dark);border-radius:16px;padding:clamp(18px,2.2vw,26px)}
 .mx-rail{display:flex;flex-direction:column;gap:18px;position:sticky;top:92px}
+.mx-colhead{display:flex;align-items:center;gap:16px;font-family:var(--mono);font-size:.66rem;letter-spacing:.34em;text-transform:uppercase;color:#33715C;font-weight:600;user-select:none}
+.mx-colhead::before{content:"";width:26px;height:1px;background:rgba(56,214,190,.45)}
+.mx-colhead::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(56,214,190,.35),rgba(56,214,190,0))}
+.mx-rail .mx-panel{background:rgba(9,30,28,.72);border-color:rgba(56,214,190,.14)}
 .mx-dash{display:flex;flex-direction:column;gap:18px}
 .mx-phead{display:flex;align-items:center;gap:12px;margin-bottom:18px}
 .mx-phead h3{font-family:var(--serif);font-weight:650;font-size:1.12rem;letter-spacing:-.01em}
@@ -500,7 +504,7 @@
 .mx-note{font-size:.78rem;color:rgba(237,239,236,.42);font-weight:300;line-height:1.5;margin-top:2px}
 /* control block */
 .mx-subhead{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
-.mx-bignum{font-family:var(--serif);font-weight:650;font-size:clamp(2.6rem,4.6vw,3.6rem);line-height:1;color:#33715C;font-variant-numeric:tabular-nums;min-width:120px}
+.mx-bignum{font-family:var(--serif);font-weight:650;font-size:clamp(2.6rem,4.6vw,3.6rem);line-height:1;font-variant-numeric:tabular-nums;min-width:120px;color:#D9B36C;background:linear-gradient(165deg,#EDD49B 0%,#D9B36C 42%,#B98E45 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 26px rgba(217,179,108,.18)}
 .mx-bignum i{font-style:normal;font-size:.55em;margin-left:2px}
 .mx-subcopy h3{font-family:var(--serif);font-weight:650;font-size:1.15rem}
 .mx-subcopy p{font-size:.85rem;color:rgba(237,239,236,.55);font-weight:300;margin-top:3px}
@@ -1072,6 +1076,7 @@
 
         <!-- ============ INPUT RAIL ============ -->
         <aside class="mx-rail reveal">
+          <div class="mx-colhead"><span>Inputs</span></div>
           <div class="mx-panel">
             <div class="mx-phead">
               <span class="mx-step">01</span><h3>Your current mix</h3>
@@ -1177,6 +1182,7 @@
 
         <!-- ============ DASHBOARD ============ -->
         <div class="mx-dash">
+          <div class="mx-colhead reveal"><span>Results</span></div>
           <div class="mx-panel reveal">
             <div class="mx-subhead">
               <div class="mx-bignum"><span id="mxSubPct">20</span><i>%</i></div>
