@@ -1991,7 +1991,7 @@ function ll2v(lat,lon){var la=lat*Math.PI/180,lo=lon*Math.PI/180;return [Math.co
 /* ---------- plants ---------- */
 var PLANTS=[
  {id:'modesto',name:'AggrePlex — Modesto',loc:'Modesto, California, USA',tag:'Full-Scale Commercial Production Facility',
-  lat:37.639,lon:-120.997,label:'MODESTO, USA',col:'56,214,190',
+  lat:37.639,lon:-120.997,label:'MODESTO, USA',col:'56,214,190',lside:-1,
   desc:"Co-located with Halo Glass Recycling, AggrePlex's Modesto facility will have direct access to one of the West Coast's largest recycled-glass streams. Using proprietary Microtec™ micronization and precision air-classification technology, the plant will transform this feedstock into PozzoDyne™, an engineered ground-glass pozzolan for lower-carbon, high-performance concrete. As AggrePlex's first commercial production facility, Modesto will establish the blueprint for a nationwide network of advanced recycled-glass manufacturing plants.",
   facts:[['Status','Final Engineering'],['Projected Operations','Q4 2027'],['Annual Capacity','190,000 metric tons per year'],['Co-located With','Halo Glass Recycling']]},
  {id:'bobingen',name:'AggrePlex — Bobingen',loc:'Bobingen, Bavaria, Germany',tag:'Technology & Pilot Center',
@@ -2121,9 +2121,9 @@ function frame(ts){
     // label
     g.font=(10.5*DPR)+"px 'Poppins','Segoe UI',sans-serif";
     g.textBaseline='middle';
-    var lx=px+14*DPR;
-    g.fillStyle='rgba(5,15,14,.65)';
     var tw=g.measureText(pl.label).width;
+    var lx=pl.lside===-1?px-14*DPR-tw:px+14*DPR;
+    g.fillStyle='rgba(5,15,14,.65)';
     g.fillRect(lx-4*DPR,py-9*DPR,tw+8*DPR,18*DPR);
     g.fillStyle=hover===m?'#fff':'rgba('+MC+',.95)';
     g.fillText(pl.label,lx,py);
