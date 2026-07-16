@@ -478,6 +478,10 @@
 .mx-colhead{display:flex;align-items:center;gap:16px;font-family:var(--mono);font-size:.66rem;letter-spacing:.34em;text-transform:uppercase;color:#33715C;font-weight:600;user-select:none}
 .mx-colhead::before{content:"";width:26px;height:1px;background:rgba(56,214,190,.45)}
 .mx-colhead::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(56,214,190,.35),rgba(56,214,190,0))}
+.mx-sechead{display:flex;align-items:center;gap:12px;margin-top:14px;font-family:var(--mono);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(237,239,236,.55);user-select:none}
+.mx-sechead b{color:#33715C;font-weight:600;letter-spacing:.18em}
+.mx-sechead::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.08)}
+.mx-dash>.mx-sechead:first-of-type{margin-top:0}
 .mx-rail .mx-panel{background:rgba(9,30,28,.72);border-color:rgba(56,214,190,.14)}
 .mx-dash{display:flex;flex-direction:column;gap:18px}
 .mx-phead{display:flex;align-items:center;gap:12px;margin-bottom:18px}
@@ -1183,6 +1187,7 @@
         <!-- ============ DASHBOARD ============ -->
         <div class="mx-dash">
           <div class="mx-colhead reveal"><span>Results</span></div>
+          <div class="mx-sechead reveal"><b>01</b><span>Substitution control</span></div>
           <div class="mx-panel reveal">
             <div class="mx-subhead">
               <div class="mx-bignum"><span id="mxSubPct">20</span><i>%</i></div>
@@ -1216,6 +1221,7 @@
 
           <div class="mx-inputs reveal" id="mxInputs"></div>
 
+          <div class="mx-sechead reveal"><b>02</b><span>Impact at a glance</span></div>
           <div class="mx-cards reveal">
             <div class="mx-card"><div class="k">Carbon emissions</div><div class="v good" id="mxCardCO2">—</div><div class="s" id="mxCardCO2s">—</div></div>
             <div class="mx-card"><div class="k">Material cost</div><div class="v good" id="mxCardCost">—</div><div class="s" id="mxCardCosts">—</div></div>
@@ -1223,6 +1229,7 @@
             <div class="mx-card"><div class="k">Cement replaced</div><div class="v" id="mxCardRep">—</div><div class="s">PozzoDyne™ in, clinker out — 1:1 by mass</div></div>
           </div>
 
+          <div class="mx-sechead reveal"><b>03</b><span>Deeper analysis</span></div>
           <div class="mx-panel reveal">
             <div class="mx-charthead"><h3>Carbon &amp; cost vs substitution</h3><span>shaded band = satisfies your pins</span></div>
             <div class="mx-chart"><canvas id="mxChart"></canvas></div>
@@ -1234,6 +1241,7 @@
             <p class="mx-fine">Modeled from published AGGP performance data — ASTM C1866 material qualification, C1897 isothermal calorimetry, and LCA production data. Ranges reflect mix-specific variance; a validated mix design with your materials is available on request. Carbon scope: cementitious materials, cradle-to-gate (A1–A3).</p>
           </div>
 
+          <div class="mx-sechead reveal"><b>04</b><span>Take it with you</span></div>
           <div class="mx-panel mx-report reveal">
             <div>
               <h3>Take the numbers with you.</h3>
