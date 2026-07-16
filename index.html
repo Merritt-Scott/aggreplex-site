@@ -520,11 +520,14 @@
 .mx-optnote{font-size:.8rem;margin-top:12px;color:#33715C;font-weight:400;min-height:1.2em}
 .mx-optnote.warn{color:#E0B15C}
 /* readout cards */
+#page-mixopt .page-top{padding-bottom:clamp(8px,1.2vw,18px)}
+.mx-inputs{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-top:-4px}
+.mx-inputs .hd{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#33715C;margin-right:6px;white-space:nowrap}
 .mx-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .mx-card{background:var(--ink-2);border:1px solid var(--line-dark);border-radius:14px;padding:16px 15px;min-width:0}
 .mx-card .k{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(237,239,236,.5);margin-bottom:9px}
 .mx-card .v{font-family:var(--serif);font-weight:650;font-size:clamp(.98rem,1.3vw,1.3rem);line-height:1.15;font-variant-numeric:tabular-nums;white-space:nowrap}
-.mx-card .v.good{color:#33715C}
+.mx-card .v.good{color:var(--porcelain)}
 .mx-card .v.warn{color:#E0B15C}
 .mx-card .s{font-size:.72rem;color:rgba(237,239,236,.45);font-weight:300;margin-top:7px;line-height:1.45}
 /* chart */
@@ -1205,8 +1208,10 @@
             <p class="mx-optnote" id="mxOptNote"></p>
           </div>
 
+          <div class="mx-inputs reveal" id="mxInputs"></div>
+
           <div class="mx-cards reveal">
-            <div class="mx-card"><div class="k">Carbon</div><div class="v good" id="mxCardCO2">—</div><div class="s" id="mxCardCO2s">—</div></div>
+            <div class="mx-card"><div class="k">Carbon emissions</div><div class="v good" id="mxCardCO2">—</div><div class="s" id="mxCardCO2s">—</div></div>
             <div class="mx-card"><div class="k">Material cost</div><div class="v good" id="mxCardCost">—</div><div class="s" id="mxCardCosts">—</div></div>
             <div class="mx-card"><div class="k">28-day strength</div><div class="v" id="mxCard28">—</div><div class="s">of baseline · typically ≥ 100% by 56 days</div></div>
             <div class="mx-card"><div class="k">Cement replaced</div><div class="v" id="mxCardRep">—</div><div class="s">PozzoDyne™ in, clinker out — 1:1 by mass</div></div>
@@ -2872,6 +2877,26 @@ function compute(){
   $('mxWC').textContent=cm>0?(wt/cm).toFixed(2):'—';
   $('mxTotal').innerHTML=tot>0?fmt(units==='imp'?tot:tot*MASS,0)+' <i>'+mUnit+'/'+volLbl+'</i>':'—';
   $('mxCemPct').textContent=tot>0?fmt(cm/tot*100,1)+'%':'—';
+  var chipHost=$('mxInputs');
+  if(chipHost){
+    var mU2=units==='imp'?'lb/yd³':'kg/m³',pU2=units==='imp'?'$/ton':'$/tonne';
+    var cv2=units==='imp'?1:MASS,pv2=units==='imp'?1:1/TON2TONNE;
+    var aggT=A.fine+A.mid+A.coarse;
+    var typeLbl={t1:'Type I/II',il:'Type IL',t3:'Type III',t5:'Type V'}[A.type]||A.type;
+    var chips=[
+      ['Cement',typeLbl],
+      ['Content',fmt(A.cem*cv2,0)+' '+mU2],
+      ['w/cm',A.cem>0?(A.water/A.cem).toFixed(2):'—'],
+      ['Aggregate',fmt(aggT*cv2,0)+' '+mU2],
+      ['Target',units==='imp'?fmt(A.target,0)+' psi':(A.target/PSI2MPA).toFixed(1)+' MPa'],
+      ['Cement $',fmt(A.pcem*pv2,0)+' '+pU2],
+      ['PozzoDyne™',fmt(AGGP*pv2,0)+' '+pU2]
+    ];
+    if(A.region)chips.push(['Region',A.region]);
+    if(A.proj)chips.push(['Project',A.proj]);
+    chipHost.innerHTML='<span class="hd">Confirmed inputs</span>'+chips.map(function(c){
+      return '<span class="mx-chip"><span class="k">'+c[0]+'</span><span class="v">'+c[1]+'</span></span>'}).join('');
+  }
   $('mxTradeAt').textContent='at '+fmt(x*100,x*100%1?1:0)+'% substitution';
   updTrades(r);
   drawChart();
