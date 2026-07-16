@@ -284,6 +284,8 @@
   .split .txt p strong{color:var(--slate);font-weight:500}
   .figblock{aspect-ratio:4/3;border-radius:16px;position:relative;overflow:hidden;background:var(--ink)}
   .figblock canvas{position:absolute;inset:0}
+  .figblock img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .figblock img + .cap{text-shadow:0 1px 8px rgba(5,15,14,.85)}
   .figblock .cap{position:absolute;left:20px;bottom:18px;z-index:2;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(237,239,236,.7)}
 
   /* APPLICATIONS */
@@ -1032,11 +1034,11 @@
       </div>
       <div class="split reveal">
         <div class="txt"><span class="eyebrow">Built for scale</span><h2 class="display">Performance that survives contact with reality.</h2><p>Many advanced materials shine in controlled environments, then falter when scaled. <strong>Ours are designed for scale from the start.</strong></p><p>By pairing an abundantly available feedstock with proven manufacturing technology, we deliver a reliable supply of high-performance material for construction and industry worldwide.</p></div>
-        <div class="figblock"><canvas id="fig1"></canvas><span class="cap">Micronized glass · PozzoDyne™</span></div>
+        <div class="figblock"><img src="aggreplexpowder.jpg" alt="PozzoDyne™ micronized glass powder" loading="lazy"><span class="cap">Micronized glass · PozzoDyne™</span></div>
       </div>
       <div class="split rev reveal">
         <div class="txt"><span class="eyebrow">Sustainability, simplified</span><h2 class="display">A greener build without the trade-off.</h2><p>By converting underutilized glass into high-value SCMs, we cut reliance on carbon-intensive raw materials and extend the life of resources already in circulation.</p><p><strong>PozzoDyne™ draws on a readily available feedstock</strong> — enabling long-term scalability and genuine material security.</p></div>
-        <div class="figblock"><canvas id="fig2"></canvas><span class="cap">Diverted from landfill · Re-engineered</span></div>
+        <div class="figblock"><img src="recycledglass.jpg" alt="Recycled glass cullet feedstock" loading="lazy"><span class="cap">Diverted from landfill · Re-engineered</span></div>
       </div>
     </div>
   </section>
@@ -1473,7 +1475,7 @@
       </div>
       <div class="fcol"><h4>Product</h4><a data-nav="pozzodyne">PozzoDyne™</a><a data-nav="mixopt">Mix Optimizer</a><a data-nav="difference">The Process</a><a data-nav="applications">Applications</a></div>
       <div class="fcol"><h4>Company</h4><a data-nav="team">Meet the Team</a></div>
-      <div class="fcol"><h4>Connect</h4><a href="mailto:info@aggreplexus.com">info@aggreplexus.com</a><a href="mailto:will@aggreplexus.com">will@aggreplexus.com</a><a data-nav="contact">Contact</a></div>
+      <div class="fcol"><h4>Connect</h4><a href="mailto:info@aggreplexus.com">info@aggreplexus.com</a><a data-nav="contact">Contact</a></div>
     </div>
     <div class="foot-bot"><span>© 2026 AggrePlex™ · A Microtec Company</span><span>Micronized for Performance · Engineered for the Future</span></div>
   </div>
@@ -1681,13 +1683,6 @@ var TEAM = [
   addEventListener('resize',function(){ millInstances.forEach(function(m){ m.refit(); }); });
   refitMillsIn(document.querySelector('.page.active'));
 
-  /* ===== FIGURE SHIMMER ===== */
-  function shimmer(id,tint){var cv=document.getElementById(id);if(!cv)return;var g=cv.getContext('2d'),DPR=Math.min(devicePixelRatio||1,2),W,H,ps=[];
-    function fit(){W=cv.width=cv.offsetWidth*DPR;H=cv.height=cv.offsetHeight*DPR}
-    function seed(){ps=[];var n=Math.round((cv.offsetWidth*cv.offsetHeight)/5200);n=Math.min(n,120);for(var i=0;i<n;i++)ps.push({x:Math.random()*W,y:Math.random()*H,r:(Math.random()*2+.4)*DPR,vx:(Math.random()-.5)*.18*DPR,vy:(Math.random()-.5)*.18*DPR,a:Math.random()*.6+.15,h:Math.random()<.4?tint:'210,224,220',tw:Math.random()*6.28})}
-    function loop(){g.clearRect(0,0,W,H);for(var i=0;i<ps.length;i++){var p=ps[i];p.x+=p.vx;p.y+=p.vy;p.tw+=.025;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;var a=p.a*(.6+.4*Math.sin(p.tw));g.beginPath();g.arc(p.x,p.y,p.r,0,6.28);g.fillStyle='rgba('+p.h+','+a+')';g.fill()}if(!reduce)requestAnimationFrame(loop)}
-    fit();seed();loop();addEventListener('resize',function(){fit();seed();if(reduce)loop()})}
-  shimmer('fig1','56,214,190');shimmer('fig2','127,168,255');
 
   /* ===== INITIAL ROUTE ===== */
   var start=(location.hash||'#home').replace('#','');
