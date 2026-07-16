@@ -1997,7 +1997,7 @@ var PLANTS=[
  {id:'bobingen',name:'AggrePlex — Bobingen',loc:'Bobingen, Bavaria, Germany',tag:'Technology & Pilot Center',
   lat:48.271,lon:10.834,label:'BOBINGEN, DE',col:'244,177,105',
   desc:"AggrePlex's Bobingen, Germany pilot plant has served as the company's initial technology and process development center, where feedstocks are validated, customer samples are produced, and commercial manufacturing processes are refined. Powered by proprietary Microtec™ micronization and precision air-classification technology, the facility has laid the foundation for AggrePlex's commercial-scale production network.",
-  facts:[['Status','Operational'],['Location','Bobingen, Bavaria, Germany'],['Technology','Microtec™ micronization + air classification']]},
+  facts:[['Status','Operational'],['Technology','Microtec™ micronization + air classification']]},
  {id:'temperance',name:'AggrePlex — Temperance',loc:'Temperance, Michigan, USA',tag:'U.S. Pilot Facility',
   lat:41.776,lon:-83.582,label:'TEMPERANCE, USA',col:'244,177,105',
   desc:"AggrePlex's U.S. Pilot Facility in Temperance, Michigan will serve as the company's North American center for pilot production, customer qualification, and technology validation. Utilizing proprietary Microtec™ micronization and precision air-classification technology, the facility will produce customer samples, validate new feedstocks, optimize commercial processes, train operators, and demonstrate technology performance. As the bridge between laboratory development and full-scale manufacturing, the U.S. pilot plant will accelerate product qualification and support the deployment of AggrePlex's commercial production network across North America.",
@@ -2017,7 +2017,7 @@ function gcSeg(a,b){
   }
   return pts;
 }
-var ARC=gcSeg(PLANTS[0].v,PLANTS[2].v).concat(gcSeg(PLANTS[2].v,PLANTS[1].v));
+var ARCS=[gcSeg(PLANTS[1].v,PLANTS[0].v),gcSeg(PLANTS[2].v,PLANTS[0].v)]; // each pilot feeds Modesto
 
 /* ---------- camera / projection ---------- */
 var rotY=2.53,rotX=0.42,vy=0,vx=0,zoom=1,tzoom=1;
@@ -2071,24 +2071,30 @@ function frame(ts){
       g.beginPath();g.arc(q[0],q[1],(1+.45*q[2])*DPR,0,6.283);g.fill()}}
 
   // arc
-  for(var i=0;i<ARC.length-1;i++){
-    var a1=project(ARC[i]),a2=project(ARC[i+1]);
-    var front=(a1[2]>-.05&&a2[2]>-.05);
-    g.strokeStyle=front?'rgba('+TAN+',.75)':'rgba('+TAN+',.12)';
-    g.lineWidth=(front?1.3:1)*DPR;
-    g.beginPath();g.moveTo(a1[0],a1[1]);g.lineTo(a2[0],a2[1]);g.stroke();
+  for(var ai=0;ai<ARCS.length;ai++){
+    var AR=ARCS[ai];
+    for(var i=0;i<AR.length-1;i++){
+      var a1=project(AR[i]),a2=project(AR[i+1]);
+      var front=(a1[2]>-.05&&a2[2]>-.05);
+      g.strokeStyle=front?'rgba('+TAN+',.75)':'rgba('+TAN+',.12)';
+      g.lineWidth=(front?1.3:1)*DPR;
+      g.beginPath();g.moveTo(a1[0],a1[1]);g.lineTo(a2[0],a2[1]);g.stroke();
+    }
   }
   if(!reduce){
-    // pulse travels Bobingen (pilot) -> Modesto (production): orange fades to teal
-    var pu=(arcPulse%1);var pi=Math.floor((1-pu)*(ARC.length-1));
-    var pp=project(ARC[pi]);
-    if(pp[2]>-.05){
-      var mixR=Math.round(244+(56-244)*pu),mixG=Math.round(177+(214-177)*pu),mixB=Math.round(105+(190-105)*pu);
-      var pgrad=g.createRadialGradient(pp[0],pp[1],0,pp[0],pp[1],8*DPR);
-      pgrad.addColorStop(0,'rgba('+mixR+','+mixG+','+mixB+',.95)');
-      pgrad.addColorStop(1,'rgba('+mixR+','+mixG+','+mixB+',0)');
-      g.fillStyle=pgrad;g.beginPath();g.arc(pp[0],pp[1],8*DPR,0,6.283);g.fill();
-      g.fillStyle='rgba(255,255,255,.95)';g.beginPath();g.arc(pp[0],pp[1],2.2*DPR,0,6.283);g.fill();
+    // pulses travel pilot -> production: orange fades to teal (staggered per feed)
+    for(var ai2=0;ai2<ARCS.length;ai2++){
+      var AR2=ARCS[ai2];
+      var pu=((arcPulse+ai2*.5)%1),pi=Math.floor(pu*(AR2.length-1));
+      var pp=project(AR2[pi]);
+      if(pp[2]>-.05){
+        var mixR=Math.round(244+(56-244)*pu),mixG=Math.round(177+(214-177)*pu),mixB=Math.round(105+(190-105)*pu);
+        var pgrad=g.createRadialGradient(pp[0],pp[1],0,pp[0],pp[1],8*DPR);
+        pgrad.addColorStop(0,'rgba('+mixR+','+mixG+','+mixB+',.95)');
+        pgrad.addColorStop(1,'rgba('+mixR+','+mixG+','+mixB+',0)');
+        g.fillStyle=pgrad;g.beginPath();g.arc(pp[0],pp[1],8*DPR,0,6.283);g.fill();
+        g.fillStyle='rgba(255,255,255,.95)';g.beginPath();g.arc(pp[0],pp[1],2.2*DPR,0,6.283);g.fill();
+      }
     }
   }
 
