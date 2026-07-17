@@ -298,7 +298,8 @@
   .app p{font-size:.88rem;color:var(--muted);font-weight:300;margin-top:.5em}
 
   /* APPLICATIONS v2 */
-  .apx{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:clamp(30px,4vw,50px);align-items:stretch}
+  .apx{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:0;align-items:stretch}
+  #page-applications .page-top{padding-bottom:clamp(8px,1.2vw,18px)}
   .apx-card{background:rgba(14,44,41,.55);border:1px solid var(--line-dark);border-radius:16px;backdrop-filter:blur(6px);padding:clamp(24px,2.6vw,36px);display:flex;flex-direction:column}
   .apx-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
   .apx-n{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;color:#328371;border:1px solid rgba(56,214,190,.4);border-radius:100px;padding:4px 10px;font-weight:600}
@@ -318,6 +319,10 @@
       linear-gradient(135deg,#e7eae5,#d7ddd5);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
   .member .photo .mono{font-family:var(--serif);font-weight:400;font-size:2.2rem;color:var(--teal);opacity:.5}
   .member .photo::after{content:"PHOTO";position:absolute;bottom:10px;right:12px;font-family:var(--mono);font-size:.52rem;letter-spacing:.18em;color:var(--muted);opacity:.7}
+  .member .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block;z-index:1}
+  .member .photo.has-img::after{display:none}
+  .member .photo.has-img .mono{display:none}
+  .member .photo .rank{z-index:2}
   .member .rank{position:absolute;top:10px;left:12px;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--muted);background:rgba(255,255,255,.7);padding:2px 7px;border-radius:100px}
   .member .info{padding:16px 16px 18px}
   .member .info .nm{font-family:var(--serif);font-weight:500;font-size:1.12rem;color:var(--ink);letter-spacing:-.01em;line-height:1.15}
@@ -334,6 +339,10 @@
   .bio-panel .bp-photo{aspect-ratio:16/11;background:linear-gradient(135deg,#12403c,#0b2321);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
   .bio-panel .bp-photo .mono{font-family:var(--serif);font-size:3.4rem;color:#328371;opacity:.6}
   .bio-panel .bp-photo::after{content:"PHOTO TO COME";position:absolute;bottom:14px;right:16px;font-family:var(--mono);font-size:.56rem;letter-spacing:.2em;color:rgba(237,239,236,.5)}
+  .bio-panel .bp-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;display:none}
+  .bio-panel .bp-photo.has-img::after{display:none}
+  .bio-panel .bp-photo.has-img .mono{display:none}
+  .bio-panel .bp-photo.has-img img{display:block}
   .bio-close{position:absolute;top:16px;right:16px;z-index:3;width:38px;height:38px;border-radius:50%;border:1px solid var(--line-dark);background:rgba(11,35,33,.5);color:var(--porcelain);cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:.25s}
   .bio-close:hover{background:var(--silica);color:var(--ink);border-color:var(--silica);transform:rotate(90deg)}
   .bp-body{padding:clamp(24px,3vw,38px);display:flex;flex-direction:column;flex:1}
@@ -622,7 +631,7 @@
     <!-- MIXOPT-HIDDEN: uncomment to restore the nav link
     <a data-nav="mixopt">Mix Optimizer</a>
     -->
-    <a data-nav="casestudy">Case Study</a>
+    <a data-nav="casestudy">Case Studies</a>
     <a data-nav="plants">Plants</a>
     <a data-nav="applications">Applications</a>
     <a data-nav="team">Meet the Team</a>
@@ -1424,7 +1433,7 @@
 <!-- BIO MODAL -->
 <div class="bio-overlay" id="bioOverlay"></div>
 <aside class="bio-panel" id="bioPanel" aria-hidden="true">
-  <div class="bp-photo"><span class="mono" id="bpMono">A</span><button class="bio-close" id="bioClose" aria-label="Close">✕</button></div>
+  <div class="bp-photo" id="bpPhoto"><img id="bpImg" alt=""><span class="mono" id="bpMono">A</span><button class="bio-close" id="bioClose" aria-label="Close">✕</button></div>
   <div class="bp-body">
     <span class="bp-rank" id="bpRank">01 · Founder</span>
     <h2 class="bp-name" id="bpName">Name</h2>
@@ -1480,18 +1489,18 @@
 <script>
 /* ===== TEAM DATA ===== */
 var TEAM = [
-  {n:'Anthony Cialone', t:'President and Founder', e:'Tony@microtecdhus.com',p:'239-505-9101',tel:'+12395059101', b:"Anthony founded Microtec Development & Holdings to turn advanced materials science into real-world industrial capacity. As President and Founder, he sets the company's strategic direction and drives the innovation agenda behind PozzoDyne™ — building a durable, U.S.-based platform for sustainable pozzolans at commercial scale."},
-  {n:'David Haughie', t:'Executive Chairman', e:'david@microtecdhus.com',p:'239-505-9105',tel:'+12395059105', b:"David serves as Executive Chairman, guiding governance and long-term strategy across the Microtec and AggrePlex portfolio. He brings decades of leadership experience to the board, helping align the company's growth with its sustainability mission."},
-  {n:'William Cialone', t:'VP of Corporate Strategy', e:'will@microtecdhus.com',p:'239-505-9102',tel:'+12395059102', b:"William leads corporate strategy, shaping how AggrePlex scales its supply, partnerships, and market position. He connects the company's technical strengths to commercial opportunity across the construction and industrial sectors."},
-  {n:'Josef Fischer', t:'Chief Technology Officer', e:'info@microtec-bobingen.de',p:'+49 171 3803815',tel:'+491713803815', b:"As Chief Technology Officer, Josef oversees the science and engineering behind Microtec's milling and air-classification technology. Based in Germany, he leads the R&D that pushes particle performance to the micron level."},
-  {n:'Alan Wessel', t:'Senior Strategic Advisor', e:'alan@aggreplexus.com',p:'323-791-2926',tel:'+13237912926', b:"Alan advises the leadership team on strategy and growth, bringing an experienced outside perspective to AggrePlex's expansion. He helps steer key decisions across market development and partnerships."},
-  {n:'Mike Kneller', t:'Controller', e:'mike@microtecdhus.com',p:'239-505-8450',tel:'+12395058450', b:"Mike manages the company's financial operations as Controller, overseeing accounting, reporting, and fiscal discipline. He ensures AggrePlex's growth is built on a sound financial foundation."},
-  {n:'Merritt Scott', t:'Director of Digital Intelligence & Technology Integration', e:'merritt@microtecdhus.com',p:'239-505-9107',tel:'+12395059107', b:"Merritt leads digital intelligence and technology integration, building the systems and data infrastructure that keep AggrePlex running efficiently. He bridges operations and technology across the organization."},
-  {n:'Joe Meierhoff', t:'National Glass Acquisition & Logistics Director', e:'joe@aggreplexus.com',p:'218-591-4569',tel:'+12185914569', b:"Joe directs national glass acquisition and logistics, securing the post-consumer glass feedstock at the heart of PozzoDyne™. He manages the supply relationships and transport network that keep material flowing to production."},
+  {n:'Anthony Cialone', img:'Anthoney Cialone.webp', t:'President and Founder', e:'Tony@microtecdhus.com',p:'239-505-9101',tel:'+12395059101', b:"Anthony founded Microtec Development & Holdings to turn advanced materials science into real-world industrial capacity. As President and Founder, he sets the company's strategic direction and drives the innovation agenda behind PozzoDyne™ — building a durable, U.S.-based platform for sustainable pozzolans at commercial scale."},
+  {n:'David Haughie', img:'David Haughie.png', t:'Executive Chairman', e:'david@microtecdhus.com',p:'239-505-9105',tel:'+12395059105', b:"David serves as Executive Chairman, guiding governance and long-term strategy across the Microtec and AggrePlex portfolio. He brings decades of leadership experience to the board, helping align the company's growth with its sustainability mission."},
+  {n:'William Cialone', img:'William Cialone.webp', t:'VP of Corporate Strategy', e:'will@microtecdhus.com',p:'239-505-9102',tel:'+12395059102', b:"William leads corporate strategy, shaping how AggrePlex scales its supply, partnerships, and market position. He connects the company's technical strengths to commercial opportunity across the construction and industrial sectors."},
+  {n:'Josef Fischer', img:'Josef Fisher.png', t:'Chief Technology Officer', e:'info@microtec-bobingen.de',p:'+49 171 3803815',tel:'+491713803815', b:"As Chief Technology Officer, Josef oversees the science and engineering behind Microtec's milling and air-classification technology. Based in Germany, he leads the R&D that pushes particle performance to the micron level."},
+  {n:'Alan Wessel', img:'Alan Wessel.jpg', t:'Senior Strategic Advisor', e:'alan@aggreplexus.com',p:'323-791-2926',tel:'+13237912926', b:"Alan advises the leadership team on strategy and growth, bringing an experienced outside perspective to AggrePlex's expansion. He helps steer key decisions across market development and partnerships."},
+  {n:'Mike Kneller', img:'Michael Kneller.jpg', t:'Controller', e:'mike@microtecdhus.com',p:'239-505-8450',tel:'+12395058450', b:"Mike manages the company's financial operations as Controller, overseeing accounting, reporting, and fiscal discipline. He ensures AggrePlex's growth is built on a sound financial foundation."},
+  {n:'Merritt Scott', img:'Merritt Scott.webp', t:'Director of Digital Intelligence & Technology Integration', e:'merritt@microtecdhus.com',p:'239-505-9107',tel:'+12395059107', b:"Merritt leads digital intelligence and technology integration, building the systems and data infrastructure that keep AggrePlex running efficiently. He bridges operations and technology across the organization."},
+  {n:'Joe Meierhoff', img:'Joe Meierhoff.jpg', t:'National Glass Acquisition & Logistics Director', e:'joe@aggreplexus.com',p:'218-591-4569',tel:'+12185914569', b:"Joe directs national glass acquisition and logistics, securing the post-consumer glass feedstock at the heart of PozzoDyne™. He manages the supply relationships and transport network that keep material flowing to production."},
   {n:'Martín Guzman', t:'Plant Manager, Modesto', e:'martin@aggreplexus.com',p:'239-505-9109',tel:'+12395059109', b:"Martín manages day-to-day operations at the Modesto plant, overseeing production, safety, and quality on the floor. He turns AggrePlex's process technology into consistent, commercial-scale output."},
-  {n:'Tabitha Eaves', t:'Document Controls Manager', e:'tabitha@aggreplexus.com',p:'239-509-3190',tel:'+12395093190', b:"Tabitha manages document controls, keeping the company's technical, compliance, and operational records organized and accessible. She supports quality and accountability across every project."},
-  {n:'Christopher Cheadle', t:'Lead Process Engineer', e:'chris@microtecdhus.com',p:'239-505-9108',tel:'+12395059108', b:"Christopher leads process engineering, designing and optimizing the milling and classification systems that define AggrePlex's material performance. He translates lab results into repeatable industrial processes."},
-  {n:'Nick Tenley', t:'Mechanical Engineering Specialist', e:'nick@microtecdhus.com',p:'239-505-9106',tel:'+12395059106', b:"Nick specializes in mechanical engineering, supporting the design, maintenance, and reliability of AggrePlex's production equipment. He keeps the systems that power micronization running at peak."},
+  {n:'Tabitha Eaves', img:'Tabitha Eaves.jpg', t:'Document Controls Manager', e:'tabitha@aggreplexus.com',p:'239-509-3190',tel:'+12395093190', b:"Tabitha manages document controls, keeping the company's technical, compliance, and operational records organized and accessible. She supports quality and accountability across every project."},
+  {n:'Christopher Cheadle', img:'Chris Cheadle.webp', t:'Lead Process Engineer', e:'chris@microtecdhus.com',p:'239-505-9108',tel:'+12395059108', b:"Christopher leads process engineering, designing and optimizing the milling and classification systems that define AggrePlex's material performance. He translates lab results into repeatable industrial processes."},
+  {n:'Nick Tenley', img:'Nick Tenley.webp', t:'Mechanical Engineering Specialist', e:'nick@microtecdhus.com',p:'239-505-9106',tel:'+12395059106', b:"Nick specializes in mechanical engineering, supporting the design, maintenance, and reliability of AggrePlex's production equipment. He keeps the systems that power micronization running at peak."},
   {n:'Stan Gibson', t:'Engineering', e:'stan@microtecdhus.com',p:'941-350-9253',tel:'+19413509253', b:"Stan supports the engineering team across design and implementation, contributing to the systems and equipment that bring AggrePlex's materials to commercial scale."}
 ];
 
@@ -1505,7 +1514,7 @@ var TEAM = [
     var rank=String(i+1).padStart(2,'0');
     var card=document.createElement('div');
     card.className='member';card.setAttribute('data-i',i);
-    card.innerHTML='<div class="photo"><span class="rank">'+rank+'</span><span class="mono">'+initials+'</span></div>'+
+    card.innerHTML='<div class="photo'+(m.img?' has-img':'')+'">'+(m.img?'<img src="'+m.img+'" alt="'+m.n+'" loading="lazy">':'')+'<span class="rank">'+rank+'</span><span class="mono">'+initials+'</span></div>'+
       '<div class="info"><div class="nm">'+m.n+'</div><div class="ti">'+m.t+'</div><div class="view">View bio →</div></div>';
     card.addEventListener('click',function(){openBio(i)});
     grid.appendChild(card);
@@ -1516,6 +1525,8 @@ var TEAM = [
   function openBio(i){
     var m=TEAM[i];
     document.getElementById('bpMono').textContent=m.n.split(' ').map(function(w){return w[0]}).slice(0,2).join('');
+    var bpp=document.getElementById('bpPhoto'),bpi=document.getElementById('bpImg');
+    if(m.img){bpp.classList.add('has-img');bpi.src=m.img;bpi.alt=m.n}else{bpp.classList.remove('has-img');bpi.removeAttribute('src')}
     document.getElementById('bpRank').textContent=String(i+1).padStart(2,'0')+' · '+m.t.split(',')[0].split(' ').slice(-1)[0];
     document.getElementById('bpName').textContent=m.n;
     document.getElementById('bpTitle').textContent=m.t;
