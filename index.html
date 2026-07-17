@@ -495,7 +495,11 @@
 .mx-app .wrap{max-width:min(1460px,100%)}
 .mx-grid{display:grid;grid-template-columns:370px 1fr;gap:22px;align-items:start;position:relative}
 .mx-panel{background:var(--ink-2);border:1px solid var(--line-dark);border-radius:16px;padding:clamp(18px,2.2vw,26px)}
-.mx-rail{display:flex;flex-direction:column;gap:18px;position:sticky;top:92px}
+.mx-rail{display:flex;flex-direction:column;gap:18px;position:sticky;top:92px;max-height:calc(100vh - 112px);overflow-y:auto;overscroll-behavior:contain;padding-right:6px;scrollbar-width:thin;scrollbar-color:rgba(56,214,190,.35) transparent}
+.mx-rail::-webkit-scrollbar{width:8px}
+.mx-rail::-webkit-scrollbar-track{background:transparent}
+.mx-rail::-webkit-scrollbar-thumb{background:rgba(56,214,190,.25);border-radius:100px}
+.mx-rail::-webkit-scrollbar-thumb:hover{background:rgba(56,214,190,.45)}
 .mx-colhead{display:flex;align-items:center;gap:16px;font-family:var(--mono);font-size:.66rem;letter-spacing:.34em;text-transform:uppercase;color:#328371;font-weight:600;user-select:none}
 .mx-colhead::before{content:"";width:26px;height:1px;background:rgba(56,214,190,.45)}
 .mx-colhead::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(56,214,190,.35),rgba(56,214,190,0))}
@@ -598,7 +602,7 @@
 .mx-confirm.attn{animation:mxPulse 1.6s infinite}
 @keyframes mxPulse{0%,100%{box-shadow:0 0 0 0 rgba(56,214,190,.45)}50%{box-shadow:0 0 0 10px rgba(56,214,190,0)}}
 .mx-dirty{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#E0B15C;text-align:center;min-height:1em;margin-top:-6px}
-@media(max-width:1080px){.mx-grid{grid-template-columns:1fr}.mx-rail{position:static}.mx-cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1080px){.mx-grid{grid-template-columns:1fr}.mx-rail{position:static;max-height:none;overflow:visible;padding-right:0}.mx-cards{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:680px){.mx-report{grid-template-columns:1fr}.mx-subhead{gap:14px}.mx-objwrap{margin-left:0}.mx-tr{grid-template-columns:1fr;gap:8px}.mx-tr .val{text-align:left}}
 </style>
 </head>
@@ -803,17 +807,13 @@
   <!-- POZZOLANS / WHY IT MATTERS -->
   <section class="band band-porc2">
     <div class="wrap">
-      <div class="proc reveal" style="margin-top:0">
-        <div class="pcell">
-          <span class="spec">What are pozzolans?</span>
-          <h3>The chemistry behind better concrete</h3>
-          <p>Pozzolans are amorphous siliceous materials that react with calcium hydroxide in the presence of water to form additional cementitious compounds — densifying the cement matrix and improving strength, durability, and chemical resistance over time. PozzoDyne™ is a new generation of engineered pozzolanic powder made from glass and optimized through advanced particle engineering.</p>
-        </div>
-        <div class="pcell">
-          <span class="spec">Why PozzoDyne™ matters</span>
-          <h3>Concrete's carbon problem, addressed</h3>
-          <p>Cement production accounts for roughly 8% of global emissions. PozzoDyne™ replaces a portion of Portland cement with a lower-carbon alternative that integrates into existing concrete and cement production systems — reducing carbon intensity while improving material circularity.</p>
-        </div>
+      <div class="split reveal" style="margin-top:0">
+        <div class="txt"><span class="eyebrow">Built for scale</span><h2 class="display">Performance that survives contact with reality.</h2><p>Many advanced materials shine in controlled environments, then falter when scaled. <strong>Ours are designed for scale from the start.</strong></p><p>By pairing an abundantly available feedstock with proven manufacturing technology, we deliver a reliable supply of high-performance material for construction and industry worldwide.</p></div>
+        <div class="figblock"><img src="aggreplexpowder.jpg" alt="PozzoDyne™ micronized glass powder" loading="lazy"><span class="cap">Micronized glass · PozzoDyne™</span></div>
+      </div>
+      <div class="split rev reveal">
+        <div class="txt"><span class="eyebrow">Sustainability, simplified</span><h2 class="display">A greener build without the trade-off.</h2><p>By converting underutilized glass into high-value SCMs, we cut reliance on carbon-intensive raw materials and extend the life of resources already in circulation.</p><p><strong>PozzoDyne™ draws on a readily available feedstock</strong> — enabling long-term scalability and genuine material security.</p></div>
+        <div class="figblock"><img src="RecycledGlass.webp" alt="Recycled glass cullet feedstock" loading="lazy"><span class="cap">Diverted from landfill · Re-engineered</span></div>
       </div>
     </div>
   </section>
@@ -1031,14 +1031,6 @@
         <div class="pcell"><span class="spec">Precision classification</span><h3>Consistent, repeatable output</h3><p>Tightly controlled particle-size distributions deliver consistency and repeatability across every application.</p></div>
         <div class="pcell"><span class="spec">Engineered reactivity</span><h3>Stronger pozzolanic reactions</h3><p>Optimized particle design supports stronger reactions and improved cementitious performance.</p></div>
         <div class="pcell"><span class="spec">Commercial scale</span><h3>Built for volume, not the lab</h3><p>Designed for high-volume production — real supply for real infrastructure, not laboratory-scale results.</p></div>
-      </div>
-      <div class="split reveal">
-        <div class="txt"><span class="eyebrow">Built for scale</span><h2 class="display">Performance that survives contact with reality.</h2><p>Many advanced materials shine in controlled environments, then falter when scaled. <strong>Ours are designed for scale from the start.</strong></p><p>By pairing an abundantly available feedstock with proven manufacturing technology, we deliver a reliable supply of high-performance material for construction and industry worldwide.</p></div>
-        <div class="figblock"><img src="aggreplexpowder.jpg" alt="PozzoDyne™ micronized glass powder" loading="lazy"><span class="cap">Micronized glass · PozzoDyne™</span></div>
-      </div>
-      <div class="split rev reveal">
-        <div class="txt"><span class="eyebrow">Sustainability, simplified</span><h2 class="display">A greener build without the trade-off.</h2><p>By converting underutilized glass into high-value SCMs, we cut reliance on carbon-intensive raw materials and extend the life of resources already in circulation.</p><p><strong>PozzoDyne™ draws on a readily available feedstock</strong> — enabling long-term scalability and genuine material security.</p></div>
-        <div class="figblock"><img src="RecycledGlass.webp" alt="Recycled glass cullet feedstock" loading="lazy"><span class="cap">Diverted from landfill · Re-engineered</span></div>
       </div>
     </div>
   </section>
