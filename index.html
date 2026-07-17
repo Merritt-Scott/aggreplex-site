@@ -300,6 +300,7 @@
   /* APPLICATIONS v2 */
   .apx{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:0;align-items:stretch}
   #page-applications .page-top{padding-bottom:clamp(8px,1.2vw,18px)}
+  #page-plants .page-top{padding-bottom:clamp(6px,1vw,14px)}
   .apx-card{background:rgba(14,44,41,.55);border:1px solid var(--line-dark);border-radius:16px;backdrop-filter:blur(6px);padding:clamp(24px,2.6vw,36px);display:flex;flex-direction:column}
   .apx-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
   .apx-n{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;color:#328371;border:1px solid rgba(56,214,190,.4);border-radius:100px;padding:4px 10px;font-weight:600}
@@ -457,6 +458,9 @@
   .rv-stagger.in>*:nth-child(3){transition-delay:.24s}
   .rv-stagger.in>*:nth-child(4){transition-delay:.36s}
   .rv-stagger.in>*:nth-child(5){transition-delay:.48s}
+  .rv-stagger.in>*:nth-child(6){transition-delay:.6s}
+  .rv-stagger.in>*:nth-child(7){transition-delay:.72s}
+  .rv-stagger.in>*:nth-child(8){transition-delay:.84s}
   #herovid,.hero-inner{will-change:transform}
 
   @media(max-width:1020px){
@@ -844,7 +848,7 @@
   <!-- VALUE PROPS -->
   <section class="band band-light" style="padding-top:clamp(50px,6vw,80px)">
     <div class="wrap">
-      <div class="props reveal">
+      <div class="props reveal rv-stagger">
         <div class="prop"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 20h18M6 20V9m4 11V5m4 15v-7m4 7V8"/></svg><span class="tag">01 · Performance</span><h3>Superior performance</h3><p>Improves long-term strength, durability, and resistance to chemical attack across demanding applications.</p></div>
         <div class="prop"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.2c0-1.2 1.1-2 2.5-2s2.5.8 2.5 2-1.1 1.8-2.5 1.8-2.5.6-2.5 1.9 1.1 2 2.5 2 2.5-.8 2.5-2"/></svg><span class="tag">02 · Economics</span><h3>Cost-competitive</h3><p>Priced to compete with cement while improving performance and lowering total lifecycle cost.</p></div>
         <div class="prop"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l7 3v6c0 4.5-3 7.3-7 9-4-1.7-7-4.5-7-9V6l7-3z"/></svg><span class="tag">03 · Supply</span><h3>Reliable &amp; local</h3><p>Consistent quality and optimized reactivity, proudly produced in the U.S. for a resilient supply chain.</p></div>
@@ -861,7 +865,7 @@
         <h2 class="display">Better concrete, from the inside out.</h2>
         <p class="sub">Engineered reactivity. Measurable results. How PozzoDyne™ concrete outperforms conventional mixes.</p>
       </div>
-      <div class="adv reveal">
+      <div class="adv reveal rv-stagger">
         <div class="cell"><span class="n">01</span><h3>20–30% cement replacement</h3><p>Comparable or improved compressive strength with standard mix design practices — no production redesign.</p></div>
         <div class="cell"><span class="n">02</span><h3>Lower embodied carbon</h3><p>Direct CO₂ reduction per cubic yard; supports ESG, regulatory, and project-specific carbon targets.</p></div>
         <div class="cell"><span class="n">03</span><h3>Reduced permeability</h3><p>Ultra-fine particles refine the pore structure — lower chloride ingress and improved durability in aggressive environments.</p></div>
@@ -1049,7 +1053,7 @@
   <section class="band band-porc2">
     <div class="wrap">
       <div class="sec-head reveal"><span class="eyebrow">How we do it</span><h2 class="display">Advanced materials, meet practical solutions.</h2></div>
-      <div class="proc reveal">
+      <div class="proc reveal rv-stagger">
         <div class="pcell"><span class="spec">Ultra-fine production</span><h3>Engineered down to the micron</h3><p>Particle sizes reduced to the micron level increase surface area and lift material performance where it counts.</p></div>
         <div class="pcell"><span class="spec">Precision classification</span><h3>Consistent, repeatable output</h3><p>Tightly controlled particle-size distributions deliver consistency and repeatability across every application.</p></div>
         <div class="pcell"><span class="spec">Engineered reactivity</span><h3>Stronger pozzolanic reactions</h3><p>Optimized particle design supports stronger reactions and improved cementitious performance.</p></div>
@@ -1089,7 +1093,7 @@
         <span class="eyebrow">Process precision</span>
         <h2 class="display">Engineered output, measured.</h2>
       </div>
-      <div class="adv reveal" style="grid-template-columns:repeat(4,1fr)">
+      <div class="adv reveal rv-stagger" style="grid-template-columns:repeat(4,1fr)">
         <div class="cell"><span class="n">D97</span><h3>≤ 10–20 µm</h3><p>Two engineered particle-size distributions for different performance targets.</p></div>
         <div class="cell"><span class="n">D50</span><h3>3–5 µm</h3><p>Median particle size at the micron level — surface area that drives reactivity.</p></div>
         <div class="cell"><span class="n">LOI</span><h3>≤ 0.5%</h3><p>Loss on ignition consistently below the ASTM C1866 threshold — clean feedstock, low variability.</p></div>
@@ -1327,8 +1331,8 @@
 <main class="page" id="page-plants">
   <section class="page-top"><div class="glow"></div><div class="wrap">
     <span class="eyebrow">Global Operations</span>
-    <h1 class="display">Two plants. <em>One platform.</em></h1>
-    <p class="sub">Production in California. Engineering in Bavaria. Spin the globe and select a location to learn more about each facility.</p>
+    <h1 class="display">Three facilities. <em>One platform.</em></h1>
+    <p class="sub">Production in California. Pilots in Bavaria and Michigan. Spin the globe and select a location to learn more about each facility.</p>
   </div></section>
   <section class="glsec">
     <div class="gl-meta">
@@ -1353,7 +1357,7 @@
   </div></section>
   <section class="band band-light">
     <div class="wrap">
-      <div class="apx reveal">
+      <div class="apx reveal rv-stagger">
 
         <div class="apx-card">
           <div class="apx-head"><span class="apx-n">01</span><h3>Ready-Mix &amp; Precast</h3></div>
@@ -1411,7 +1415,7 @@
   </div></section>
   <section class="band band-light">
     <div class="wrap">
-      <div class="team-grid reveal" id="teamGrid"><!--TEAM_CARDS--></div>
+      <div class="team-grid reveal rv-stagger" id="teamGrid"><!--TEAM_CARDS--></div>
     </div>
   </section>
 </main>
@@ -1614,15 +1618,8 @@ var TEAM = [
   },{threshold:.15,rootMargin:'0px 0px -6% 0px'});
   function revealPage(scope){
     var els=(scope||document).querySelectorAll('.reveal');
-    if(scope&&scope.id==='page-home'&&!reduce){
-      els.forEach(function(el){el.classList.remove('in');scrollRev.observe(el)});
-      return;
-    }
-    els.forEach(function(el,i){
-      if(reduce){el.classList.add('in');return}
-      el.classList.remove('in');
-      setTimeout(function(){el.classList.add('in')}, 60+i*80);
-    });
+    if(reduce){els.forEach(function(el){el.classList.add('in')});return}
+    els.forEach(function(el){el.classList.remove('in');scrollRev.observe(el)});
   }
   /* ===== HOME HERO PARALLAX ===== */
   (function(){
