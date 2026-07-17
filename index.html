@@ -1600,12 +1600,16 @@ var TEAM = [
   var scrollRev=new IntersectionObserver(function(es){
     var batch=0;
     es.forEach(function(e){
-      if(!e.isIntersecting)return;
       var el=e.target;
-      el.style.transitionDelay=(batch*90)+'ms';
-      el.classList.add('in');
-      (function(t){setTimeout(function(){t.style.transitionDelay=''},1200)})(el);
-      scrollRev.unobserve(el);batch++;
+      if(e.isIntersecting){
+        el.style.transitionDelay=(batch*90)+'ms';
+        el.classList.add('in');
+        (function(t){setTimeout(function(){t.style.transitionDelay=''},1200)})(el);
+        batch++;
+      }else{
+        el.style.transitionDelay='';
+        el.classList.remove('in');
+      }
     });
   },{threshold:.15,rootMargin:'0px 0px -6% 0px'});
   function revealPage(scope){
