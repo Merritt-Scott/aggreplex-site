@@ -301,7 +301,11 @@
   .apx{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:0;align-items:stretch}
   #page-applications .page-top{padding-bottom:clamp(8px,1.2vw,18px)}
   #page-plants .page-top{padding-bottom:clamp(6px,1vw,14px)}
-  .apx-card{background:rgba(14,44,41,.55);border:1px solid var(--line-dark);border-radius:16px;backdrop-filter:blur(6px);padding:clamp(24px,2.6vw,36px);display:flex;flex-direction:column}
+  .apx-card{background:rgba(14,44,41,.55);border:1px solid var(--line-dark);border-radius:16px;backdrop-filter:blur(6px);padding:clamp(24px,2.6vw,36px);display:flex;flex-direction:column;overflow:hidden}
+  .apx-media{margin:calc(clamp(24px,2.6vw,36px) * -1) calc(clamp(24px,2.6vw,36px) * -1) 20px;height:172px;position:relative;overflow:hidden}
+  .apx-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+  .apx-card:hover .apx-media img{transform:scale(1.06)}
+  .apx-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,35,33,.12) 0%,rgba(11,35,33,0) 35%,rgba(14,44,41,.78) 100%)}
   .apx-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
   .apx-n{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;color:#328371;border:1px solid rgba(56,214,190,.4);border-radius:100px;padding:4px 10px;font-weight:600}
   .apx-head h3{font-family:var(--serif);font-weight:600;font-size:1.28rem;letter-spacing:-.01em;color:var(--porcelain)}
@@ -1360,6 +1364,7 @@
       <div class="apx reveal rv-stagger">
 
         <div class="apx-card">
+          <div class="apx-media"><img src="ReadyMixConcrete.webp" alt="Ready-mix concrete pour" loading="lazy"></div>
           <div class="apx-head"><span class="apx-n">01</span><h3>Ready-Mix &amp; Precast</h3></div>
           <div class="apx-list">
             <div>Improved durability</div>
@@ -1371,6 +1376,7 @@
         </div>
 
         <div class="apx-card">
+          <div class="apx-media"><img src="Infrastructure.webp" alt="Infrastructure construction site" loading="lazy"></div>
           <div class="apx-head"><span class="apx-n">02</span><h3>Infrastructure &amp; DOT</h3></div>
           <div class="apx-list">
             <div>Bridges</div>
@@ -1383,6 +1389,7 @@
         </div>
 
         <div class="apx-card">
+          <div class="apx-media"><img src="CO2.webp" alt="CO2 reduction" loading="lazy"></div>
           <div class="apx-head"><span class="apx-n">03</span><h3>Cement Solutions</h3></div>
           <p class="apx-intro">PozzoDyne™ can be blended into cement to create IP cement — extending product performance while reducing carbon footprint.</p>
           <div class="apx-list">
