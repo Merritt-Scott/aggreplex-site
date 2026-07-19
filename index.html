@@ -302,7 +302,7 @@
   .figblock canvas{position:absolute;inset:0}
   .figblock img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
   .figblock img + .cap{text-shadow:0 1px 8px rgba(5,15,14,.85)}
-  .figblock .cap{position:absolute;left:20px;bottom:18px;z-index:2;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(237,239,236,.7)}
+  .figblock .cap{position:absolute;left:20px;bottom:18px;z-index:2;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:var(--silica);padding:5px 12px;border-radius:5px;font-weight:600}
 
   /* APPLICATIONS */
   .apps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:clamp(40px,5vw,60px)}
@@ -682,7 +682,7 @@
     </video>
     <div class="hero-inner">
       <h1 class="display">PozzoDyne™: <em>Engineered to Perform</em></h1>
-      <p class="lede">AggrePlex transforms landfill-destined glass into activated ground-glass pozzolan (AGGP), a high-performance supplementary cementitious material that enhances concrete durability, long-term strength, and resilience while significantly reducing its carbon footprint.</p>
+      <p class="lede">AggrePlex transforms landfill-destined glass into activated ground-glass pozzolan (AGGP), a high-performance supplementary cementitious material that enhances concrete durability, long-term strength, and resilience while simultaneously reducing its carbon footprint.</p>
       <div class="hero-actions">
         <a class="btn btn-silica" data-nav="pozzodyne">Explore PozzoDyne™</a>
         <!-- MIXOPT-HIDDEN: uncomment to restore the hero button
@@ -699,14 +699,14 @@
       <div class="head reveal">
         <div>
           <span class="eyebrow">The opportunity, by the numbers</span>
-          <h2 class="display" style="font-size:clamp(1.7rem,3.4vw,2.6rem);margin-top:.4em;color:var(--porcelain)">A vast, wasted feedstock — re-engineered into value.</h2>
+          <h2 class="display" style="font-size:clamp(1.7rem,3.4vw,2.6rem);margin-top:.4em;color:var(--porcelain)">A vast, discarded feedstock — re-engineered into value.</h2>
         </div>
-        <p>Every year the world discards enough glass to reshape how concrete is made. PozzoDyne™ turns that stream into supply security.</p>
+        <p>Every year the United States landfills enough glass to fundamentally change how concrete is made. PozzoDyne™ turns that once discarded glass stream into a secure, domestic supply of high-performance cement replacement.</p>
       </div>
       <div class="statgrid reveal rv-stagger">
         <div class="stat"><div class="num" data-count="7.6" data-suffix="M">0</div><div class="lbl">tons of glass landfilled in the U.S. each year</div></div>
         <div class="stat"><div class="num" data-count="400" data-suffix="M">0</div><div class="lbl">cubic yards of ready-mixed concrete delivered annually in the U.S.</div></div>
-        <div class="stat"><div class="num" data-count="100" data-suffix="M">0</div><div class="lbl">tons of cement shipped annually in the U.S.</div></div>
+        <div class="stat"><div class="num" data-count="100" data-suffix="M">0</div><div class="lbl">tons of cement utilized annually in the U.S.</div></div>
         <div class="stat"><div class="num"><span class="u">↑</span><span data-count="30" data-suffix="%">0</span></div><div class="lbl">potential cement replacement with PozzoDyne™</div></div>
       </div>
     </div>
@@ -730,7 +730,7 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="eyebrow">The Signature Process</span>
-        <h2 class="display">Cullet in. <em>PozzoDyne™ out.</em></h2>
+        <h2 class="display">Glass in. <em>PozzoDyne™ out.</em></h2>
         <p class="sub">Recovered glass enters the UTM Turbo Mill, where shear, attrition, and impact forces explode particles down to the micron level — engineered fineness, not just size reduction.</p>
       </div>
     </div>
@@ -747,9 +747,9 @@
     <div class="glow"></div>
     <div class="wrap"><div class="mill-grid">
       <div class="reveal">
-        <span class="eyebrow">The micronization</span>
+        <span class="eyebrow">Precision micronization</span>
         <h2 class="display">Engineered at the <em>micron scale.</em></h2>
-        <p class="copy">Micronization is more than making particles smaller. It’s the precise engineering of particle size and distribution to maximize surface area, unlock pozzolanic reactivity, and consistently produce high-performance ground-glass pozzolan at commercial scale.</p>
+        <p class="copy">Micronization is more than reducing particle size — it’s engineering particles to maximize reactive surface area and pozzolanic activity. This precision enables higher cement replacement levels while maintaining the strength, durability, and performance demanded by modern concrete.</p>
         <a class="btn btn-ghost" data-nav="difference" style="margin-top:6px">Explore the process →</a>
       </div>
       <div class="mill-stage reveal" data-max="12700" data-min="3" data-inches="1">
@@ -764,30 +764,12 @@
       </div>
     </div></div>
   
-    <div class="wrap" style="margin-top:clamp(64px,8vw,110px)"><div class="mill-grid">
-      <div class="reveal">
-        <span class="eyebrow">The comparison</span>
-        <h2 class="display">Where the industry stops, <em>we start.</em></h2>
-        <p class="copy">The industry's average ground-glass pozzolan is milled to about 45 microns. PozzoDyne™ begins there and keeps going — down to 3 microns, multiplying reactive surface area along the way.</p>
-        <p class="copy" style="margin-bottom:0;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:rgba(237,239,236,.5)">Drag to compare →</p>
-      </div>
-      <div class="mill-stage reveal" data-max="45" data-min="3">
-        <canvas class="millCanvas"></canvas>
-        <div class="mill-readout">
-          <div class="ro"><div class="k">Particle size</div><div class="v roSize">45<span class="u">µm</span></div></div>
-          <div class="ro"><div class="k">Surface area</div><div class="v roSurf">1.0<span class="u">×</span></div></div>
-          <div class="ro"><div class="k">Reactivity</div><div class="v roReact">Low</div></div>
-        </div>
-        <div class="slider-row"><span class="caplabel">45 <span style="text-transform:none">µm</span> · Industry avg</span><input type="range" class="millSlider" min="0" max="100" value="0" aria-label="Pozzolan fineness comparison"><span class="caplabel">3 <span style="text-transform:none">µm</span> · PozzoDyne™</span></div>
-        <div class="mill-note">Illustrative model — average ground-glass pozzolan (~45 µm) vs PozzoDyne™ micronization (down to 3 µm).</div>
-      </div>
-    </div></div>
   </section>
 
   <section class="cta"><div class="glow"></div><div class="wrap">
     <span class="eyebrow">Get in touch</span>
     <h2 class="display">Built to perform.<br><em>Built to last.</em></h2>
-    <p>Let's talk about how PozzoDyne™ fits your mix designs, your carbon targets, and your supply chain.</p>
+    <p>Let's talk about how PozzoDyne™ can help achieve your performance goals, carbon reduction targets, and supply chain objectives.</p>
     <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap"><a class="btn btn-primary" data-nav="contact">Contact us →</a><a class="btn btn-ghost" data-nav="team">Meet the team</a></div>
   </div></section>
 </main>
@@ -797,9 +779,9 @@
   <section class="page-top"><div class="glow"></div><div class="wrap">
     <span class="eyebrow">Flagship Product</span>
     <h1 class="display">PozzoDyne™ — <em>engineered</em> to perform.</h1>
-    <p class="sub">AggrePlex's flagship Activated Ground Glass Pozzolan (AGGP) — a next-generation supplementary cementitious material engineered to lower carbon, improve concrete performance, and create value from underutilized glass streams.</p>
+    <p class="sub">AggrePlex's flagship product, PozzoDyne™, is an Activated Ground Glass Pozzolan (AGGP) — a next-generation supplementary cementitious material engineered to enhance concrete performance, reduce embodied carbon, and provide a reliable, consistent, and locally sourced cement replacement.</p>
     <div class="chiprow">
-      <span>Lower Carbon Concrete</span><span>Stronger &amp; Durable</span><span>Circular Solution</span><span>Built for Scale</span>
+      <span>Higher Performance</span><span>Lower Embodied Carbon</span><span>Reliable Local Supply</span><span>Consistent Quality</span>
     </div>
   </div></section>
 
@@ -809,43 +791,25 @@
       <div class="pz-grid reveal">
         <div>
           <span class="eyebrow">What is PozzoDyne™?</span>
-          <h2 class="display" style="font-size:clamp(1.6rem,3vw,2.4rem)">Ultra-fine. Engineered. Repeatable.</h2>
-          <p class="pz-p">PozzoDyne™ is an ultra-fine ground glass pozzolan manufactured from carefully processed glass feedstocks. Through AggrePlex's proprietary material processing, the glass is cleaned, micronized, and classified into a precise particle-size distribution that delivers high performance in cementitious systems.</p>
+          <h2 class="display" style="font-size:clamp(1.6rem,3vw,2.4rem)">Ultra-fine. Engineered. Consistent. Repeatable.</h2>
+          <p class="pz-p">PozzoDyne™ is an Activated Ground Glass Pozzolan (AGGP) manufactured from post-consumer and post-industrial glass feedstocks. Through AggrePlex's proprietary processing technology, the material is cleaned and precision micronized into an engineered particle-size distribution that delivers exceptional performance in cementitious systems.</p>
           <p class="pz-p">As a supplementary cementitious material, PozzoDyne™ can replace <strong>20–30% of ordinary Portland cement</strong> in the concrete matrix — reducing embodied carbon while maintaining or improving concrete performance.</p>
-          <div class="pz-sup">PozzoDyne™ is designed to support:</div>
-          <div class="checks">
-            <div>Lower-carbon concrete</div>
-            <div>Enhanced long-term strength development</div>
-            <div>Improved durability</div>
-            <div>Increased sulfate resistivity</div>
-            <div>Reduced chloride permeability</div>
-            <div>Circular use of glass byproducts</div>
-            <div>ASR mitigation</div>
-          </div>
         </div>
         <div>
           <span class="eyebrow">Product Specifications</span>
-          <h2 class="display" style="font-size:clamp(1.6rem,3vw,2.4rem)">Two engineered distributions.</h2>
-          <p class="pz-p">Produced in two particle-size distributions to support different performance requirements and mix designs.</p>
-          <div class="spec-cards">
+          <h2 class="display" style="font-size:clamp(1.6rem,3vw,2.4rem)">Precision by design.</h2>
+          <p class="pz-p">PozzoDyne™ is produced to a precisely engineered particle-size distribution, optimized to maximize pozzolanic reactivity, concrete performance, and consistent results across a wide range of mix designs.</p>
+          <div class="spec-cards" style="grid-template-columns:1fr">
             <div class="spec-card">
-              <h4>PozzoDyne™ 20µm</h4>
+              <h4>PozzoDyne™</h4>
               <div class="body">
                 <div class="row"><span class="k">D97</span><span class="v">≤ 20 microns</span></div>
-                <div class="row"><span class="k">D50</span><span class="v">5 microns</span></div>
-                <p>Optimized for balanced performance, workability, and general cement replacement.</p>
-              </div>
-            </div>
-            <div class="spec-card">
-              <h4>PozzoDyne™ 10µm</h4>
-              <div class="body">
-                <div class="row"><span class="k">D97</span><span class="v">≤ 10 microns</span></div>
-                <div class="row"><span class="k">D50</span><span class="v">3 microns</span></div>
-                <p>Designed for higher reactivity, increased surface area, and enhanced early and long-term performance.</p>
+                <div class="row"><span class="k">D50</span><span class="v">≤ 7 microns</span></div>
+                <p>Engineered to deliver an optimized balance of strength development, durability, cement replacement, and workability through the delivery of a consistent, ultra-fine particle-size distribution.</p>
               </div>
             </div>
           </div>
-          <p class="spec-note">Both products are manufactured using precise micronization and classification to ensure consistency, reactivity, and repeatability across applications.</p>
+          <p class="spec-note"><em>Manufactured using AggrePlex's proprietary micronization technology to ensure consistent quality, engineered reactivity, and repeatable performance from batch to batch.</em></p>
         </div>
       </div>
     </div>
@@ -855,7 +819,7 @@
   <section class="band band-porc2">
     <div class="wrap">
       <div class="split reveal" style="margin-top:0">
-        <div class="txt"><span class="eyebrow">Built for scale</span><h2 class="display">Performance that survives contact with reality.</h2><p>Many advanced materials shine in controlled environments, then falter when scaled. <strong>Ours are designed for scale from the start.</strong></p><p>By pairing an abundantly available feedstock with proven manufacturing technology, we deliver a reliable supply of high-performance material for construction and industry worldwide.</p></div>
+        <div class="txt"><span class="eyebrow">Built for scale</span><h2 class="display">Performance that survives contact with reality.</h2><p>The concrete industry doesn't need another technology that may reach commercialization years from now — it needs solutions that can be implemented today. <strong>Ours is designed for scale from the start.</strong></p><p>Built on proven manufacturing technology, precision particle engineering, and abundant regional feedstocks, PozzoDyne™ delivers a reliable, local, and scalable supplementary cementitious material ready for commercial deployment.</p></div>
         <div class="figblock"><img src="aggreplexpowder.jpg" alt="PozzoDyne™ micronized glass powder" loading="lazy"><span class="cap">Micronized glass · PozzoDyne™</span></div>
       </div>
       <div class="split rev reveal">
@@ -869,10 +833,10 @@
   <section class="band band-light" style="padding-top:clamp(50px,6vw,80px)">
     <div class="wrap">
       <div class="props reveal rv-stagger">
-        <div class="prop"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 20h18M6 20V9m4 11V5m4 15v-7m4 7V8"/></svg><span class="tag">01 · Performance</span><h3>Superior performance</h3><p>Improves long-term strength, durability, and resistance to chemical attack across demanding applications.</p></div>
-        <div class="prop"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.2c0-1.2 1.1-2 2.5-2s2.5.8 2.5 2-1.1 1.8-2.5 1.8-2.5.6-2.5 1.9 1.1 2 2.5 2 2.5-.8 2.5-2"/></svg><span class="tag">02 · Economics</span><h3>Cost-competitive</h3><p>Priced to compete with cement while improving performance and lowering total lifecycle cost.</p></div>
-        <div class="prop"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l7 3v6c0 4.5-3 7.3-7 9-4-1.7-7-4.5-7-9V6l7-3z"/></svg><span class="tag">03 · Supply</span><h3>Reliable &amp; local</h3><p>Consistent quality and optimized reactivity, proudly produced in the U.S. for a resilient supply chain.</p></div>
-        <div class="prop"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 17l-3-3 3-3m10-2l3 3-3 3M5 14h11a3 3 0 0 0 3-3M19 10H8a3 3 0 0 0-3 3"/></svg><span class="tag">04 · Sustainability</span><h3>Sustainable solution</h3><p>Diverts glass from landfill and cuts the embodied carbon of every structure it goes into.</p></div>
+        <div class="prop"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 20h18M6 20V9m4 11V5m4 15v-7m4 7V8"/></svg><span class="tag">01 · Performance</span><h3>Higher performance</h3><p>Engineered to improve long-term strength, durability, and concrete performance across demanding applications.</p></div>
+        <div class="prop"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 5.8v12.4M14.8 8.6c-.6-.9-1.6-1.4-2.8-1.4-1.7 0-3 .9-3 2.3 0 1.3 1.1 1.9 3 2.2 2 .3 3.1 1 3.1 2.4 0 1.5-1.4 2.4-3.1 2.4-1.4 0-2.6-.6-3.2-1.6"/></svg><span class="tag">02 · Economics</span><h3>Cost competitive</h3><p>Priced to compete with slag while delivering high-performance concrete and lower embodied carbon.</p></div>
+        <div class="prop"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l7 3v6c0 4.5-3 7.3-7 9-4-1.7-7-4.5-7-9V6l7-3z"/></svg><span class="tag">03 · Supply</span><h3>Reliable &amp; local</h3><p>Manufactured from abundant regional feedstocks to provide a consistent, dependable, and locally sourced supply.</p></div>
+        <div class="prop"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 17l-3-3 3-3m10-2l3 3-3 3M5 14h11a3 3 0 0 0 3-3M19 10H8a3 3 0 0 0-3 3"/></svg><span class="tag">04 · Sustainability</span><h3>Lower-carbon concrete</h3><p>Reduces embodied carbon through cement replacement while supporting a more circular and resource-efficient construction industry.</p></div>
       </div>
     </div>
   </section>
@@ -1451,7 +1415,7 @@
       <div style="max-width:640px">
         <span class="eyebrow">Get in touch</span>
         <h2 class="display" style="text-align:left;margin-left:0;font-size:clamp(2.2rem,5vw,4rem)">Built to perform.<br><em>Built to last.</em></h2>
-        <p style="margin-left:0;text-align:left">Let's talk about how PozzoDyne™ fits your mix designs, your carbon targets, and your supply chain.</p>
+        <p style="margin-left:0;text-align:left">Let's talk about how PozzoDyne™ can help achieve your performance goals, carbon reduction targets, and supply chain objectives.</p>
       </div>
       <form class="cform" onsubmit="return false">
         <div class="row">
