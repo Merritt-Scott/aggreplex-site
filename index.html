@@ -329,6 +329,8 @@
   .apx-list{display:grid;gap:10px;margin-bottom:18px}
   .apx-list div{font-size:.9rem;color:rgba(237,239,236,.8);font-weight:300;line-height:1.45;padding-left:24px;position:relative}
   .apx-list div::before{content:"✓";position:absolute;left:0;color:#328371;font-weight:700}
+  .apx-sub{font-family:var(--serif);font-weight:500;font-size:1.02rem;color:var(--porcelain);margin-bottom:10px;line-height:1.35}
+  .apx-lbl{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#328371;font-weight:600;margin:16px 0 10px}
   .apx-foot{margin-top:auto;padding-top:14px;border-top:1px solid var(--line-dark);font-size:.82rem;color:rgba(237,239,236,.55);font-weight:300;line-height:1.55}
   @media(max-width:1020px){.apx{grid-template-columns:1fr}}
 
@@ -393,6 +395,9 @@
   main.page .page-top + section{padding-top:clamp(24px,3.5vw,48px)}
   main.page .page-top .glow{display:none}
   main.page .stats,main.page .mvis,main.page .mill,main.page .cta,main.page .glsec{background:transparent;border-top:0}
+  /* process page: tighter rhythm between steps */
+  #page-difference .mvis{padding-top:clamp(30px,4vw,56px)}
+  #page-difference .pv-scene,#page-difference .mv-scene{height:min(56vh,520px);min-height:380px;margin-top:0}
   main.page .mill .glow,main.page .cta .glow{display:none}
   main.page .band-light,main.page .band-porc2{background:transparent}
   .sec-head .sub{color:rgba(237,239,236,.6)}
@@ -731,13 +736,13 @@
       <div class="sec-head reveal">
         <span class="eyebrow">The Signature Process</span>
         <h2 class="display">Glass in. <em>PozzoDyne™ out.</em></h2>
-        <p class="sub">Recovered glass enters the UTM Turbo Mill, where shear, attrition, and impact forces explode particles down to the micron level — engineered fineness, not just size reduction.</p>
+        <p class="sub">Recovered glass enters the UTM Turbo Mill, where shear, attrition, compression, and impact forces explode particles down to the micron level — engineered fineness, not just size reduction.</p>
       </div>
     </div>
     <div class="mv-scene">
       <canvas></canvas>
-      <div class="mv-lbl mvl1"><div class="t">Recovered Glass Cullet</div><div class="s">Post-consumer feedstock</div></div>
-      <div class="mv-lbl mvl2"><div class="t">UTM Turbo Mill</div><div class="s">Shear · Attrition · Impact</div></div>
+      <div class="mv-lbl mvl1"><div class="t">Clean Glass</div><div class="s">Removed of contaminants</div></div>
+      <div class="mv-lbl mvl2"><div class="t">UTM Turbo Mill</div><div class="s">Shear · Attrition · Compression · Impact</div></div>
       <div class="mv-lbl mvl3"><div class="t">PozzoDyne™</div><div class="s">Micronized pozzolan</div></div>
       <div class="mv-hint">Move cursor to explore</div>
     </div>
@@ -815,6 +820,30 @@
     </div>
   </section>
 
+
+  <!-- THE COMPARISON -->
+  <section class="mill">
+    <div class="glow"></div>
+    <div class="wrap"><div class="mill-grid">
+      <div class="reveal">
+        <span class="eyebrow">The comparison</span>
+        <h2 class="display">Where the industry stops, <em>we start.</em></h2>
+        <p class="copy">The industry's average ground-glass pozzolan is milled to about 45 microns. PozzoDyne™ begins there and keeps going — down to 3 microns, multiplying reactive surface area along the way.</p>
+        <p class="copy" style="margin-bottom:0;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:rgba(237,239,236,.5)">Drag to compare →</p>
+      </div>
+      <div class="mill-stage reveal" data-max="45" data-min="3">
+        <canvas class="millCanvas"></canvas>
+        <div class="mill-readout">
+          <div class="ro"><div class="k">Particle size</div><div class="v roSize">45<span class="u">µm</span></div></div>
+          <div class="ro"><div class="k">Surface area</div><div class="v roSurf">1.0<span class="u">×</span></div></div>
+          <div class="ro"><div class="k">Reactivity</div><div class="v roReact">Low</div></div>
+        </div>
+        <div class="slider-row"><span class="caplabel">45 <span style="text-transform:none">µm</span> · Industry avg</span><input type="range" class="millSlider" min="0" max="100" value="0" aria-label="Pozzolan fineness comparison"></input><span class="caplabel">3 <span style="text-transform:none">µm</span> · PozzoDyne™</span></div>
+        <div class="mill-note">Illustrative model — average ground-glass pozzolan (~45 µm) vs PozzoDyne™ micronization (down to 3 µm).</div>
+      </div>
+    </div></div>
+  </section>
+
   <!-- POZZOLANS / WHY IT MATTERS -->
   <section class="band band-porc2">
     <div class="wrap">
@@ -850,14 +879,21 @@
         <p class="sub">Engineered reactivity. Measurable results. How PozzoDyne™ concrete outperforms conventional mixes.</p>
       </div>
       <div class="adv reveal rv-stagger">
-        <div class="cell"><span class="n">01</span><h3>20–30% cement replacement</h3><p>Comparable or improved compressive strength with standard mix design practices — no production redesign.</p></div>
-        <div class="cell"><span class="n">02</span><h3>Lower embodied carbon</h3><p>Direct CO₂ reduction per cubic yard; supports ESG, regulatory, and project-specific carbon targets.</p></div>
-        <div class="cell"><span class="n">03</span><h3>Reduced permeability</h3><p>Ultra-fine particles refine the pore structure — lower chloride ingress and improved durability in aggressive environments.</p></div>
-        <div class="cell"><span class="n">04</span><h3>ASR &amp; sulfate resistance</h3><p>Consumes free lime into additional C-S-H, limiting expansive alkali-silica and sulfate reactions.</p></div>
-        <div class="cell"><span class="n">05</span><h3>Strength at every age</h3><p>Slag-like early performance, ~100% of control at 28 days, and continued densification beyond 56 days.</p></div>
-        <div class="cell"><span class="n">06</span><h3>Thermal performance</h3><p>A denser matrix limits heat transfer — higher R-value, lower U-value, better energy efficiency.</p></div>
-        <div class="cell"><span class="n">07</span><h3>Fire &amp; heat stability</h3><p>Less free lime and more stable C-S-H phases reduce high-temperature degradation and spalling risk.</p></div>
-        <div class="cell"><span class="n">08</span><h3>Acoustic &amp; consistency</h3><p>Higher sound attenuation (STC), plus engineered repeatability that eliminates the variability of traditional SCMs.</p></div>
+        <div class="cell"><span class="n">01</span><h3>Compressive strength</h3><p>Delivers slag-like early-age performance at 7 days and significantly exceeds the control mix at 28 days through continued pozzolanic reaction.</p></div>
+        <div class="cell"><span class="n">02</span><h3>Enhanced later-age strength</h3><p>Continued pozzolanic reactions contribute to control-exceeding long-term strength development beyond conventional curing periods.</p></div>
+        <div class="cell"><span class="n">03</span><h3>Reduced chloride permeability</h3><p>A denser cement matrix limits chloride ingress, helping protect reinforcing steel from corrosion.</p></div>
+        <div class="cell"><span class="n">04</span><h3>Improved sulfate resistance</h3><p>Reduced calcium hydroxide and a refined pore structure improve resistance to sulfate attack in aggressive environments.</p></div>
+        <div class="cell"><span class="n">05</span><h3>ASR mitigation</h3><p>Consumes alkalis and refines the concrete microstructure to reduce the risk of alkali-silica reaction (ASR) expansion.</p></div>
+        <div class="cell"><span class="n">06</span><h3>Stable water demand</h3><p>The non-porous nature of glass minimizes water absorption, supporting stable water demand and improved consistency across concrete mix designs.</p></div>
+        <div class="cell"><span class="n">07</span><h3>Extended service life</h3><p>A refined and less permeable concrete matrix improves long-term durability and extends the service life of concrete structures.</p></div>
+        <div class="cell"><span class="n">08</span><h3>Improved matrix densification</h3><p>Ultra-fine particles fill microscopic voids, producing a denser, stronger, and more durable cementitious matrix.</p></div>
+        <div class="cell"><span class="n">09</span><h3>Higher R-value (insulation)</h3><p>Improved thermal performance helps regulate interior temperatures, supporting more energy-efficient buildings and lower operating costs.</p></div>
+        <div class="cell"><span class="n">10</span><h3>Lower heat island effect</h3><p>Lighter-colored concrete reflects more solar radiation, helping reduce surface temperatures and urban heat island effects.</p></div>
+        <div class="cell"><span class="n">11</span><h3>Enhanced particle packing</h3><p>Engineered particle-size distribution improves packing efficiency, reducing void space and optimizing matrix density.</p></div>
+        <div class="cell"><span class="n">12</span><h3>Reduced efflorescence</h3><p>Lower permeability and reduced free lime migration help minimize surface efflorescence over time.</p></div>
+        <div class="cell"><span class="n">13</span><h3>Improved freeze-thaw durability</h3><p>When properly air entrained, a denser concrete matrix improves resistance to freeze-thaw cycles and deicing salt exposure.</p></div>
+        <div class="cell"><span class="n">14</span><h3>Improved abrasion resistance</h3><p>A denser, stronger cement matrix improves resistance to surface wear and abrasion in high-traffic and demanding service environments.</p></div>
+        <div class="cell"><span class="n">15</span><h3>Brighter concrete</h3><p>The naturally light color of PozzoDyne™ produces brighter concrete, enhancing aesthetics and increasing solar reflectance.</p></div>
       </div>
       <div class="adv-bottom reveal">This is not just a cement replacement — <em>it's a performance upgrade to conventional concrete.</em></div>
     </div>
@@ -875,12 +911,11 @@
         <div class="sus-stat">
           <div class="k">LCA Key Finding</div>
           <div class="big">Up to <span>94%</span></div>
-          <p>reduction in CO₂ emissions during production compared to ordinary Portland cement (OPC) — validated by Life Cycle Assessment.</p>
+          <p>reduction in CO₂ emissions per ton produced compared to Ordinary Portland Cement (OPC), validated through independent Life Cycle Assessments (LCAs).</p>
         </div>
         <div class="sus-cards">
           <div class="sus-card"><h3>CO₂ reduction through cement replacement</h3><p>Cement is the most carbon-intensive component of concrete. Replacing 20–30% of it with PozzoDyne™ directly lowers embodied carbon per cubic yard — without changing how concrete is produced.</p></div>
           <div class="sus-card"><h3>Data-backed decarbonization</h3><p>LCA-validated performance supports ESG and sustainability reporting, aligns with emerging low-carbon material standards, and gives project owners quantifiable impact.</p></div>
-          <div class="sus-card"><h3>Circular material strategy</h3><p>Landfill-bound glass becomes a high-value cementitious input — upgrading existing material streams, extending lifecycles, and reducing dependency on newly produced materials.</p></div>
         </div>
       </div>
     </div>
@@ -891,20 +926,21 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="eyebrow">Certifications &amp; Standards</span>
-        <h2 class="display">Built to be specified.</h2>
+        <h2 class="display">Standards-compliant <em>by design.</em></h2>
         <p class="sub">PozzoDyne™ is engineered to meet established industry standards and integrate seamlessly into existing concrete specifications.</p>
       </div>
       <div class="pz-grid reveal" style="margin-top:clamp(30px,4vw,50px)">
         <div class="cert-card">
           <h3>ASTM C1866 Compliance</h3>
           <p class="cert-sub">Standard Specification for Ground-Glass Pozzolan for Use in Concrete</p>
+          <p style="font-size:.9rem;color:rgba(237,239,236,.72);font-weight:300;line-height:1.6;margin-top:14px">PozzoDyne™ complies with ASTM C1866, the established specification for ground-glass pozzolan used in concrete. Beyond compliance, its engineered fineness and strength performance exceed key minimum requirements established by the standard.</p>
           <div class="cert-list">
-            <div><b>Loss on Ignition (LOI)</b> ≤ 0.5% — consistently below threshold</div>
-            <div><b>Fineness</b> — engineered particle-size distributions well within specification</div>
-            <div><b>Chemical composition</b> — high amorphous silica content suitable for pozzolanic reaction</div>
-            <div><b>Performance criteria</b> — meets or exceeds required strength activity and durability benchmarks</div>
+            <div><b>Loss on Ignition (LOI)</b> — consistently below the ASTM C1866 maximum limit of 0.5%</div>
+            <div><b>Fineness</b> — engineered particle-size distributions significantly finer than the minimum requirements of ASTM C1866</div>
+            <div><b>Chemical composition</b> — meets all chemical composition requirements established under ASTM C1866</div>
+            <div><b>Strength activity</b> — exceeds ASTM C1866 minimum strength activity requirements and delivers continued strength development beyond 28 days</div>
           </div>
-          <p class="cert-foot">Specification-ready for commercial and infrastructure projects — can be specified as a ground-glass pozzolan per ASTM C1866 within performance-based specs and 20–30% replacement strategies.</p>
+          <p class="cert-foot">Specification-ready for commercial and infrastructure projects — can be specified per ASTM C1866 (as a ground-glass pozzolan in concrete) &amp; ASTM C595 (as a Portland-pozzolan cement) within performance-based specs and 20–30% replacement strategies.</p>
         </div>
         <div class="cert-card">
           <h3>Performance-Based Validation</h3>
@@ -932,8 +968,8 @@
 <main class="page" id="page-difference">
   <section class="page-top"><div class="glow"></div><div class="wrap">
     <span class="eyebrow">The AggrePlex™ Process</span>
-    <h1 class="display">It's not ground. <em>It's micronized.</em></h1>
-    <p class="sub">Powered by Microtec's advanced milling and air-classification systems, we produce ultra-fine powders with tightly controlled particle-size distributions that conventional grinding simply can't reach.</p>
+    <h1 class="display">From start <em>to finish.</em></h1>
+    <p class="sub">From feedstock preparation and contaminant removal to precision micronization and air classification, every stage of the AggrePlex™ process is engineered to produce a cleaner, more consistent, and higher-performing supplementary cementitious material.</p>
   </div></section>
 
   <section class="mvis">
@@ -947,7 +983,7 @@
     <div class="pv-scene" data-pscene="sep">
       <canvas></canvas>
       <div class="mv-lbl mvl1"><div class="t">Mixed Recycled Glass</div><div class="s">Post-consumer stream</div></div>
-      <div class="mv-lbl mvl2"><div class="t">Screening Belt</div><div class="s">Dirt &amp; dust fall through</div></div>
+      <div class="mv-lbl mvl2"><div class="t">Glass Pre-Processing</div><div class="s">Dirt &amp; dust removed</div></div>
       <div class="mv-lbl big mvl7"><div class="t">Removal Process</div></div>
       <div class="mv-lbl mvl3"><div class="t">Metals</div></div>
       <div class="mv-lbl mvl4"><div class="t">Papers</div></div>
@@ -968,8 +1004,8 @@
     <div class="pv-scene" data-pscene="clean">
       <canvas></canvas>
       <div class="mv-lbl mvl1"><div class="t">Sorted Glass Cullet</div><div class="s">From separation</div></div>
-      <div class="mv-lbl mvl2"><div class="t">Precision Cleaning</div><div class="s">Adhesives · Sugars · Organics</div></div>
-      <div class="mv-lbl mvl3"><div class="t">Drying &amp; Conditioning</div><div class="s">Moisture removed</div></div>
+      <div class="mv-lbl mvl2"><div class="t">Precision Cleaning</div><div class="s">Adhesives, sugars &amp; organics removed</div></div>
+      <div class="mv-lbl mvl3"><div class="t">Drying</div><div class="s">Moisture removed</div></div>
       <div class="mv-lbl mvl4"><div class="t">Engineered Glass Feedstock</div><div class="s">Ready for micronization</div></div>
       <div class="mv-hint">Move cursor to explore</div>
     </div>
@@ -979,14 +1015,14 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="eyebrow">Step 03 · The Signature Process</span>
-        <h2 class="display">Cullet in. <em>PozzoDyne™ out.</em></h2>
-        <p class="sub">Recovered glass enters the UTM Turbo Mill, where shear, attrition, and impact forces explode particles down to the micron level — engineered fineness, not just size reduction.</p>
+        <h2 class="display">Glass in. <em>PozzoDyne™ out.</em></h2>
+        <p class="sub">Recovered glass enters the UTM Turbo Mill, where shear, attrition, compression, and impact forces explode particles down to the micron level — engineered fineness, not just size reduction.</p>
       </div>
     </div>
     <div class="mv-scene">
       <canvas></canvas>
-      <div class="mv-lbl mvl1"><div class="t">Recovered Glass Cullet</div><div class="s">Post-consumer feedstock</div></div>
-      <div class="mv-lbl mvl2"><div class="t">UTM Turbo Mill</div><div class="s">Shear · Attrition · Impact</div></div>
+      <div class="mv-lbl mvl1"><div class="t">Clean Glass</div><div class="s">Removed of contaminants</div></div>
+      <div class="mv-lbl mvl2"><div class="t">UTM Turbo Mill</div><div class="s">Shear · Attrition · Compression · Impact</div></div>
       <div class="mv-lbl mvl3"><div class="t">PozzoDyne™</div><div class="s">Micronized pozzolan</div></div>
       <div class="mv-hint">Move cursor to explore</div>
     </div>
@@ -1036,12 +1072,12 @@
 
   <section class="band band-porc2">
     <div class="wrap">
-      <div class="sec-head reveal"><span class="eyebrow">How we do it</span><h2 class="display">Advanced materials, meet practical solutions.</h2></div>
+      <div class="sec-head reveal"><span class="eyebrow">What we deliver</span><h2 class="display">Advanced materials, meet practical solutions.</h2></div>
       <div class="proc reveal rv-stagger">
-        <div class="pcell"><span class="spec">Ultra-fine production</span><h3>Engineered down to the micron</h3><p>Particle sizes reduced to the micron level increase surface area and lift material performance where it counts.</p></div>
-        <div class="pcell"><span class="spec">Precision classification</span><h3>Consistent, repeatable output</h3><p>Tightly controlled particle-size distributions deliver consistency and repeatability across every application.</p></div>
-        <div class="pcell"><span class="spec">Engineered reactivity</span><h3>Stronger pozzolanic reactions</h3><p>Optimized particle design supports stronger reactions and improved cementitious performance.</p></div>
-        <div class="pcell"><span class="spec">Commercial scale</span><h3>Built for volume, not the lab</h3><p>Designed for high-volume production — real supply for real infrastructure, not laboratory-scale results.</p></div>
+        <div class="pcell"><span class="spec">Ultra-fine production</span><h3>Engineered down to the micron.</h3><p>Microtec's advanced micronization technology produces ultra-fine powders with tightly controlled particle-size distributions, maximizing surface area and material performance.</p></div>
+        <div class="pcell"><span class="spec">Ultra-low contamination</span><h3>Clean, specification-ready feedstock.</h3><p>Advanced cleaning and contaminant removal produce an engineered feedstock with <strong>less than 0.25% loss on ignition (LOI)</strong>, delivering the consistency required for demanding industrial applications.</p></div>
+        <div class="pcell"><span class="spec">Commercial scale</span><h3>Built for production, not just the lab.</h3><p>Designed for continuous, high-volume manufacturing, the AggrePlex™ process delivers commercial-scale supply for real-world infrastructure projects — not laboratory-scale proof of concept.</p></div>
+        <div class="pcell"><span class="spec">Consistent quality</span><h3>Repeatable. Batch after batch.</h3><p>Precision air classification and process control produce consistent particle-size distributions and dependable product quality, enabling reliable performance across every shipment.</p></div>
       </div>
     </div>
   </section>
@@ -1299,11 +1335,39 @@
   <section class="band band-light">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="eyebrow">Coming soon</span>
-        <h2 class="display">The first PozzoDyne™ case study.</h2>
-        <p class="sub">Our first published case study is in the works. Want early access to the data, or a pilot placement of your own?</p>
+        <span class="eyebrow">Built for commercial scale</span>
+        <h2 class="display">Industrial supply, <em>not lab batches.</em></h2>
+        <p class="sub">Unlike laboratory-scale technologies, AggrePlex is engineered for continuous, high-volume manufacturing. Powered by Microtec's micronization and precision air-classification technology, PozzoDyne™ is produced at industrial scale to meet the supply demands of ready-mix producers, precast manufacturers, cement companies, and major infrastructure projects.</p>
       </div>
-      <div style="margin-top:34px;display:flex;gap:16px;flex-wrap:wrap" class="reveal">
+    </div>
+  </section>
+
+  <section class="band band-porc2">
+    <div class="wrap">
+      <div class="split reveal" style="margin-top:0;align-items:start">
+        <div class="txt">
+          <span class="eyebrow">UC Davis Lab2Slab Demonstration</span>
+          <h2 class="display">Our first field demonstration of <em>PozzoDyne™ in concrete.</em></h2>
+          <p>The <strong>UC Davis Lab2Slab Demonstration</strong> marks the <strong>first field implementation of PozzoDyne™ Activated Ground-Glass Pozzolan (AGGP)</strong> in concrete. Conducted in partnership with the <strong>University of California, Davis</strong>, the project advanced beyond laboratory testing to validate the material under real-world construction conditions.</p>
+          <p>The demonstration incorporated <strong>PozzoDyne™ as a 20% replacement for Ordinary Portland Cement (OPC)</strong> in a conventional ready-mix concrete design. The concrete was batched, transported, placed, and finished using standard ready-mix construction practices, allowing PozzoDyne™ to be evaluated throughout the entire concrete production process.</p>
+        </div>
+        <div class="ovc" style="cursor:default">
+          <h3 style="margin-bottom:6px">Project highlights</h3>
+          <div class="checks" style="grid-template-columns:1fr;color:var(--porcelain)">
+            <div style="color:rgba(237,239,236,.8)">First field demonstration of PozzoDyne™ AGGP</div>
+            <div style="color:rgba(237,239,236,.8)">20% replacement of Ordinary Portland Cement</div>
+            <div style="color:rgba(237,239,236,.8)">Conducted in collaboration with UC Davis</div>
+            <div style="color:rgba(237,239,236,.8)">Commercial ready-mix concrete produced using conventional equipment via Central Concrete — Dixon Plant</div>
+            <div style="color:rgba(237,239,236,.8)">Full-scale slab placement to evaluate constructability and field performance</div>
+            <div style="color:rgba(237,239,236,.8)">Monitoring workability, finishing characteristics, strength development, and durability</div>
+          </div>
+        </div>
+      </div>
+      <div class="sec-head reveal" style="margin-top:clamp(40px,5vw,64px)">
+        <span class="eyebrow">Results coming soon</span>
+        <p class="sub" style="max-width:70ch">The UC Davis Lab-to-Slab Demonstration represents an important milestone in AggrePlex's commercialization journey. <strong>Comprehensive performance results and project findings are currently being finalized and are expected to be released publicly soon.</strong> These results will provide further insight into the performance of PozzoDyne™ under real-world construction conditions and support its continued commercial deployment.</p>
+      </div>
+      <div style="margin-top:30px;display:flex;gap:16px;flex-wrap:wrap" class="reveal">
         <a class="btn btn-primary" data-nav="contact">Request technical data →</a>
         <a class="btn btn-ghost" data-nav="pozzodyne">About PozzoDyne™</a>
       </div>
@@ -1336,8 +1400,8 @@
 <main class="page" id="page-applications">
   <section class="page-top"><div class="glow"></div><div class="wrap">
     <span class="eyebrow">Applications</span>
-    <h1 class="display">Designed for <em>modern concrete.</em></h1>
-    <p class="sub">Engineered for long-term durability in critical infrastructure applications.</p>
+    <h1 class="display">One material. <em>Multiple markets.</em></h1>
+    <p class="sub">PozzoDyne™ is an engineered ground-glass pozzolan designed for a wide range of concrete and cement applications. Its controlled particle-size distribution and consistent quality enable deployment across ready-mix, precast, infrastructure, and cement manufacturing.</p>
   </div></section>
   <section class="band band-light">
     <div class="wrap">
@@ -1346,40 +1410,67 @@
         <div class="apx-card">
           <div class="apx-media"><img src="ReadyMixConcrete.webp" alt="Ready-mix concrete pour" loading="lazy"></div>
           <div class="apx-head"><span class="apx-n">01</span><h3>Ready-Mix &amp; Precast</h3></div>
+          <div class="apx-sub">High-performance concrete for everyday construction.</div>
+          <p class="apx-intro">PozzoDyne™ integrates seamlessly into conventional concrete production, providing producers with a high-performance supplementary cementitious material (SCM) that improves durability while reducing cement consumption.</p>
+          <div class="apx-lbl">Applications</div>
           <div class="apx-list">
-            <div>Improved durability</div>
-            <div>Lower permeability</div>
-            <div>Workability enhancement</div>
-            <div>Commercial scalability</div>
+            <div>Ready-mix concrete</div>
+            <div>Precast concrete</div>
+            <div>Concrete masonry units (CMUs)</div>
+            <div>Architectural concrete</div>
+            <div>Tilt-up construction</div>
+            <div>Commercial &amp; residential construction</div>
           </div>
-          <div class="apx-foot">Ideal for ready-mix producers, precast manufacturers, and concrete construction projects.</div>
+          <div class="apx-lbl">Key Benefits</div>
+          <div class="apx-list" style="margin-bottom:0">
+            <div>Improved long-term durability</div>
+            <div>Reduced permeability</div>
+            <div>Enhanced workability</div>
+            <div>Higher cement replacement potential</div>
+            <div>ASTM C1866 compliant</div>
+            <div>Commercial-scale supply</div>
+          </div>
         </div>
 
         <div class="apx-card">
           <div class="apx-media"><img src="Infrastructure.webp" alt="Infrastructure construction site" loading="lazy"></div>
           <div class="apx-head"><span class="apx-n">02</span><h3>Infrastructure &amp; DOT</h3></div>
+          <div class="apx-sub">Designed for demanding infrastructure applications.</div>
+          <p class="apx-intro">PozzoDyne™ supports durable, long-life concrete for transportation and infrastructure projects where performance, consistency, and service life are critical.</p>
+          <div class="apx-lbl">Applications</div>
           <div class="apx-list">
             <div>Bridges</div>
             <div>Roads &amp; highways</div>
+            <div>Airport pavements</div>
             <div>Marine structures</div>
-            <div>Mass concrete applications</div>
-            <div>Long lifecycle performance</div>
+            <div>Mass concrete</div>
+            <div>Transportation infrastructure</div>
           </div>
-          <div class="apx-foot">Built for the demands of DOT projects, critical infrastructure, and heavy-duty concrete applications.</div>
+          <div class="apx-lbl">Key Benefits</div>
+          <div class="apx-list" style="margin-bottom:0">
+            <div>Increased durability</div>
+            <div>Reduced chloride penetration</div>
+            <div>Lower permeability</div>
+            <div>Enhanced later-age strength</div>
+            <div>Improved sulfate resistance</div>
+            <div>Long service life</div>
+          </div>
         </div>
 
         <div class="apx-card">
           <div class="apx-media"><img src="CO21.webp" alt="CO2 reduction" loading="lazy"></div>
-          <div class="apx-head"><span class="apx-n">03</span><h3>Cement Solutions</h3></div>
-          <p class="apx-intro">PozzoDyne™ can be blended into cement to create IP cement — extending product performance while reducing carbon footprint.</p>
-          <div class="apx-list">
-            <div>Lower carbon footprint without new permits</div>
-            <div>No additional infrastructure or equipment required</div>
-            <div>Uses existing silos and operations</div>
-            <div>Maintain output volumes and market reach</div>
-            <div>Deliver a greener, higher-performing cement product</div>
+          <div class="apx-head"><span class="apx-n">03</span><h3>Cement Manufacturing</h3></div>
+          <div class="apx-sub">A drop-in supplementary cementitious material.</div>
+          <p class="apx-intro">PozzoDyne™ can be blended directly into cement manufacturing operations using existing infrastructure, enabling producers to reduce clinker content while maintaining plant throughput.</p>
+          <div class="apx-lbl">Key Benefits</div>
+          <div class="apx-list" style="margin-bottom:0">
+            <div>Compatible with existing cement operations</div>
+            <div>No major capital equipment required</div>
+            <div>Utilizes existing silos and material handling systems</div>
+            <div>Supports lower-carbon cement production</div>
+            <div>Maintains commercial production rates</div>
+            <div>Produces a higher-performance finished cement</div>
           </div>
-          <div class="apx-foot">A simple way for cement producers to meet sustainability goals and deliver better cement to market.</div>
         </div>
 
       </div>
@@ -2031,16 +2122,16 @@ function ll2v(lat,lon){var la=lat*Math.PI/180,lo=lon*Math.PI/180;return [Math.co
 var PLANTS=[
  {id:'modesto',name:'AggrePlex — Modesto',loc:'Modesto, California, USA',tag:'Full-Scale Commercial Production Facility',
   lat:37.639,lon:-120.997,label:'MODESTO, USA',col:'56,214,190',lside:-1,
-  desc:"Co-located with Halo Glass Recycling, AggrePlex's Modesto facility will have direct access to one of the West Coast's largest recycled-glass streams. Using proprietary Microtec™ micronization and precision air-classification technology, the plant will transform this feedstock into PozzoDyne™, an engineered ground-glass pozzolan for lower-carbon, high-performance concrete. As AggrePlex's first commercial production facility, Modesto will establish the blueprint for a nationwide network of advanced recycled-glass manufacturing plants.",
+  desc:"Co-located with Halo Glass Recycling, AggrePlex's Modesto facility will have direct access to one of the West Coast's largest streams of recycled glass. The facility will utilize Microtec's proprietary micronization and precision air-classification technology to manufacture PozzoDyne™, a high-performance ground-glass pozzolan for the concrete and cement industries. As AggrePlex's first commercial production facility, Modesto will serve as the blueprint for the company's planned nationwide network of advanced glass processing and manufacturing facilities.",
   facts:[['Status','Final Engineering'],['Projected Operations','Q4 2027'],['Annual Capacity','190,000 metric tons per year'],['Co-located With','Halo Glass Recycling']]},
  {id:'bobingen',name:'AggrePlex — Bobingen',loc:'Bobingen, Bavaria, Germany',tag:'Technology & Pilot Center',
   lat:48.271,lon:10.834,label:'BOBINGEN, DE',col:'244,177,105',
-  desc:"AggrePlex's Bobingen, Germany pilot plant has served as the company's initial technology and process development center, where feedstocks are validated, customer samples are produced, and commercial manufacturing processes are refined. Powered by proprietary Microtec™ micronization and precision air-classification technology, the facility has laid the foundation for AggrePlex's commercial-scale production network.",
+  desc:"Located at AggrePlex's parent company, Microtec, the Bobingen, Germany pilot plant has served as the company's initial technology and process development center for the past three years. The facility is used to validate feedstocks, produce customer qualification samples, and refine commercial manufacturing processes before full-scale deployment. Utilizing Microtec's advanced micronization and precision air-classification technology, the pilot plant has laid the foundation for AggrePlex's commercial-scale production network.",
   facts:[['Status','Operational'],['Technology','Microtec™ micronization + air classification']]},
  {id:'temperance',name:'AggrePlex — Temperance',loc:'Temperance, Michigan, USA',tag:'U.S. Pilot Facility',
   lat:41.776,lon:-83.582,label:'TEMPERANCE, USA',col:'244,177,105',
   desc:"AggrePlex's U.S. Pilot Facility in Temperance, Michigan will serve as the company's North American center for pilot production, customer qualification, and technology validation. Utilizing proprietary Microtec™ micronization and precision air-classification technology, the facility will produce customer samples, validate new feedstocks, optimize commercial processes, train operators, and demonstrate technology performance. As the bridge between laboratory development and full-scale manufacturing, the U.S. pilot plant will accelerate product qualification and support the deployment of AggrePlex's commercial production network across North America.",
-  facts:[['Status','Engineering & Development'],['Projected Operations','Q2 2027'],['Technology','Microtec™ micronization + air classification']]}
+  facts:[['Status','Engineering & Development'],['Projected Operations','Q2 2027']]}
 ];
 PLANTS.forEach(function(p){p.v=ll2v(p.lat,p.lon)});
 
@@ -2056,7 +2147,7 @@ function gcSeg(a,b){
   }
   return pts;
 }
-var ARCS=[gcSeg(PLANTS[1].v,PLANTS[0].v),gcSeg(PLANTS[2].v,PLANTS[0].v)]; // each pilot feeds Modesto
+var ARCS=[gcSeg(PLANTS[1].v,PLANTS[2].v),gcSeg(PLANTS[2].v,PLANTS[0].v)]; // Bobingen feeds Temperance; Temperance feeds Modesto
 
 /* ---------- camera / projection ---------- */
 var rotY=2.53,rotX=0.42,vy=0,vx=0,zoom=1,tzoom=1;
