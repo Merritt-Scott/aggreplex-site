@@ -1048,25 +1048,6 @@
         <div class="mill-note">Illustrative model — finer particles expose more reactive surface per unit mass.</div>
       </div>
     </div></div>
-  
-    <div class="wrap" style="margin-top:clamp(64px,8vw,110px)"><div class="mill-grid">
-      <div class="reveal">
-        <span class="eyebrow">The comparison</span>
-        <h2 class="display">Where the industry stops, <em>we start.</em></h2>
-        <p class="copy">The industry's average ground-glass pozzolan is milled to about 45 microns. PozzoDyne™ begins there and keeps going — down to 3 microns, multiplying reactive surface area along the way.</p>
-        <p class="copy" style="margin-bottom:0;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:rgba(237,239,236,.5)">Drag to compare →</p>
-      </div>
-      <div class="mill-stage reveal" data-max="45" data-min="3">
-        <canvas class="millCanvas"></canvas>
-        <div class="mill-readout">
-          <div class="ro"><div class="k">Particle size</div><div class="v roSize">45<span class="u">µm</span></div></div>
-          <div class="ro"><div class="k">Surface area</div><div class="v roSurf">1.0<span class="u">×</span></div></div>
-          <div class="ro"><div class="k">Reactivity</div><div class="v roReact">Low</div></div>
-        </div>
-        <div class="slider-row"><span class="caplabel">45 <span style="text-transform:none">µm</span> · Industry avg</span><input type="range" class="millSlider" min="0" max="100" value="0" aria-label="Pozzolan fineness comparison"><span class="caplabel">3 <span style="text-transform:none">µm</span> · PozzoDyne™</span></div>
-        <div class="mill-note">Illustrative model — average ground-glass pozzolan (~45 µm) vs PozzoDyne™ micronization (down to 3 µm).</div>
-      </div>
-    </div></div>
   </section>
 
 
@@ -1408,7 +1389,7 @@
       <div class="apx reveal rv-stagger">
 
         <div class="apx-card">
-          <div class="apx-media"><img src="ReadyMixConcrete.webp" alt="Ready-mix concrete pour" loading="lazy"></div>
+          <div class="apx-media"><img src="ReadyMixConcrete.png" alt="Ready-mix concrete pour" loading="lazy"></div>
           <div class="apx-head"><span class="apx-n">01</span><h3>Ready-Mix &amp; Precast</h3></div>
           <div class="apx-sub">High-performance concrete for everyday construction.</div>
           <p class="apx-intro">PozzoDyne™ integrates seamlessly into conventional concrete production, providing producers with a high-performance supplementary cementitious material (SCM) that improves durability while reducing cement consumption.</p>
@@ -1433,7 +1414,7 @@
         </div>
 
         <div class="apx-card">
-          <div class="apx-media"><img src="Infrastructure.webp" alt="Infrastructure construction site" loading="lazy"></div>
+          <div class="apx-media"><img src="Infrastructure.png" alt="Infrastructure construction site" loading="lazy"></div>
           <div class="apx-head"><span class="apx-n">02</span><h3>Infrastructure &amp; DOT</h3></div>
           <div class="apx-sub">Designed for demanding infrastructure applications.</div>
           <p class="apx-intro">PozzoDyne™ supports durable, long-life concrete for transportation and infrastructure projects where performance, consistency, and service life are critical.</p>
@@ -1458,7 +1439,7 @@
         </div>
 
         <div class="apx-card">
-          <div class="apx-media"><img src="CO21.webp" alt="CO2 reduction" loading="lazy"></div>
+          <div class="apx-media"><img src="CO2.png" alt="CO2 reduction" loading="lazy"></div>
           <div class="apx-head"><span class="apx-n">03</span><h3>Cement Manufacturing</h3></div>
           <div class="apx-sub">A drop-in supplementary cementitious material.</div>
           <p class="apx-intro">PozzoDyne™ can be blended directly into cement manufacturing operations using existing infrastructure, enabling producers to reduce clinker content while maintaining plant throughput.</p>
@@ -1592,7 +1573,7 @@ var TEAM = [
   {n:'Martín Guzman', t:'Plant Manager, Modesto', e:'martin@aggreplexus.com',p:'239-505-9109',tel:'+12395059109', b:"Martín manages day-to-day operations at the Modesto plant, overseeing production, safety, and quality on the floor. He turns AggrePlex's process technology into consistent, commercial-scale output."},
   {n:'Tabitha Eaves', img:'Tabitha Eaves.jpg', t:'Document Controls Manager', e:'tabitha@aggreplexus.com',p:'239-509-3190',tel:'+12395093190', b:"Tabitha manages document controls, keeping the company's technical, compliance, and operational records organized and accessible. She supports quality and accountability across every project."},
   {n:'Christopher Cheadle', img:'Chris Cheadle.webp', t:'Lead Process Engineer', e:'chris@microtecdhus.com',p:'239-505-9108',tel:'+12395059108', b:"Christopher leads process engineering, designing and optimizing the milling and classification systems that define AggrePlex's material performance. He translates lab results into repeatable industrial processes."},
-  {n:'Nick Tenley', img:'Nick Tenley.webp', t:'Mechanical Engineering Specialist', e:'nick@microtecdhus.com',p:'239-505-9106',tel:'+12395059106', b:"Nick specializes in mechanical engineering, supporting the design, maintenance, and reliability of AggrePlex's production equipment. He keeps the systems that power micronization running at peak."},
+  {n:'Nick Tenley', img:'Nick Tenley.jpg', t:'Mechanical Engineering Specialist', e:'nick@microtecdhus.com',p:'239-505-9106',tel:'+12395059106', b:"Nick specializes in mechanical engineering, supporting the design, maintenance, and reliability of AggrePlex's production equipment. He keeps the systems that power micronization running at peak."},
   {n:'Stan Gibson', t:'Engineering', e:'stan@microtecdhus.com',p:'941-350-9253',tel:'+19413509253', b:"Stan supports the engineering team across design and implementation, contributing to the systems and equipment that bring AggrePlex's materials to commercial scale."}
 ];
 
@@ -2218,7 +2199,8 @@ function frame(ts){
       var pu=((arcPulse+ai2*.5)%1),pi=Math.floor(pu*(AR2.length-1));
       var pp=project(AR2[pi]);
       if(pp[2]>-.05){
-        var mixR=Math.round(244+(56-244)*pu),mixG=Math.round(177+(214-177)*pu),mixB=Math.round(105+(190-105)*pu);
+        var mix=(ai2===ARCS.length-1)?pu:0; // fade to teal only on the final leg into production; pilot-to-pilot stays orange
+        var mixR=Math.round(244+(56-244)*mix),mixG=Math.round(177+(214-177)*mix),mixB=Math.round(105+(190-105)*mix);
         var pgrad=g.createRadialGradient(pp[0],pp[1],0,pp[0],pp[1],8*DPR);
         pgrad.addColorStop(0,'rgba('+mixR+','+mixG+','+mixB+',.95)');
         pgrad.addColorStop(1,'rgba('+mixR+','+mixG+','+mixB+',0)');
@@ -2810,10 +2792,10 @@ var GY=-92,SIL='56,214,190',TAN='197,191,169',BRIGHT='232,228,202',
       else{E.dot([pq.x,pq.y,pq.z],1.9,'rgba('+GLASS_W+',.95)')}
     }
 
-    E.label(L1,[-215,GY,-72],20);
-    E.label(L2,[WX,GY,-22],18);
-    E.label(L3,[(DXa+DXb)/2,GY,-22],18);
-    E.label(L4,[224,GY,-72],20);
+    E.label(L1,[-215,GY,-72],26);
+    E.label(L2,[WX,104,0],-30);
+    E.label(L3,[(DXa+DXb)/2,80,0],-30);
+    E.label(L4,[224,GY,-72],26);
     E.vignette();
     if(!reduce)requestAnimationFrame(frame);
   }
