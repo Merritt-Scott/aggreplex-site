@@ -234,7 +234,7 @@
   .cert-card h3{font-family:var(--serif);font-weight:600;font-size:1.3rem;color:var(--ink);letter-spacing:-.01em}
   .cert-sub{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:6px}
   .cert-list{margin-top:18px;display:grid;gap:11px}
-  /* case study cards + panel */
+  /* case study cards */
   .cs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px;margin-top:clamp(28px,3.5vw,44px)}
   .cs-card{background:rgba(14,44,41,.55);border:1px solid var(--line-dark);border-radius:16px;backdrop-filter:blur(6px);overflow:hidden;cursor:pointer;transition:transform .3s,border-color .3s;display:flex;flex-direction:column}
   .cs-card:hover{transform:translateY(-4px);border-color:rgba(56,214,190,.4)}
@@ -248,22 +248,45 @@
   .cs-card h3{font-family:var(--serif);font-weight:600;font-size:1.18rem;letter-spacing:-.01em;color:var(--porcelain);line-height:1.25}
   .cs-card .sub{font-size:.85rem;color:rgba(237,239,236,.6);font-weight:300;margin-top:8px;line-height:1.5}
   .cs-card .view{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#328371;margin-top:auto;padding-top:16px}
-  .cs-panel{width:min(94vw,560px)}
-  .cs-panel .csp-body{padding:26px 30px 40px}
-  .cs-panel .csp-tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#38D6BE}
-  .cs-panel h2{font-family:var(--serif);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;margin:10px 0 4px;line-height:1.2}
-  .cs-panel .csp-sub{font-size:.92rem;color:rgba(237,239,236,.65);font-weight:300;margin-bottom:16px}
-  .cs-panel .csp-rule{height:1px;background:var(--line-dark);margin:16px 0}
-  .cs-panel p{font-size:.92rem;font-weight:300;color:rgba(237,239,236,.78);line-height:1.65;margin-bottom:14px}
-  .cs-panel h4{font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:#328371;margin:20px 0 10px}
-  .cs-panel .checks{grid-template-columns:1fr}
-  .cs-panel .checks div{color:rgba(237,239,236,.8)}
-  .csp-gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
-  .csp-gallery .g{aspect-ratio:4/3;border-radius:10px;background:linear-gradient(135deg,#12403c,#0b2321);position:relative;overflow:hidden}
+  /* centered case-study modal */
+  .cs-modal{position:fixed;z-index:202;top:50%;left:50%;width:min(94vw,1080px);max-height:88vh;overflow-y:auto;
+    background:rgba(10,31,29,.98);border:1px solid rgba(56,214,190,.16);border-radius:20px;
+    box-shadow:0 40px 120px rgba(0,0,0,.65);color:var(--porcelain);
+    transform:translate(-50%,-50%) scale(.95);opacity:0;visibility:hidden;
+    transition:transform .45s cubic-bezier(.16,.84,.28,1),opacity .35s,visibility .45s;
+    scrollbar-width:thin;scrollbar-color:rgba(56,214,190,.35) transparent}
+  .cs-modal.open{transform:translate(-50%,-50%) scale(1);opacity:1;visibility:visible}
+  .cs-modal::-webkit-scrollbar{width:8px}
+  .cs-modal::-webkit-scrollbar-thumb{background:rgba(56,214,190,.25);border-radius:100px}
+  .csm-close{position:sticky;top:16px;z-index:6;margin:16px 16px -54px auto;width:38px;height:38px;border-radius:50%;
+    border:1px solid rgba(255,255,255,.25);background:rgba(11,35,33,.72);backdrop-filter:blur(8px);color:var(--porcelain);
+    cursor:pointer;font-size:1.05rem;display:flex;align-items:center;justify-content:center;transition:.25s}
+  .csm-close:hover{background:var(--silica);color:var(--ink);border-color:var(--silica)}
+  .csm-hero{aspect-ratio:21/8;min-height:180px;background:linear-gradient(135deg,#12403c,#0b2321);position:relative;overflow:hidden;border-radius:20px 20px 0 0}
+  .csm-hero::after{content:"PHOTO TO COME";position:absolute;top:16px;right:18px;font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;color:rgba(237,239,236,.5)}
+  .csm-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+  .csm-hero.has-img::after{display:none}
+  .csm-hero.has-img img{display:block}
+  .csm-hero .grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,31,29,0) 50%,rgba(10,31,29,.94) 100%)}
+  .csm-head{position:absolute;left:clamp(24px,3.2vw,44px);bottom:20px;right:clamp(24px,3.2vw,44px);z-index:2}
+  .csm-head .csp-tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#38D6BE}
+  .csm-head h2{font-family:var(--serif);font-weight:650;font-size:clamp(1.5rem,2.6vw,2.2rem);letter-spacing:-.01em;margin:8px 0 4px;line-height:1.1;text-shadow:0 2px 18px rgba(5,15,14,.6)}
+  .csm-head .csp-sub{font-size:.95rem;color:rgba(237,239,236,.8);font-weight:300}
+  .csm-body{padding:clamp(26px,3.2vw,44px);display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(26px,3.2vw,48px);align-items:start}
+  .csm-body p{font-size:.96rem;font-weight:300;color:rgba(237,239,236,.8);line-height:1.7;margin-bottom:16px}
+  .csm-body h4{font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:#328371;margin:4px 0 12px}
+  .csm-side{display:flex;flex-direction:column;gap:18px}
+  .csm-box{background:rgba(14,44,41,.6);border:1px solid var(--line-dark);border-radius:14px;padding:22px 24px}
+  .csm-box .checks{grid-template-columns:1fr;margin-top:0}
+  .csm-box .checks div{color:rgba(237,239,236,.82);font-size:.88rem}
+  .csp-gallery{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .csp-gallery .g{aspect-ratio:4/3;border-radius:12px;background:linear-gradient(135deg,#12403c,#0b2321);position:relative;overflow:hidden;border:1px solid var(--line-dark)}
   .csp-gallery .g::after{content:"PHOTO TO COME";position:absolute;bottom:8px;right:10px;font-family:var(--mono);font-size:.5rem;letter-spacing:.18em;color:rgba(237,239,236,.45)}
   .csp-gallery .g img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
   .csp-gallery .g.has-img::after{display:none}
   .csp-gallery .g.has-img img{display:block}
+  .csm-results{border-top:1px solid var(--line-dark);margin-top:6px;padding-top:18px}
+  @media(max-width:900px){.csm-body{grid-template-columns:1fr}.cs-modal{max-height:92vh}}
   .cert-list div{font-size:.88rem;color:var(--slate);font-weight:300;line-height:1.5;padding-left:22px;position:relative}
   .cert-list div::before{content:"✓";position:absolute;left:0;color:#328371;font-weight:700}
   .cert-list b{font-weight:600;color:var(--ink)}
@@ -1517,21 +1540,34 @@
 </main>
 
 <!-- BIO MODAL -->
-<!-- CASE STUDY PANEL -->
+<!-- CASE STUDY MODAL -->
 <div class="bio-overlay" id="csOverlay"></div>
-<aside class="bio-panel cs-panel" id="csPanel" aria-hidden="true">
-  <div class="bp-photo" id="cspPhoto" style="aspect-ratio:16/9"><img id="cspImg" alt=""><button class="bio-close" id="csClose" aria-label="Close">✕</button></div>
-  <div class="csp-body">
-    <span class="csp-tag" id="cspTag">Case Study</span>
-    <h2 id="cspTitle">Title</h2>
-    <div class="csp-sub" id="cspSub"></div>
-    <div class="csp-rule"></div>
-    <div id="cspBody"></div>
-    <h4>Project highlights</h4>
-    <div class="checks" id="cspHighlights"></div>
-    <h4>Project photos</h4>
-    <div class="csp-gallery" id="cspGallery"></div>
-    <div id="cspResults"></div>
+<aside class="cs-modal" id="csPanel" aria-hidden="true">
+  <button class="csm-close" id="csClose" aria-label="Close">✕</button>
+  <div class="csm-hero" id="cspPhoto">
+    <img id="cspImg" alt="">
+    <div class="grad"></div>
+    <div class="csm-head">
+      <span class="csp-tag" id="cspTag">Case Study</span>
+      <h2 id="cspTitle">Title</h2>
+      <div class="csp-sub" id="cspSub"></div>
+    </div>
+  </div>
+  <div class="csm-body">
+    <div>
+      <div id="cspBody"></div>
+      <div class="csm-results" id="cspResults"></div>
+    </div>
+    <div class="csm-side">
+      <div class="csm-box">
+        <h4>Project highlights</h4>
+        <div class="checks" id="cspHighlights"></div>
+      </div>
+      <div class="csm-box">
+        <h4>Project photos</h4>
+        <div class="csp-gallery" id="cspGallery"></div>
+      </div>
+    </div>
   </div>
 </aside>
 
@@ -1650,10 +1686,11 @@ var TEAM = [
       var gal=document.getElementById('cspGallery');gal.innerHTML='';
       (c.gallery||[]).forEach(function(gsrc){
         var g=document.createElement('div');g.className='g';
-        g.innerHTML='<img alt="Project photo" loading="lazy">';
+        g.innerHTML='<img alt="Project photo">';
         var gi=g.querySelector('img');gi.onload=function(){g.classList.add('has-img')};gi.src=gsrc;
         gal.appendChild(g);
       });
+      csPn.scrollTop=0;
       csOv.classList.add('open');csPn.classList.add('open');csPn.setAttribute('aria-hidden','false');
       document.body.style.overflow='hidden';
     };
@@ -1661,7 +1698,7 @@ var TEAM = [
     CASES.forEach(function(c,i){
       var card=document.createElement('div');
       card.className='cs-card';
-      card.innerHTML='<div class="cs-media"><img alt="'+c.title+'" loading="lazy"></div>'+
+      card.innerHTML='<div class="cs-media"><img alt="'+c.title+'"></div>'+
         '<div class="body"><span class="tagchip">'+c.tag+'</span><h3>'+c.title+'</h3><div class="sub">'+c.sub+'</div><div class="view">Read case study →</div></div>';
       var im=card.querySelector('.cs-media img');
       im.onload=function(){card.querySelector('.cs-media').classList.add('has-img')};
